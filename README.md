@@ -19,6 +19,16 @@ Downloadable as:
 - *Wrapped JAR* (**EXE file**) **[Comes in a zip]**
 - JAR file with all dependencies **[Comes in a zip]**
 
+## Setup
+Go to the instalation folder and find `AdminTools.properties`
+If you installed it using a installer it is in `AppData\Local\AdminTools` folder by default.
+Example Directory - `C:\Users\lukak\AppData\Local\Admin Tools\app`
+
+In the file `AdminTools.properties` edit two valiues to your credentials
+
+    rcon.host=<ip of server>`
+    rcon.port=<port of rcon - 25575>
+
 ## Galery
 Rcon 
 ![rcon](https://i.imgur.com/v8LLB6f.png)
