@@ -41,7 +41,9 @@ Settings
 
 ## Libraries used
 [rkon-core](https://github.com/Kronos666/rkon-core)  - by [Kronos666](https://github.com/Kronos666)
+
 [gson](https://github.com/google/gson) - by [Google](https://github.com/google)
+
 [MinecraftServerPing](https://github.com/jamietech/MinecraftServerPing) - by [jamietech](https://github.com/jamietech)
 
 ## Legal info
