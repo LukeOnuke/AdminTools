@@ -20,6 +20,8 @@ Downloadable as:
 - JAR file with all dependencies **[Comes in a zip]**
 
 ## Setup
+First run the program so it can setup files (It will error out and thats normal because it couldnt connect to a server), then folow instructions bellow
+
 Go to the instalation folder and find `AdminTools.properties`
 If you installed it using a installer it is in `AppData\Local\AdminTools` folder by default.
 Example Directory - `C:\Users\lukak\AppData\Local\Admin Tools\app`
