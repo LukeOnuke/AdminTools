@@ -1,0 +1,295 @@
+/* 
+    Created on : Jul 7, 2020, 12:13:44 AM
+    Author     : Luka Kresoja
+*/
+
+.sidePane{
+    -fx-background-color: #424242;
+}
+
+.rconPane{
+    -fx-background-color: #424242;
+    -fx-border-color: #5c5c5c;
+    -fx-border-width: 0px 0px 0px 1px;
+}
+
+.rcon{
+    -fx-border-color: #5c5c5c;
+    -fx-background-color: #383838;
+}
+
+.rconTextField{
+    -fx-text-box-border: #5c5c5c;
+    -fx-focus-color: #D76700;
+    -fx-faint-focus-color: #5c5c5c;
+    -fx-border-radius: 1px;
+    -fx-control-inner-background: #383838;
+}
+
+.rconButton{
+    -fx-background-color: #383838;
+    -fx-text-fill: white;
+    -fx-padding: 2px;
+    -fx-text-fill: #ffffff;
+    -fx-border-color: #5c5c5c;
+    -fx-border-width: 1px
+}
+
+.rconButton:hover{
+    -fx-background-color: #424242;
+    -fx-opacity: 1;
+    -fx-text-fill: #5c5c5c;
+    -fx-padding: 2px;
+}
+
+.text{
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 14px;
+}
+
+.title{
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 40px;
+    -fx-fill: white;
+}
+
+.settingsPane{
+    -fx-background-color: #424242;
+    -fx-border-color: #5c5c5c;
+    -fx-border-width: 0px 0px 0px 1px;
+}
+
+.sideMenu{
+    -fx-background-color: #3b3b3b;
+    -fx-border-color: #5c5c5c;
+    -fx-border-width: 0px 1px 0px 0px;
+}
+
+/*Rcon button*/
+.sideMenuRconButton{
+    -fx-background-color: #3b3b3b;
+    -fx-background-image: url('/rconclient/image/console.png');
+    -fx-border-color: #3b3b3b #3b3b3b #3b3b3b #3b3b3b;
+    -fx-border-width: 0px 2px 1px 1px;
+}
+
+.sideMenuRconButton:selected{
+    -fx-background-color: #708055;
+    -fx-background-image: url('/rconclient/image/console-active.png');
+    -fx-border-color: #3b3b3b #a1fc03 #3b3b3b #3b3b3b;
+    -fx-border-width: 0px 2px 1px 0px;
+}
+
+.sideMenuRconButton:disabled{
+    -fx-opacity: 1.0;
+}
+
+.sideMenuRconButton:hover{
+    -fx-background-color: #3b3b3b;
+    -fx-background-image: url('/rconclient/image/console.png');
+    -fx-border-color: #3b3b3b #d7fc03 #3b3b3b #3b3b3b;
+    -fx-border-width: 0px 2px 1px 1px;
+}
+
+/*Settings button*/
+.sideMenuSettingsButton{
+    -fx-background-color: #3b3b3b;
+    -fx-background-image: url('/rconclient/image/setting.png');
+    -fx-border-color: #3b3b3b #3b3b3b #3b3b3b #3b3b3b;
+    -fx-border-width: 0px 2px 1px 1px;
+}
+
+.sideMenuSettingsButton:selected{
+    -fx-background-color: #708055;
+    -fx-background-image: url('/rconclient/image/setting-active.png');
+    -fx-border-color: #3b3b3b #a1fc03 #3b3b3b #3b3b3b;
+    -fx-border-width: 0px 2px 1px 0px;
+}
+
+.sideMenuSettingsButton:disabled{
+    -fx-opacity: 1.0;
+}
+
+.sideMenuSettingsButton:hover{
+    -fx-background-color: #3b3b3b;
+    -fx-background-image: url('/rconclient/image/setting.png');
+    -fx-border-color: #3b3b3b #d7fc03 #3b3b3b #3b3b3b;
+    -fx-border-width: 0px 2px 1px 1px;
+}
+
+/*Status Button*/
+.sideMenuStatusButton{
+    -fx-background-color: #3b3b3b;
+    -fx-background-image: url('/rconclient/image/status.png');
+    -fx-border-color: #3b3b3b #3b3b3b #3b3b3b #3b3b3b;
+    -fx-border-width: 0px 2px 1px 1px;
+}
+
+.sideMenuStatusButton:selected{
+    -fx-background-color: #708055;
+    -fx-background-image: url('/rconclient/image/status-active.png');
+    -fx-border-color: #3b3b3b #a1fc03 #3b3b3b #3b3b3b;
+    -fx-border-width: 0px 2px 1px 0px;
+}
+
+.sideMenuStatusButton:disabled{
+    -fx-opacity: 1.0;
+}
+
+.sideMenuStatusButton:hover{
+    -fx-background-color: #3b3b3b;
+    -fx-background-image: url('/rconclient/image/status.png');
+    -fx-border-color: #3b3b3b #d7fc03 #3b3b3b #3b3b3b;
+    -fx-border-width: 0px 2px 1px 1px;
+}
+
+/*Scrollbar*/
+.scroll-bar{
+    -fx-background-color:#3b3b3b;
+}
+
+.scroll-bar:horizontal, .scroll-bar:vertical{
+    -fx-background-color:#404040;
+}
+
+.increment-button, .decrement-button {
+    -fx-background-color: #404040;
+    -fx-border-color: #3b3b3b;
+}
+
+.scroll-bar:horizontal .track,
+.scroll-bar:vertical .track{
+    -fx-background-color: #404040;
+    -fx-border-color: #3b3b3b;
+    -fx-background-radius: 0em;
+}
+
+.scroll-bar:horizontal .thumb,
+.scroll-bar:vertical .thumb {
+    -fx-background-color: #2b2b2b;
+    -fx-background-radius: 5em;
+}
+
+.scroll-pane > .corner {
+    -fx-background-color: #404040;
+}
+/*-----------*/
+
+.settingsTitlePane{
+    -fx-background-color: #708055;
+}
+
+.borderPane{
+    -fx-background-color: #3d3d3d;
+    -fx-border-color: #5c5c5c;
+    -fx-border-width: 1px;
+}
+
+.borderPaneText{
+    -fx-text-fill: #5c5c5c;
+    -fx-font-size: 13px;
+    -fx-fill: white;
+}
+
+.labelButton{
+    -fx-background-color: #383838;
+    -fx-text-fill: white;
+    -fx-padding: 2px;
+    -fx-text-fill: #ffffff;
+    -fx-border-color: #5c5c5c;
+    -fx-border-width: 1px;
+    -fx-text-alignment: center;
+}
+
+.labelButton .text{
+    -fx-text-alignment: center;
+    -fx-alignment: center;
+}
+
+.labelButton:hover{
+    -fx-background-color: #424242;
+    -fx-opacity: 1;
+    -fx-text-fill: #5c5c5c;
+    -fx-padding: 2px;
+}
+
+/*Slider*/
+.slider{
+
+}
+
+.slider .thumb{
+    -fx-background-color: #38a154;
+}
+
+.slider .thumb:active{
+    -fx-focus-color: #a1fc03;
+    -fx-faint-focus-color: #5c5c5c;
+}
+
+.slider .track{
+    -fx-background-color: #2b2b2b;
+}
+
+/*Radio button*/
+.radio-button{
+}
+
+.radio-button .text{
+    -fx-text-fill: #ffffff;
+    -fx-fill: white;
+}
+
+.radio-button .radio{
+    -fx-background-color: #2b2b2b;
+}
+
+.radio-button:selected .radio .dot {
+    -fx-background-color: #38a154;
+    -fx-background-insets: 0;
+}
+
+/*progressbar*/
+
+.progress-bar .track{
+    -fx-background-color: #2b2b2b;
+}
+
+.progress-bar:indeterminate .bar{
+    -fx-accent: #38a154;
+}
+
+.progress-bar:determinate .bar{
+    -fx-background-color: #38a154;
+}
+
+/*Status dot*/
+.statusDot{
+    -fx-background-radius: 17px;
+    -fx-background-color: red;
+}
+
+/*List view and its elements*/
+.list-view{
+    -fx-background-color: #2b2b2b;
+}
+
+.list-cell:odd{
+    -fx-background-color : #6e6e6e;
+    -fx-text-fill: white;
+}
+
+.list-cell:even{
+    -fx-background-color : #575757;
+    -fx-text-fill: white;
+}
+
+.list-cell:odd{
+    -fx-background-color : #6e6e6e;
+    -fx-text-fill: white;
+}
+
+.list-cell:even{
+    -fx-background-color : #575757;
+    -fx-text-fill: white;
+}

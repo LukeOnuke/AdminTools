@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane id="AnchorPane" fx:id="rootPane" prefHeight="593.0" prefWidth="973.0" xmlns="http://javafx.com/javafx/8.0.251" xmlns:fx="http://javafx.com/fxml/1" fx:controller="rconclient.gui.StatusWindowController">
+    <stylesheets>
+        <URL value="@Style.css" />
+    </stylesheets>
+   <children>
+      <AnchorPane layoutX="71.0" prefHeight="593.0" prefWidth="902.0" styleClass="settingsPane" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="71.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <AnchorPane prefHeight="71.0" prefWidth="902.0" styleClass="settingsTitlePane" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <Text layoutX="14.0" layoutY="51.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="title" text="Status" />
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutX="465.0" layoutY="85.0" prefHeight="488.0" prefWidth="420.0" styleClass="borderPane" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="85.0">
+               <children>
+                  <Text layoutY="14.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="borderPaneText" text="Services status" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                  <Label layoutX="73.0" layoutY="37.0" styleClass="text" text="minecraft.net" AnchorPane.leftAnchor="73.0" AnchorPane.topAnchor="37.0" />
+                  <Label layoutX="73.0" layoutY="77.0" styleClass="text" text="session.minecraft.net" AnchorPane.leftAnchor="73.0" AnchorPane.topAnchor="77.0" />
+                  <Label layoutX="73.0" layoutY="117.0" styleClass="text" text="account.mojang.com" AnchorPane.leftAnchor="73.0" AnchorPane.topAnchor="117.0" />
+                  <Label layoutX="73.0" layoutY="157.0" styleClass="text" text="authserver.mojang.com" AnchorPane.leftAnchor="73.0" AnchorPane.topAnchor="157.0" />
+                  <Label layoutX="73.0" layoutY="197.0" styleClass="text" text="api.mojang.com" AnchorPane.leftAnchor="73.0" AnchorPane.topAnchor="197.0" />
+                  <Label layoutX="73.0" layoutY="237.0" styleClass="text" text="textures.minecraft.net" AnchorPane.leftAnchor="73.0" AnchorPane.topAnchor="237.0" />
+                  <Label layoutX="73.0" layoutY="277.0" styleClass="text" text="mojang.com" AnchorPane.leftAnchor="73.0" AnchorPane.topAnchor="277.0" />
+                  <Pane fx:id="sd1" layoutX="26.0" layoutY="40.0" prefHeight="17.0" prefWidth="17.0" styleClass="statusDot" AnchorPane.leftAnchor="25.0" AnchorPane.topAnchor="40.0" />
+                  <Pane fx:id="sd2" layoutX="27.0" layoutY="80.0" prefHeight="17.0" prefWidth="17.0" styleClass="statusDot" AnchorPane.leftAnchor="25.0" AnchorPane.topAnchor="80.0" />
+                  <Pane fx:id="sd3" layoutX="27.0" layoutY="120.0" prefHeight="17.0" prefWidth="17.0" styleClass="statusDot" AnchorPane.leftAnchor="25.0" AnchorPane.topAnchor="120.0" />
+                  <Pane fx:id="sd4" layoutX="27.0" layoutY="160.0" prefHeight="17.0" prefWidth="17.0" styleClass="statusDot" AnchorPane.leftAnchor="25.0" AnchorPane.topAnchor="160.0" />
+                  <Pane fx:id="sd5" layoutX="27.0" layoutY="200.0" prefHeight="17.0" prefWidth="17.0" styleClass="statusDot" AnchorPane.leftAnchor="25.0" AnchorPane.topAnchor="200.0" />
+                  <Pane fx:id="sd6" layoutX="27.0" layoutY="240.0" prefHeight="17.0" prefWidth="17.0" styleClass="statusDot" AnchorPane.leftAnchor="25.0" AnchorPane.topAnchor="240.0" />
+                  <Pane fx:id="sd7" layoutX="27.0" layoutY="280.0" prefHeight="17.0" prefWidth="17.0" styleClass="statusDot" AnchorPane.leftAnchor="25.0" AnchorPane.topAnchor="280.0" />
+                  <Label layoutX="16.0" layoutY="358.0" prefHeight="63.0" prefWidth="388.0" styleClass="text" text="Beware that status is set by a human so even though &#10;the fetch is automatized , somebody in mojang needs to &#10;update the data &#10; " AnchorPane.bottomAnchor="67.0" AnchorPane.leftAnchor="16.0" AnchorPane.rightAnchor="16.0" />
+                  <ProgressBar fx:id="pbApi" layoutX="15.0" layoutY="454.0" prefHeight="20.0" prefWidth="390.0" progress="0.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" />
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutX="14.0" layoutY="85.0" prefHeight="488.0" prefWidth="420.0" styleClass="borderPane" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="461.0" AnchorPane.topAnchor="85.0">
+               <children>
+                  <Text layoutY="14.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="borderPaneText" text="Server status" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                  <ImageView fx:id="sFavicon" fitHeight="64.0" fitWidth="64.0" layoutX="14.0" layoutY="18.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="24.0" />
+                  <Label fx:id="sVer" layoutX="18.0" layoutY="96.0" styleClass="text" text="Version : " AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="100.0" />
+                  <Label fx:id="sPlayers" layoutX="18.0" layoutY="127.0" styleClass="text" text="Players online : " AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="140.0" />
+                  <Label layoutX="373.0" layoutY="461.0" onMouseClicked="#mcStatusRefresh" styleClass="labelButton" text="Refresh" AnchorPane.bottomAnchor="12.0" AnchorPane.rightAnchor="14.0" />
+                  <ListView fx:id="sOnlinePlayers" layoutX="14.0" layoutY="168.0" prefHeight="274.0" prefWidth="384.0" AnchorPane.bottomAnchor="46.0" AnchorPane.leftAnchor="13.0" AnchorPane.rightAnchor="22.0" AnchorPane.topAnchor="167.0" />
+               </children>
+            </AnchorPane>
+         </children></AnchorPane>
+      <AnchorPane layoutX="-1.0" layoutY="-1.0" prefHeight="593.0" prefWidth="71.0" styleClass="sideMenu" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="-1.0" AnchorPane.topAnchor="0.0">
+         <effect>
+            <DropShadow color="#00000081" spread="0.07" />
+         </effect>
+         <children>
+            <ToggleButton layoutX="-2.0" mnemonicParsing="false" onAction="#loadRcon" prefHeight="71.0" prefWidth="71.0" styleClass="sideMenuRconButton" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
+            <ToggleButton layoutX="1.0" layoutY="142.0" mnemonicParsing="false" onAction="#loadSettings" prefHeight="71.0" prefWidth="71.0" styleClass="sideMenuSettingsButton" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="142.0" />
+            <ToggleButton disable="true" layoutX="1.0" layoutY="71.0" mnemonicParsing="false" prefHeight="71.0" prefWidth="71.0" selected="true" styleClass="sideMenuStatusButton" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="71.0" />
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>
