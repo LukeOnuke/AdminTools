@@ -30,6 +30,7 @@ In the file `AdminTools.properties` edit two valiues to your credentials
 
     rcon.host=<ip of server>`
     rcon.port=<port of rcon - 25575>
+    rcon.password=<password of server>
 
 ## Galery
 Rcon 
