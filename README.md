@@ -15,8 +15,6 @@ Found a bug? -Report it [here](https://github.com/LukeOnuke/AdminTools/issues/ne
 Download : [here (github releases)](https://github.com/LukeOnuke/AdminTools/releases)
 Downloadable as:
 - **EXE installer** (witch will install the program) - **Recomended way to install**
-- **MSI installer** (witch will install the program)
-- *Wrapped JAR* (**EXE file**) **[Comes in a zip]**
 - JAR file with all dependencies **[Comes in a zip]**
 
 ## Setup
