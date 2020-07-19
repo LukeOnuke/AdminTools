@@ -39,6 +39,8 @@ public class Data {
      * Text elements from a text flow
      */
     public static ObservableList<Node> rconTextData = null;
+    
+    public static boolean startingUp = true;
 
     //Singleton
     private static Data instance = null;

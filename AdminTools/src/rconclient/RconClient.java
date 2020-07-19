@@ -66,41 +66,7 @@ public class RconClient extends Application {
      */
     public static void main(String[] args) {
         Data.arguments = args;
-        Data data = Data.getInstance();
-        CustomRcon rcon = null;
-        try {
-            rcon = CustomRcon.getInstance();
-        } catch (SocketException sc) {
-            Platform.runLater(() -> {
-                Dialog.okDialog(DialogImage.error, "Connnection Exception", "Couldnt connect to server");
-                System.exit(0);
-            });
-        } catch (IOException ex) {
-            Platform.runLater(() -> {
-                Dialog.okDialog(DialogImage.error, "Connnection Exception", "Couldnt connect to server" + System.lineSeparator() + "Programmer info : IOException");
-                System.exit(0);
-            });
-        } catch (AuthenticationException ex) {
-            Platform.runLater(() -> {
-                Dialog.okDialog(DialogImage.error, "Connnection Exception", "Credentials not correct [ACC_DENIED]");
-                System.exit(0);
-            });
-        } catch (Exception ex) {
-            Platform.runLater(() -> {
-                Dialog.okDialog(DialogImage.error, "Error", "Error whilst connecting to server " + System.lineSeparator() + ex.getMessage());
-                System.exit(0);
-            });
-        }
-        if (rcon == null) {
-            Platform.runLater(() -> {
-                Dialog.okDialog(DialogImage.error, "Error", "Internal connection error ocured whilst connecting to server");
-                System.exit(0);
-            });
-        }
-
-        if (rcon != null) {
-            launch(args);
-        }
+        launch(args);
     }
 
 }

@@ -23,7 +23,7 @@
                   <Font size="14.0" />
                </font>
             </Label>
-            <ScrollPane fitToHeight="true" fitToWidth="true" layoutX="15.0" layoutY="14.0" prefHeight="524.0" prefWidth="873.0" AnchorPane.bottomAnchor="55.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="13.0" AnchorPane.topAnchor="14.0">
+            <ScrollPane fx:id="rconScroll" fitToHeight="true" fitToWidth="true" layoutX="15.0" layoutY="14.0" prefHeight="524.0" prefWidth="873.0" AnchorPane.bottomAnchor="55.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="13.0" AnchorPane.topAnchor="14.0">
                <content>
                   <TextFlow fx:id="rcon" prefHeight="518.0" prefWidth="467.0" styleClass="rcon" />
                </content>

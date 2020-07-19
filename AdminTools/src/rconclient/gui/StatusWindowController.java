@@ -19,6 +19,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import rconclient.util.WindowLoader;
@@ -93,6 +94,11 @@ public class StatusWindowController implements Initializable {
     @FXML
     private void loadSettings() {
         WindowLoader.loadSettings(rootPane);
+    }
+
+    @FXML
+    public void handleMouseClick(MouseEvent arg0) {
+        //System.out.println("clicked on " + sOnlinePlayers.getSelectionModel().getSelectedItem());
     }
 
     private void refreshApiStatus() {

@@ -51,7 +51,7 @@
                   <Label fx:id="sVer" layoutX="18.0" layoutY="96.0" styleClass="text" text="Version : " AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="100.0" />
                   <Label fx:id="sPlayers" layoutX="18.0" layoutY="127.0" styleClass="text" text="Players online : " AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="140.0" />
                   <Label layoutX="373.0" layoutY="461.0" onMouseClicked="#mcStatusRefresh" styleClass="labelButton" text="Refresh" AnchorPane.bottomAnchor="12.0" AnchorPane.rightAnchor="14.0" />
-                  <ListView fx:id="sOnlinePlayers" layoutX="14.0" layoutY="168.0" prefHeight="274.0" prefWidth="384.0" AnchorPane.bottomAnchor="46.0" AnchorPane.leftAnchor="13.0" AnchorPane.rightAnchor="22.0" AnchorPane.topAnchor="167.0" />
+                  <ListView fx:id="sOnlinePlayers" layoutX="14.0" layoutY="168.0" onMouseClicked="#handleMouseClick" prefHeight="274.0" prefWidth="384.0" AnchorPane.bottomAnchor="46.0" AnchorPane.leftAnchor="13.0" AnchorPane.rightAnchor="22.0" AnchorPane.topAnchor="167.0" />
                </children>
             </AnchorPane>
          </children></AnchorPane>

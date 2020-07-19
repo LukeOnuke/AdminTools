@@ -6,6 +6,7 @@
 package rconclient.util;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
@@ -52,5 +53,11 @@ public class Utill {
         } else {
             throw new IOException();
         }
+    }
+    
+    public static String removeSpigotFormatting(String commandReply){
+        commandReply = commandReply.replaceAll("[§][1-9a-zA-Z]", ""); //remove numbers and letters
+        
+        return commandReply;
     }
 }
