@@ -31,11 +31,11 @@
          <children>
             <AnchorPane fx:id="loginPane" maxHeight="-Infinity" maxWidth="-Infinity" opacity="0.9" prefHeight="290.0" prefWidth="441.0" styleClass="loginCenter" StackPane.alignment="CENTER">
                <children>
-                  <Label layoutX="15.0" layoutY="87.0" styleClass="text" text="IP  : " AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="87.0" />
+                  <Label layoutX="15.0" layoutY="87.0" styleClass="text" text="IP:" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="87.0" />
                   <TextField fx:id="ip" layoutX="87.0" layoutY="83.0" prefHeight="29.0" prefWidth="245.0" styleClass="rconTextField" AnchorPane.leftAnchor="87.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="83.0" />
-                  <Label layoutX="15.0" layoutY="137.0" styleClass="text" text="Port : " AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="137.0" />
+                  <Label layoutX="15.0" layoutY="137.0" styleClass="text" text="Port:" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="137.0" />
                   <TextField fx:id="port" layoutX="87.0" layoutY="133.0" prefHeight="29.0" prefWidth="245.0" styleClass="rconTextField" AnchorPane.leftAnchor="87.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="133.0" />
-                  <Label layoutX="15.0" layoutY="187.0" styleClass="text" text="Password : " AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="187.0" />
+                  <Label layoutX="15.0" layoutY="187.0" styleClass="text" text="Password:" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="187.0" />
                   <PasswordField fx:id="password" layoutX="87.0" layoutY="183.0" prefHeight="29.0" prefWidth="245.0" styleClass="rconTextField" AnchorPane.leftAnchor="87.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="183.0" />
                   <Label fx:id="loginButton" layoutX="299.0" layoutY="488.0" onMouseClicked="#login" styleClass="labelButton" text="Log in" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="14.0" />
                   <Text layoutX="104.0" layoutY="56.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Admin Tools">

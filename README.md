@@ -12,10 +12,9 @@ For more documentation visit the [wiki](https://github.com/LukeOnuke/AdminTools/
 
 Found a bug? Report it [here](https://github.com/LukeOnuke/AdminTools/issues/new)
 
-Download: [here (releases)](https://github.com/LukeOnuke/AdminTools/releases)
 Downloadable as:
-- **EXE installer** - **recommended way to install**
-- JAR file with all dependencies **[.zip]**
+- [EXE installer](https://github.com/LukeOnuke/AdminTools/releases) - **recommended way to install**
+- [JAR file](https://github.com/LukeOnuke/AdminTools/releases) with all dependencies **[.zip]**
 
 ## Setup
  - Make sure your server have RCON enabled and running. 
@@ -27,8 +26,8 @@ Downloadable as:
 
 In the configuration file edit these two values to your credentials
 
-    rcon.host=<ip of your server that hosts rcon>`
-    rcon.port=<port of the rcon - 25575>
+    rcon.host=<rcon ip>`
+    rcon.port=<rcon port, default 25575>
     rcon.password=<rcon password>
 
 ## Gallery
