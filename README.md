@@ -24,12 +24,6 @@ Downloadable as:
 *if installed by .exe, the directory is in AppData\Local - `C:\Users\User\AppData\Local\Admin Tools\app`  
 *if installed by .jar, the file is in the folder with the .jar
 
-In the configuration file edit these two values to your credentials
-
-    rcon.host=<rcon ip>`
-    rcon.port=<rcon port, default 25575>
-    rcon.password=<rcon password>
-
 ## Gallery
 RCON
 ![rcon](https://i.imgur.com/v8LLB6f.png)
