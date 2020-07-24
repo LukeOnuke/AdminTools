@@ -41,7 +41,7 @@ public class StatusWindowController implements Initializable {
     private AnchorPane rootPane;
     /*
     Status dots
-    Naming scheme is :
+    Naming scheme is:
     sd<number>
     s-status
     d-tot
@@ -154,8 +154,8 @@ public class StatusWindowController implements Initializable {
 
                 //Set all the text and images 
                 Platform.runLater(() -> {
-                    sVer.setText("Version : " + data.getVersion().getName());
-                    sPlayers.setText("Players : " + data.getPlayers().getOnline() + " / " + data.getPlayers().getMax());
+                    sVer.setText("Version: " + data.getVersion().getName());
+                    sPlayers.setText("Players: " + data.getPlayers().getOnline() + " / " + data.getPlayers().getMax());
                     sFavicon.setImage(QuerryUtils.convertToImage(data.getFavicon()));
                 });
 

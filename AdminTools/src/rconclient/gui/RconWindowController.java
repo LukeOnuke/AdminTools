@@ -164,19 +164,19 @@ public class RconWindowController implements Initializable {
                 sidePane.setDisable(true);
 
                 Data d = Data.getInstance();
-                writeRconInternal("Connecting to " + d.getHost() + " : " + d.getPort());
+                writeRconInternal("Connecting to " + d.getHost() + ":" + d.getPort());
                 try {
                     CustomRcon cr = CustomRcon.getInstance();
                 } catch (IOException ex) {
                     connected = false;
                     Platform.runLater(() -> {
-                        Dialog.okDialog(DialogImage.error, "Connnection Error", "Couldnt connect to server.\n Probably an incorect IP.");
+                        Dialog.okDialog(DialogImage.error, "Connnection Error", "Couldn't connect to server.\n Probably an incorect IP.");
                         WindowLoader.loadLogin(rootPane);
                     });
                 } catch (AuthenticationException ex) {
                     connected = false;
                     Platform.runLater(() -> {
-                        Dialog.okDialog(DialogImage.error, "Connnection Error", "Couldnt authenticate with server. \nIncorrect password.");
+                        Dialog.okDialog(DialogImage.error, "Connnection Error", "Couldn't authenticate with server. \nIncorrect password.");
                         WindowLoader.loadLogin(rootPane);
                     });
                 } catch (Exception ex) {
@@ -189,14 +189,14 @@ public class RconWindowController implements Initializable {
                 //Write succsesfull connection
                 if (connected) {
                     Platform.runLater(() -> {
-                        writeRconInternal("Connected to " + d.getHost() + " : " + d.getPort());
+                        writeRconInternal("Connected to " + d.getHost() + ": " + d.getPort());
                     });
                     rconSend.setDisable(false);
                     sendButton.setDisable(false);
                     sidePane.setDisable(false);
                 } else {
                     Platform.runLater(() -> {
-                        write("Couldnt connect to " + d.getHost() + " : " + d.getPort(), Color.RED);
+                        write("Couldnt connect to " + d.getHost() + ": " + d.getPort(), Color.RED);
                     });
                 }
             });

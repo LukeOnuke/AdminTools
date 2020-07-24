@@ -1,39 +1,39 @@
 # Admin Tools
-Administration tools for minecraft servers.
-Features :
+Program with administration tools for Minecraft servers.
 
+Features:
  - Dark mode
  - Rcon client
  - Server status
  - Minecraft services status (eg. authserver, api...)
  - Barebones mode
 
-For more documentation visit the [wiki](https://github.com/LukeOnuke/AdminTools/wiki) .
+For more documentation visit the [wiki](https://github.com/LukeOnuke/AdminTools/wiki).
 
-Found a bug? -Report it [here](https://github.com/LukeOnuke/AdminTools/issues/new)
+Found a bug? Report it [here](https://github.com/LukeOnuke/AdminTools/issues/new)
 
-Download : [here (github releases)](https://github.com/LukeOnuke/AdminTools/releases)
 Downloadable as:
-- **EXE installer** (witch will install the program) - **Recomended way to install**
-- JAR file with all dependencies **[Comes in a zip]**
+- [EXE installer](https://github.com/LukeOnuke/AdminTools/releases) - **recommended way to install**
+- [JAR file](https://github.com/LukeOnuke/AdminTools/releases) with all dependencies **[.zip]**
 
 ## Setup
-First run the program so it can setup files (It will error out and thats normal because it couldnt connect to a server), then folow instructions bellow
+ - Make sure your server have RCON enabled and running. 
+ - Run the installer and follow the installation steps
+ - Go to the instalation folder* and find the configuration file called `AdminTools.properties`.
 
-Go to the instalation folder and find `AdminTools.properties`
-If you installed it using a installer it is in `AppData\Local\AdminTools` folder by default.
-Example Directory - `C:\Users\lukak\AppData\Local\Admin Tools\app`
+*if installed by .exe, the directory is in AppData\Local - `C:\Users\User\AppData\Local\Admin Tools\app`  
+*if installed by .jar, the file is in the folder with the .jar
 
-In the file `AdminTools.properties` edit two valiues to your credentials
+In the configuration file edit these two values to your credentials
 
-    rcon.host=<ip of server>`
-    rcon.port=<port of rcon - 25575>
-    rcon.password=<password of server>
+    rcon.host=<rcon ip>`
+    rcon.port=<rcon port, default 25575>
+    rcon.password=<rcon password>
 
-## Galery
-Rcon 
+## Gallery
+RCON
 ![rcon](https://i.imgur.com/v8LLB6f.png)
-Status
+Server and Mojang servers status
 ![status](https://i.imgur.com/fxjDeEZ.png)
 Settings
 ![Settings](https://i.imgur.com/GbcCCAg.png)
@@ -46,9 +46,7 @@ Settings
 [MinecraftServerPing](https://github.com/jamietech/MinecraftServerPing) - by [jamietech](https://github.com/jamietech)
 
 ## Legal info
-LukeOnuke is not affiliated with Mojang Synergies AB
-"Minecraft" is a trademark of Mojang Synergies AB
-
-Gear Icon made by [Freepik](https://www.flaticon.com/authors/freepik) from www.flaticon.com
-
+LukeOnuke is not affiliated with Mojang Synergies AB.  
+"Minecraft" is a trademark of Mojang Synergies AB.  
+Gear Icon made by [Freepik](https://www.flaticon.com/authors/freepik) from www.flaticon.com  
 This program and its code is licensed on the [GNU GPL V3.0 licence](https://github.com/LukeOnuke/AdminTools/blob/master/LICENSE)
