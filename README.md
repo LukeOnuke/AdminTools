@@ -20,12 +20,12 @@ Downloadable as:
 ## Setup
  - Make sure your server have RCON enabled and running. 
  - Run the installer and follow the installation steps
- - Go to the instalation folder* and find a file called `AdminTools.properties`.
+ - Go to the instalation folder* and find the configuration file called `AdminTools.properties`.
 
-*if installed by .exe, the directory is in Appdata\Local - `C:\Users\Users\AppData\Local\Admin Tools\app`
+*if installed by .exe, the directory is in AppData\Local - `C:\Users\User\AppData\Local\Admin Tools\app`  
 *if installed by .jar, the file is in the folder with the .jar
 
-In the file `AdminTools.properties` edit two values to your credentials
+In the configuration file edit these two values to your credentials
 
     rcon.host=<ip of your server that hosts rcon>`
     rcon.port=<port of the rcon - 25575>
@@ -47,7 +47,7 @@ Settings
 [MinecraftServerPing](https://github.com/jamietech/MinecraftServerPing) - by [jamietech](https://github.com/jamietech)
 
 ## Legal info
-LukeOnuke is not affiliated with Mojang Synergies AB.
-"Minecraft" is a trademark of Mojang Synergies AB.
-Gear Icon made by [Freepik](https://www.flaticon.com/authors/freepik) from www.flaticon.com
+LukeOnuke is not affiliated with Mojang Synergies AB.  
+"Minecraft" is a trademark of Mojang Synergies AB.  
+Gear Icon made by [Freepik](https://www.flaticon.com/authors/freepik) from www.flaticon.com  
 This program and its code is licensed on the [GNU GPL V3.0 licence](https://github.com/LukeOnuke/AdminTools/blob/master/LICENSE)
