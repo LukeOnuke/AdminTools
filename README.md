@@ -19,7 +19,6 @@ Downloadable as:
 ## Setup
  - Make sure your server have RCON enabled and running. 
  - Run the installer and follow the installation steps
- - Go to the instalation folder* and find the configuration file called `AdminTools.properties`.
 
 *if installed by .exe, the directory is in AppData\Local - `C:\Users\User\AppData\Local\Admin Tools\app`  
 *if installed by .jar, the file is in the folder with the .jar
