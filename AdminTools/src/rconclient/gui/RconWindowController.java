@@ -7,26 +7,22 @@ package rconclient.gui;
 
 import java.awt.Desktop;
 import java.io.IOException;
-import java.net.SocketException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
-import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Platform;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
@@ -35,9 +31,11 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
-import javafx.stage.Stage;
+import javax.crypto.BadPaddingException;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
 import net.kronos.rkon.core.ex.AuthenticationException;
-import rconclient.RconClient;
+import rconclient.security.Mozaic;
 import rconclient.util.CustomRcon;
 import rconclient.textprocessing.Markup;
 import rconclient.util.Data;
@@ -76,7 +74,7 @@ public class RconWindowController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-
+        
         //Get if barebones argument was given and transition to barebones mode if it was given
         if (Data.arguments.length > 0) {
             if (Data.arguments[0].equals("barebones")) {
@@ -168,24 +166,24 @@ public class RconWindowController implements Initializable {
                 Data d = Data.getInstance();
                 writeRconInternal("Connecting to " + d.getHost() + " : " + d.getPort());
                 try {
-                    CustomRcon cr = CustomRcon.getInstance(d.getHost(), d.getPort(), d.getPassword());
+                    CustomRcon cr = CustomRcon.getInstance();
                 } catch (IOException ex) {
                     connected = false;
                     Platform.runLater(() -> {
-                        Dialog.okDialog(DialogImage.error, "Connnection Error", "Couldnt connect to server.\n Probably a incorect IP, edit properties");
-                        System.exit(0);
+                        Dialog.okDialog(DialogImage.error, "Connnection Error", "Couldnt connect to server.\n Probably an incorect IP.");
+                        WindowLoader.loadLogin(rootPane);
                     });
                 } catch (AuthenticationException ex) {
                     connected = false;
                     Platform.runLater(() -> {
-                        Dialog.okDialog(DialogImage.error, "Connnection Error", "Couldnt authenticate with server. \nIncorect IP or password, edit properties.");
-                        System.exit(0);
+                        Dialog.okDialog(DialogImage.error, "Connnection Error", "Couldnt authenticate with server. \nIncorrect password.");
+                        WindowLoader.loadLogin(rootPane);
                     });
                 } catch (Exception ex) {
                     connected = false;
                     Platform.runLater(() -> {
-                        Dialog.okDialog(DialogImage.error, "Connnection Error", "General exception\n" + ex.getMessage());
-                        System.exit(0);
+                        Dialog.okDialog(DialogImage.error, "Error", "General exception\n" + ex.getMessage());
+                        WindowLoader.loadLogin(rootPane);
                     });
                 }
                 //Write succsesfull connection
@@ -205,6 +203,7 @@ public class RconWindowController implements Initializable {
             connect.start();
             Data.startingUp = false;
         }
+        
     }
 
     public void writeRcon(String message) {
@@ -273,6 +272,12 @@ public class RconWindowController implements Initializable {
                         isRightToSend = false;
                         rcon.getChildren().clear();
                         writeRconInternal("Cleared console");
+                        break;
+                    //Clear command - clears the console
+                    case "!login":
+                        isRightToSend = false;
+                        rcon.getChildren().clear();
+                        WindowLoader.loadLogin(rootPane);
                         break;
 
                     //Exit command - exits the program

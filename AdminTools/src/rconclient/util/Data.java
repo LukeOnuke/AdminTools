@@ -5,6 +5,7 @@
  */
 package rconclient.util;
 
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -12,6 +13,10 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.StringWriter;
+import java.io.UnsupportedEncodingException;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Properties;
@@ -19,6 +24,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
+import javax.crypto.BadPaddingException;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
+import rconclient.security.Mozaic;
 
 /**
  *
@@ -27,9 +36,11 @@ import javafx.scene.Node;
 public class Data {
     //All the variables
 
-    static File config = new File("RconClient.properties");
-    ArrayList<String> data;
-    
+    static File config = new File("rconclient.properties");
+    static File cred = new File("prop.encdat");
+    private ArrayList<String> data;
+    private ArrayList<String> credentials;
+
     //public data
     /**
      * Java arguments
@@ -39,7 +50,7 @@ public class Data {
      * Text elements from a text flow
      */
     public static ObservableList<Node> rconTextData = null;
-    
+
     public static boolean startingUp = true;
 
     //Singleton
@@ -50,6 +61,14 @@ public class Data {
             write(defaults);
         }
         data = read();
+        if(!cred.exists()){
+            try {
+                writeCredentials(credentialsDefaults);
+            } catch (IOException ex) {
+               
+            }
+        }
+        credentials = readCredentials();
     }
 
     /**
@@ -80,7 +99,7 @@ public class Data {
      * @return String representation of IP
      */
     public String getHost() {
-        return data.get(0);
+        return credentials.get(0);
     }
 
     /**
@@ -89,7 +108,7 @@ public class Data {
      * @return port
      */
     public int getPort() {
-        return Integer.parseInt(data.get(1));
+        return Integer.parseInt(credentials.get(1));
     }
 
     /**
@@ -98,7 +117,7 @@ public class Data {
      * @return password
      */
     public byte[] getPassword() {
-        return data.get(2).getBytes();
+        return credentials.get(2).getBytes();
     }
 
     /**
@@ -107,7 +126,7 @@ public class Data {
      * @return String of password
      */
     public String getPasswordAsString() {
-        return data.get(2);
+        return credentials.get(2);
     }
 
     /**
@@ -116,7 +135,7 @@ public class Data {
      * @return Colour hex
      */
     public String getMarkdownErrorColour() {
-        return data.get(3);
+        return data.get(0);
     }
 
     /**
@@ -125,7 +144,7 @@ public class Data {
      * @return Colour hex
      */
     public String getMarkdownSuccsesfullReplyColour() {
-        return data.get(4);
+        return data.get(1);
     }
 
     /**
@@ -134,54 +153,55 @@ public class Data {
      * @return Colour hex
      */
     public String getMarkdownNoCommandResponceColour() {
-        return data.get(5);
+        return data.get(2);
     }
 
     /**
      * Gets remember property
+     *
      * @return remember property
      */
     public boolean getRconRemember() {
-        return Boolean.parseBoolean(data.get(6));
+        return Boolean.parseBoolean(data.get(3));
     }
 
     /**
-     * Gets the refresh rate for mc serv querry 
+     * Gets the refresh rate for mc serv querry
+     *
      * @return refresh rate
      */
     public int getQuerryMcRefreshRate() {
-        return Integer.parseInt(data.get(7));
+        return Integer.parseInt(data.get(4));
     }
 
     /**
      * Gets refresh rate for Mojang API
+     *
      * @return refresh rate
      */
     public double getQuerryMojangApiRefreshRate() {
-        return Double.parseDouble(data.get(8));
+        return Double.parseDouble(data.get(5));
     }
 
     /**
      * Default valiues for the properties
      */
-    public static ArrayList<String> defaults = new ArrayList<>(Arrays.asList(new String[]{"localhost", "25575", "password", "#e02b2b", "#9cfc88", "#9cfc88", "false", "10", "100"}));
+    public static ArrayList<String> defaults = new ArrayList<>(Arrays.asList(new String[]{"#e02b2b", "#9cfc88", "#9cfc88", "false", "10", "100"}));
 
     /**
      * Writes the properties to disk
+     *
      * @param props the properties that need to be written
      */
     public static void write(ArrayList<String> props) {
         Properties prop = new Properties();
         try (OutputStream output = new FileOutputStream(config)) {
-            prop.setProperty("rcon.host", props.get(0));
-            prop.setProperty("rcon.port", props.get(1));
-            prop.setProperty("rcon.password", props.get(2));
-            prop.setProperty("markdown.error.colour", props.get(3));
-            prop.setProperty("markdown.succsesfullreply.colour", props.get(4));
-            prop.setProperty("markdown.nocommandresponce.colour", props.get(5));
-            prop.setProperty("rcon.remember", props.get(6));
-            prop.setProperty("querry.mc.refreshrate", props.get(7));
-            prop.setProperty("querry.api.mojang.refreshrate", props.get(8));
+            prop.setProperty("markdown.error.colour", props.get(0));
+            prop.setProperty("markdown.succsesfullreply.colour", props.get(1));
+            prop.setProperty("markdown.nocommandresponce.colour", props.get(2));
+            prop.setProperty("rcon.remember", props.get(3));
+            prop.setProperty("querry.mc.refreshrate", props.get(4));
+            prop.setProperty("querry.api.mojang.refreshrate", props.get(5));
             prop.store(output, "RconClient properties" + System.lineSeparator() + "Created by: LukeOnuke - https://github.com/LukeOnuke");
 
         } catch (FileNotFoundException ex) {
@@ -193,6 +213,7 @@ public class Data {
 
     /**
      * Reads the properties from disk
+     *
      * @return ArrayList of properites
      */
     public static ArrayList<String> read() {
@@ -201,15 +222,12 @@ public class Data {
         Properties prop = new Properties();
         try (InputStream input = new FileInputStream(config)) {
             prop.load(input);
-            arl.add(prop.getProperty("rcon.host", defaults.get(0)));
-            arl.add(prop.getProperty("rcon.port", defaults.get(1)));
-            arl.add(prop.getProperty("rcon.password", defaults.get(2)));
-            arl.add(prop.getProperty("markdown.error.colour", defaults.get(3)));
-            arl.add(prop.getProperty("markdown.succsesfullreply.colour", defaults.get(4)));
-            arl.add(prop.getProperty("markdown.nocommandresponce.colour", defaults.get(5)));
-            arl.add(prop.getProperty("rcon.remember", defaults.get(6)));
-            arl.add(prop.getProperty("querry.mc.refreshrate", defaults.get(7)));
-            arl.add(prop.getProperty("querry.api.mojang.refreshrate", defaults.get(8)));
+            arl.add(prop.getProperty("markdown.error.colour", defaults.get(0)));
+            arl.add(prop.getProperty("markdown.succsesfullreply.colour", defaults.get(1)));
+            arl.add(prop.getProperty("markdown.nocommandresponce.colour", defaults.get(2)));
+            arl.add(prop.getProperty("rcon.remember", defaults.get(3)));
+            arl.add(prop.getProperty("querry.mc.refreshrate", defaults.get(4)));
+            arl.add(prop.getProperty("querry.api.mojang.refreshrate", defaults.get(5)));
 
         } catch (FileNotFoundException ex) {
             Logger.getLogger(Data.class.getName()).log(Level.SEVERE, null, ex);
@@ -218,5 +236,43 @@ public class Data {
         }
 
         return arl;
+    }
+
+    public static ArrayList<String> credentialsDefaults = new ArrayList<>(Arrays.asList(new String[]{"localhost", "25575", "password"}));
+
+    public static ArrayList<String> readCredentials() {
+        ArrayList<String> cred = new ArrayList<>();
+
+        Properties prop = new Properties();
+        try (InputStream input = new ByteArrayInputStream(Mozaic.read().getBytes());) {
+            prop.load(input);
+            cred.add(prop.getProperty("rcon.host", credentialsDefaults.get(0)));
+            cred.add(prop.getProperty("rcon.port", credentialsDefaults.get(1)));
+            cred.add(prop.getProperty("rcon.password", credentialsDefaults.get(2)));
+
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(Data.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(Data.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InvalidKeyException | IllegalBlockSizeException | BadPaddingException | NoSuchAlgorithmException | NoSuchPaddingException ex) {
+            Logger.getLogger(Data.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return cred;
+    }
+
+    public static void writeCredentials(ArrayList<String> credentials) throws IOException {
+        Properties prop = new Properties();
+        StringWriter output = new StringWriter();
+        prop.setProperty("rcon.host", credentials.get(0));
+        prop.setProperty("rcon.port", credentials.get(1));
+        prop.setProperty("rcon.password", credentials.get(2));
+        prop.store(output, "RconClient credentials" + System.lineSeparator() + "Created by: LukeOnuke - https://github.com/LukeOnuke");
+        
+        try {
+            Mozaic.write(output.getBuffer().toString());
+        } catch (NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException | UnsupportedEncodingException | IllegalBlockSizeException | BadPaddingException ex) {
+            Logger.getLogger(Data.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

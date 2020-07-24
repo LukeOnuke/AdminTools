@@ -293,3 +293,22 @@
     -fx-background-color : #575757;
     -fx-text-fill: white;
 }
+
+.leftSidePane{
+    -fx-background-color: #3d3d3d;
+    -fx-border-color: #5c5c5c;
+    -fx-border-width: 0px 1px 0px 0px;
+}
+
+.imageBackground{
+    -fx-background-image: url(/rconclient/image/background.png); 
+    -fx-background-size: cover;
+}
+
+.loginCenter{
+    -fx-background-color: #3d3d3d;
+    -fx-border-color: #5c5c5c;
+    -fx-border-width: 1px;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+}

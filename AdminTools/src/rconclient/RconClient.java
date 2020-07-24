@@ -1,5 +1,6 @@
 package rconclient;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.SocketException;
 import javafx.application.Application;
@@ -28,7 +29,12 @@ public class RconClient extends Application {
     @Override
     public void start(Stage stage) throws Exception {
 
-        Parent root = FXMLLoader.load(getClass().getResource("/rconclient/gui/RconWindow.fxml"));
+        Parent root;
+        if(new File("rconclient.properties").exists()){
+            root = FXMLLoader.load(getClass().getResource("/rconclient/gui/RconWindow.fxml"));
+        }else{
+            root = FXMLLoader.load(getClass().getResource("/rconclient/gui/LoginWindow.fxml"));
+        }
 
         Scene scene = new Scene(root);
 

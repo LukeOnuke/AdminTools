@@ -98,7 +98,7 @@ public class StatusWindowController implements Initializable {
 
     @FXML
     public void handleMouseClick(MouseEvent arg0) {
-        //System.out.println("clicked on " + sOnlinePlayers.getSelectionModel().getSelectedItem());
+        System.out.println("clicked on " + sOnlinePlayers.getSelectionModel().getSelectedItem());
     }
 
     private void refreshApiStatus() {

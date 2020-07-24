@@ -20,13 +20,13 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 import net.kronos.rkon.core.ex.AuthenticationException;
 import rconclient.util.CustomRcon;
 import rconclient.util.Data;
 import rconclient.util.WindowLoader;
 import simplefxdialog.Dialog;
 import simplefxdialog.img.DialogImage;
-
 
 /**
  * FXML Controller class
@@ -80,61 +80,80 @@ public class SettingsWindowController implements Initializable {
     private void loadStatus() {
         WindowLoader.loadStatus(rootPane);
     }
-    
+
     @FXML
-    private void login(){
+    private void login() {
         connectionIndicator.setProgress(ProgressBar.INDETERMINATE_PROGRESS);
-        Thread thread = new Thread(() ->{
-        Data datao = Data.getInstance();
-        boolean isSuccsesfull = true;
-        
-        try {
-            CustomRcon rcon = CustomRcon.getInstance();
-            rcon.disconnect();
-            
-            rcon = CustomRcon.getInstance(rconIP.getText(), Integer.valueOf(rconPort.getText()), rconPassword.getText().getBytes());
-        } catch (IOException ex) {
-            isSuccsesfull = false;
-            Dialog.okDialog(DialogImage.error, "Server error", "Incorect ip or server is not up");
-            rconIP.setText(datao.getHost());
-            rconPort.setText(String.valueOf(datao.getPort()));
-        } catch (AuthenticationException ex){
-            isSuccsesfull = false;
-            Dialog.okDialog(DialogImage.error, "Credentials error", "Credentials arent correct");
-            rconPassword.setText(datao.getPasswordAsString());
-        }
-        
-        if(isSuccsesfull){
-            ArrayList<String> data = Data.read();
-            data.set(0, rconIP.getText());
-            data.set(1, rconPort.getText());
-            data.set(2, rconPassword.getText());
-            data.set(6, String.valueOf(rconRemember.isSelected()));
-            Data.write(data);
-            Data.refresh();
-        } 
-        
+        Thread thread = new Thread(() -> {
+            Data datao = Data.getInstance();
+            boolean isSuccsesfull = true;
+
+            try {
+                CustomRcon rcon = CustomRcon.getInstance();
+                rcon.disconnect();
+
+                rcon = CustomRcon.getInstance(rconIP.getText(), Integer.valueOf(rconPort.getText()), rconPassword.getText().getBytes());
+            } catch (IOException ex) {
+                isSuccsesfull = false;
+                Dialog.okDialog(DialogImage.error, "Server error", "Incorect ip or server is not up");
+                rconIP.setText(datao.getHost());
+                rconPort.setText(String.valueOf(datao.getPort()));
+            } catch (AuthenticationException ex) {
+                isSuccsesfull = false;
+                Dialog.okDialog(DialogImage.error, "Credentials error", "Credentials arent correct");
+                rconPassword.setText(datao.getPasswordAsString());
+            }
+
+            if (isSuccsesfull) {
+                ArrayList<String> data = Data.read();
+                data.set(3, String.valueOf(rconRemember.isSelected()));
+                Data.write(data);
+
+                ArrayList<String> credentials = Data.readCredentials();
+                credentials.set(0, rconIP.getText());
+                credentials.set(1, rconPort.getText());
+                credentials.set(2, rconPassword.getText());
+                try {
+                    Data.writeCredentials(credentials);
+                } catch (IOException ex) {
+                    Logger.getLogger(SettingsWindowController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+                Data.refresh();
+
+                Stage stage = (Stage) rootPane.getScene().getWindow();
+                Data d = Data.getInstance();
+                String barebonesq = "";
+                if (Data.arguments.length > 0) {
+                    if (Data.arguments[0].equals("barebones")) {
+                        barebonesq = " [Barebones mode]";
+                    }
+                }
+                stage.setTitle("Admin Tools - " + d.getHost() + ":" + d.getPort() + barebonesq);
+                stage.show();
+            }
+
         });
-        
+
         connectionIndicator.setProgress(0.0);
     }
-    
+
     @FXML
-    private void refresh(){
+    private void refresh() {
         sARR.setText(String.valueOf(Math.round(settingsApiRequestR.getValue())) + "s");
     }
-    
+
     @FXML
-    private void apply(){
+    private void apply() {
         ArrayList<String> data = Data.read();
-        data.set(7, settingsQuerryRR.getText());
-        data.set(8, String.valueOf( Math.round(settingsApiRequestR.getValue()) ));
+        data.set(4, settingsQuerryRR.getText());
+        data.set(5, String.valueOf(Math.round(settingsApiRequestR.getValue())));
         Data.write(data);
         Data.refresh();
     }
-    
+
     @FXML
-    private void reset(){
+    private void reset() {
         Data d = Data.getInstance();
         settingsQuerryRR.setText(String.valueOf(d.getQuerryMcRefreshRate()));
         settingsApiRequestR.setValue(d.getQuerryMojangApiRefreshRate());

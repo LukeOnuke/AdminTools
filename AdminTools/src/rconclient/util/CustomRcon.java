@@ -15,7 +15,6 @@ public class CustomRcon extends Rcon {
 
     public static CustomRcon getInstance() throws IOException, AuthenticationException {
         if (instance == null) {
-
             //Variable declaration
             Data data = Data.getInstance();
             String host = data.getHost();
