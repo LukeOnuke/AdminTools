@@ -54,6 +54,15 @@
                               <Slider fx:id="settingsApiRequestR" layoutX="178.0" layoutY="66.0" max="200.0" min="20.0" onMouseClicked="#refresh" onMouseMoved="#refresh" onMousePressed="#refresh" onMouseReleased="#refresh" value="100.0" />
                               <Label fx:id="sARR" layoutX="327.0" layoutY="63.0" prefHeight="20.0" prefWidth="46.0" styleClass="text" text="s" AnchorPane.leftAnchor="327.0" AnchorPane.topAnchor="63.0" />
                               <Label layoutX="3.0" layoutY="244.0" onMouseClicked="#reset" styleClass="labelButton" text="Default" AnchorPane.bottomAnchor="2.0" AnchorPane.leftAnchor="2.0" />
+                              <AnchorPane layoutX="14.0" layoutY="91.0" prefHeight="145.0" prefWidth="322.0" styleClass="borderPane" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="91.0">
+                                 <children>
+                                    <Text layoutX="2.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="borderPaneText" text="Message system settings" AnchorPane.leftAnchor="1.0" AnchorPane.topAnchor="0.0" />
+                                    <TextField fx:id="settingsMsgUsername" layoutX="90.0" layoutY="27.0" prefHeight="29.0" prefWidth="217.0" styleClass="rconTextField" AnchorPane.leftAnchor="90.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="27.0" />
+                                    <Label layoutX="11.0" layoutY="31.0" styleClass="text" text="Username - " AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="31.0" />
+                                    <RadioButton fx:id="settingsMsgNotify" layoutX="12.0" layoutY="73.0" mnemonicParsing="false" text="Notify login in chat" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="73.0" />
+                                    <RadioButton fx:id="settingsMsgOverrideSay" layoutX="14.0" layoutY="111.0" mnemonicParsing="false" text="Override say command" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="111.0" />
+                                 </children>
+                              </AnchorPane>
                            </children>
                         </AnchorPane>
                      </children>

@@ -51,23 +51,32 @@ public class SettingsWindowController implements Initializable {
     private TextField settingsQuerryRR;
     @FXML
     private Label sARR; //settings api request rate
-    @FXML
-    private Label sQRR; //settings querry request rate
+    //@FXML
+    //private Label sQRR; //settings querry request rate
     @FXML
     private ProgressBar connectionIndicator;
+    @FXML
+    private RadioButton settingsMsgNotify;
+    @FXML
+    private RadioButton settingsMsgOverrideSay;
+    @FXML
+    private TextField settingsMsgUsername;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        Data data = Data.getInstance();
+        Data data = Data.refresh();
         rconIP.setText(data.getHost());
         rconPort.setText(String.valueOf(data.getPort()));
         rconPassword.setText(data.getPasswordAsString());
         rconRemember.setSelected(data.getRconRemember());
         settingsApiRequestR.setValue(data.getQuerryMojangApiRefreshRate());
         settingsQuerryRR.setText(String.valueOf(data.getQuerryMcRefreshRate()));
+        settingsMsgOverrideSay.setSelected(data.getMessageOverwriteSay());
+        settingsMsgNotify.setSelected(data.getMessageNotify());
+        settingsMsgUsername.setText(data.getMessageUsername());
         refresh();
     }
 
@@ -140,7 +149,11 @@ public class SettingsWindowController implements Initializable {
 
     @FXML
     private void refresh() {
+        Data data = Data.refresh();
         sARR.setText(String.valueOf(Math.round(settingsApiRequestR.getValue())) + "s");
+        settingsMsgNotify.selectedProperty().set(data.getMessageNotify());
+        settingsMsgOverrideSay.selectedProperty().set(data.getMessageOverwriteSay());
+        settingsMsgUsername.setText(data.getMessageUsername());
     }
 
     @FXML
@@ -148,6 +161,9 @@ public class SettingsWindowController implements Initializable {
         ArrayList<String> data = Data.read();
         data.set(4, settingsQuerryRR.getText());
         data.set(5, String.valueOf(Math.round(settingsApiRequestR.getValue())));
+        data.set(6, String.valueOf(settingsMsgNotify.selectedProperty().get()));
+        data.set(7, String.valueOf(settingsMsgOverrideSay.selectedProperty().get()));
+        data.set(8, settingsMsgUsername.getText());
         Data.write(data);
         Data.refresh();
     }

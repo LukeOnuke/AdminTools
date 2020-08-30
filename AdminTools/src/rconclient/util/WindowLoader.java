@@ -23,18 +23,22 @@ public class WindowLoader {
 
     public static void loadRcon(AnchorPane rootPane) {
         loadWindow(rootPane, "/rconclient/gui/RconWindow.fxml");
+        Data.isOnStatusWindow = false;
     }
 
     public static void loadSettings(AnchorPane rootPane) {
         loadWindow(rootPane, "/rconclient/gui/SettingsWindow.fxml");
+        Data.isOnStatusWindow = false;
     }
 
     public static void loadStatus(AnchorPane rootPane) {
+        Data.isOnStatusWindow = true;
         loadWindow(rootPane, "/rconclient/gui/StatusWindow.fxml");
     }
 
     public static void loadLogin(AnchorPane rootPane) {
         loadWindow(rootPane, "/rconclient/gui/LoginWindow.fxml");
+        Data.isOnStatusWindow = false;
     }
 
     private static void loadWindow(AnchorPane rootPane, String url) {

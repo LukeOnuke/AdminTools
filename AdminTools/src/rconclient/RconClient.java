@@ -11,6 +11,7 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import net.kronos.rkon.core.ex.AuthenticationException;
+import rconclient.textprocessing.TellrawFormatter;
 import rconclient.util.*;
 import simplefxdialog.Dialog;
 import simplefxdialog.img.DialogImage;
@@ -28,8 +29,10 @@ public class RconClient extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-
+        Data d = Data.getInstance();
         Parent root;
+        
+        //Load login if there is no credentials
         if(new File("rconclient.properties").exists()){
             root = FXMLLoader.load(getClass().getResource("/rconclient/gui/RconWindow.fxml"));
         }else{
@@ -43,7 +46,11 @@ public class RconClient extends Application {
         stage.setOnCloseRequest((event) -> {
             System.out.println("Closing");
             try {
-                CustomRcon.getInstance().disconnect();
+                CustomRcon cr = CustomRcon.getInstance();
+                if(d.getMessageNotify()){
+                        cr.command(TellrawFormatter.assembleLogoutTellraw(d.getMessageUsername()));
+                    }
+                cr.disconnect();
             } catch (IOException ex) {
 
             } catch (AuthenticationException ex) {
@@ -53,7 +60,6 @@ public class RconClient extends Application {
         });
 
         //Setting the title
-        Data d = Data.getInstance();
         String barebonesq = "";
         if (Data.arguments.length > 0) {
             if (Data.arguments[0].equals("barebones")) {

@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.Socket;
 import net.kronos.rkon.core.Rcon;
 import net.kronos.rkon.core.ex.AuthenticationException;
+import rconclient.textprocessing.TellrawFormatter;
 
 public class CustomRcon extends Rcon {
 
@@ -22,15 +23,14 @@ public class CustomRcon extends Rcon {
             byte[] password = data.getPassword();
 
             //Reading configuration from file
-
             //Constructing the instance
             instance = new CustomRcon(host, port, password);
         }
         //Returns the instance
         return instance;
     }
-    
-    public static CustomRcon getInstance(String host, int port, byte[] password) throws IOException, AuthenticationException{
+
+    public static CustomRcon getInstance(String host, int port, byte[] password) throws IOException, AuthenticationException {
         instance = null;
         instance = new CustomRcon(host, port, password);
         return instance;
@@ -44,7 +44,13 @@ public class CustomRcon extends Rcon {
     @Override
     public String command(String payload) throws IOException {
         String uc = "Unknown command";
+        Data data = Data.getInstance();
         if (!empty(payload)) {
+            if (data.getMessageOverwriteSay()) {
+                if (payload.split(" ")[0].equals("say")) {
+                    payload = TellrawFormatter.assembleSayTellraw(data.getMessageUsername(), payload.substring(payload.indexOf(" ") + 1));
+                }
+            }
             String response = super.command(payload);
             if (empty(response)) {
                 return "No command response";

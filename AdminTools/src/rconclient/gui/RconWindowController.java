@@ -38,6 +38,7 @@ import net.kronos.rkon.core.ex.AuthenticationException;
 import rconclient.security.Mozaic;
 import rconclient.util.CustomRcon;
 import rconclient.textprocessing.Markup;
+import rconclient.textprocessing.TellrawFormatter;
 import rconclient.util.Data;
 import rconclient.util.Utill;
 import rconclient.util.WindowLoader;
@@ -167,6 +168,10 @@ public class RconWindowController implements Initializable {
                 writeRconInternal("Connecting to " + d.getHost() + ":" + d.getPort());
                 try {
                     CustomRcon cr = CustomRcon.getInstance();
+                    //write connected message if its enabled
+                    if(d.getMessageNotify()){
+                        cr.command(TellrawFormatter.assembleLoginTellraw(d.getMessageUsername()));
+                    }
                 } catch (IOException ex) {
                     connected = false;
                     Platform.runLater(() -> {

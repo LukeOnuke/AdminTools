@@ -52,6 +52,12 @@ public class Data {
     public static ObservableList<Node> rconTextData = null;
 
     public static boolean startingUp = true;
+    
+    /**
+     * Is the view on the status window
+     * <i>Used in stopping and starting tick threads in the status window</i>
+     */
+    public static boolean isOnStatusWindow = false;
 
     //Singleton
     private static Data instance = null;
@@ -61,11 +67,11 @@ public class Data {
             write(defaults);
         }
         data = read();
-        if(!cred.exists()){
+        if (!cred.exists()) {
             try {
                 writeCredentials(credentialsDefaults);
             } catch (IOException ex) {
-               
+
             }
         }
         credentials = readCredentials();
@@ -183,10 +189,21 @@ public class Data {
         return Double.parseDouble(data.get(5));
     }
 
+    public boolean getMessageNotify() {
+        return Boolean.parseBoolean(data.get(6));
+    }
+
+    public boolean getMessageOverwriteSay() {
+        return Boolean.parseBoolean(data.get(7));
+    }
+
+    public String getMessageUsername() {
+        return data.get(8);
+    }
     /**
      * Default valiues for the properties
      */
-    public static ArrayList<String> defaults = new ArrayList<>(Arrays.asList(new String[]{"#e02b2b", "#9cfc88", "#9cfc88", "false", "10", "100"}));
+    public static ArrayList<String> defaults = new ArrayList<>(Arrays.asList(new String[]{"#e02b2b", "#9cfc88", "#9cfc88", "false", "10", "100", "false", "false", "username"}));
 
     /**
      * Writes the properties to disk
@@ -202,6 +219,9 @@ public class Data {
             prop.setProperty("rcon.remember", props.get(3));
             prop.setProperty("querry.mc.refreshrate", props.get(4));
             prop.setProperty("querry.api.mojang.refreshrate", props.get(5));
+            prop.setProperty("message.send.on.login", props.get(6));
+            prop.setProperty("message.overwrite.say", props.get(7));
+            prop.setProperty("message.username", props.get(8));
             prop.store(output, "RconClient properties" + System.lineSeparator() + "Created by: LukeOnuke - https://github.com/LukeOnuke");
 
         } catch (FileNotFoundException ex) {
@@ -228,7 +248,9 @@ public class Data {
             arl.add(prop.getProperty("rcon.remember", defaults.get(3)));
             arl.add(prop.getProperty("querry.mc.refreshrate", defaults.get(4)));
             arl.add(prop.getProperty("querry.api.mojang.refreshrate", defaults.get(5)));
-
+            arl.add(prop.getProperty("message.send.on.login", defaults.get(6)));
+            arl.add(prop.getProperty("message.overwrite.say", defaults.get(7)));
+            arl.add(prop.getProperty("message.username", defaults.get(8)));
         } catch (FileNotFoundException ex) {
             Logger.getLogger(Data.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
@@ -268,7 +290,7 @@ public class Data {
         prop.setProperty("rcon.port", credentials.get(1));
         prop.setProperty("rcon.password", credentials.get(2));
         prop.store(output, "RconClient credentials" + System.lineSeparator() + "Created by: LukeOnuke - https://github.com/LukeOnuke");
-        
+
         try {
             Mozaic.write(output.getBuffer().toString());
         } catch (NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException | UnsupportedEncodingException | IllegalBlockSizeException | BadPaddingException ex) {

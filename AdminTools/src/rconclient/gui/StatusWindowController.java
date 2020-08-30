@@ -18,6 +18,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.ProgressBar;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -28,6 +29,8 @@ import rconclient.querry.mc.MinecraftPing;
 import rconclient.querry.mc.MinecraftPingOptions;
 import rconclient.querry.mc.MinecraftPingReply;
 import rconclient.querry.mc.QuerryUtils;
+import rconclient.threadmanager.ThreadManager;
+import rconclient.threadmanager.ThreadType;
 import rconclient.util.Data;
 
 /**
@@ -130,18 +133,28 @@ public class StatusWindowController implements Initializable {
 
     private void tickApi() {
         Thread ratf = new Thread(() -> {
-            Platform.runLater(() -> {
-                refreshApiStatus();
-            });
-            Data data = Data.getInstance();
-            try {
-                Thread.sleep(Math.round(data.getQuerryMojangApiRefreshRate()) * 1000);
-            } catch (InterruptedException ex) {
-
+            if (Data.isOnStatusWindow) {
+                Platform.runLater(() -> {
+                    refreshApiStatus();
+                });
+                Data data = Data.getInstance();
+                try {
+                    int timeSleep = (int) data.getQuerryMojangApiRefreshRate() * 1000;
+                    for (int i = 0; i < timeSleep / 500; i++) {
+                        if (!Data.isOnStatusWindow) {
+                            return;
+                        }
+                        Thread.sleep(500);
+                    }
+                } catch (InterruptedException ex) {
+                    
+                }
+                System.out.println(Data.isOnStatusWindow);
+                tickApi();
             }
-            tickApi();
         });
-        ratf.start();
+        ratf.setName("ApiTick");
+        ThreadManager.startThread(ratf, ThreadType.ASYNCJOB);
     }
 
     @FXML
@@ -156,7 +169,11 @@ public class StatusWindowController implements Initializable {
                 Platform.runLater(() -> {
                     sVer.setText("Version: " + data.getVersion().getName());
                     sPlayers.setText("Players: " + data.getPlayers().getOnline() + " / " + data.getPlayers().getMax());
-                    sFavicon.setImage(QuerryUtils.convertToImage(data.getFavicon()));
+                    if (data.getFavicon() != null) {
+                        sFavicon.setImage(QuerryUtils.convertToImage(data.getFavicon()));
+                    } else {
+                        sFavicon.setImage(new Image(StatusWindowController.class.getResourceAsStream("/rconclient/image/unknown_server.png")));
+                    }
                 });
 
                 //Set player list
@@ -177,6 +194,7 @@ public class StatusWindowController implements Initializable {
             } catch (IOException ex) {
 
             }
+
         });
         mcsr.start();
     }
@@ -188,12 +206,20 @@ public class StatusWindowController implements Initializable {
             });
             Data d = Data.getInstance();
             try {
-                Thread.sleep(d.getQuerryMcRefreshRate() * 1000);
+                int timeSleep = d.getQuerryMcRefreshRate() * 1000;
+                for (int i = 0; i < timeSleep / 500; i++) {
+                    if (!Data.isOnStatusWindow) {
+                        return;
+                    }
+                    Thread.sleep(500);
+                }
             } catch (InterruptedException ex) {
                 Logger.getLogger(StatusWindowController.class.getName()).log(Level.SEVERE, null, ex);
             }
             tickMcRefresh();
+
         });
-        tmrt.start();
+        tmrt.setName("McTick");
+        ThreadManager.startThread(tmrt, ThreadType.ASYNCJOB);
     }
 }
