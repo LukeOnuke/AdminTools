@@ -10,7 +10,7 @@ Features:
  - Minecraft services status (eg. authserver, api...)
  - Barebones mode
  
-With multiplatform in mind admin tools can be used anywhere.
+## With multiplatform in mind admin tools can be used anywhere.
 ![admin tools](https://i.imgur.com/Rqxxcbg.png)
 
 For more documentation visit the [wiki](https://github.com/LukeOnuke/AdminTools/wiki).
