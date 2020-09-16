@@ -2,7 +2,7 @@
 [![made with java](https://camo.githubusercontent.com/f323bfd5013976480497e79198bee01b7c5356a4/687474703a2f2f466f7254686542616467652e636f6d2f696d616765732f6261646765732f6d6164652d776974682d6a6176612e737667)](https://www.java.com/)
 
 
-[![daym](https://img.shields.io/github/downloads/LukeOnuke/AdminTools/total)](https://github.com/LukeOnuke/AdminTools/releases) ![wow here](https://img.shields.io/github/license/LukeOnuke/AdminTools) ![wow](https://img.shields.io/github/v/release/LukeOnuke/AdminTools?include_prereleases) [![Codacy Badge](https://app.codacy.com/project/badge/Grade/2e08b96cb16a4741a93032cb11963f5a)](https://www.codacy.com/manual/lukakresoja1/AdminTools?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=LukeOnuke/AdminTools&amp;utm_campaign=Badge_Grade)
+[![daym](https://img.shields.io/github/downloads/LukeOnuke/AdminTools/total)](https://github.com/LukeOnuke/AdminTools/releases) ![wow here](https://img.shields.io/github/license/LukeOnuke/AdminTools) ![wow](https://img.shields.io/github/v/release/LukeOnuke/AdminTools?include_prereleases)
 
 Program with administration tools for Minecraft servers.
 
