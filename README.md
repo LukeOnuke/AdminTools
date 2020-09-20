@@ -13,6 +13,8 @@ Features:
  - Minecraft services status (eg. authserver, api...)
  - Barebones mode
  
+ **Images outdated, will update them soon**
+ 
 ## With multiplatform in mind admin tools can be used anywhere.
 ![admin tools](https://i.imgur.com/Rqxxcbg.png)
 
