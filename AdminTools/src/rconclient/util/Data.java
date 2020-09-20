@@ -49,7 +49,7 @@ public class Data {
     /**
      * Text elements from a text flow
      */
-    public static ObservableList<Node> rconTextData = null;
+    public static ArrayList<String> rconTextData = null;
 
     public static boolean startingUp = true;
     
@@ -168,7 +168,7 @@ public class Data {
      * @return remember property
      */
     public boolean getRconRemember() {
-        return Boolean.parseBoolean(data.get(3));
+        return Boolean.parseBoolean(data.get(0));
     }
 
     /**
@@ -177,7 +177,7 @@ public class Data {
      * @return refresh rate
      */
     public int getQuerryMcRefreshRate() {
-        return Integer.parseInt(data.get(4));
+        return Integer.parseInt(data.get(1));
     }
 
     /**
@@ -186,24 +186,24 @@ public class Data {
      * @return refresh rate
      */
     public double getQuerryMojangApiRefreshRate() {
-        return Double.parseDouble(data.get(5));
+        return Double.parseDouble(data.get(2));
     }
 
     public boolean getMessageNotify() {
-        return Boolean.parseBoolean(data.get(6));
+        return Boolean.parseBoolean(data.get(3));
     }
 
     public boolean getMessageOverwriteSay() {
-        return Boolean.parseBoolean(data.get(7));
+        return Boolean.parseBoolean(data.get(4));
     }
 
     public String getMessageUsername() {
-        return data.get(8);
+        return data.get(5);
     }
     /**
      * Default valiues for the properties
      */
-    public static ArrayList<String> defaults = new ArrayList<>(Arrays.asList(new String[]{"#e02b2b", "#9cfc88", "#9cfc88", "false", "10", "100", "false", "false", "username"}));
+    public static ArrayList<String> defaults = new ArrayList<>(Arrays.asList(new String[]{"false", "10", "100", "false", "false", "username"}));
 
     /**
      * Writes the properties to disk
@@ -213,15 +213,12 @@ public class Data {
     public static void write(ArrayList<String> props) {
         Properties prop = new Properties();
         try (OutputStream output = new FileOutputStream(config)) {
-            prop.setProperty("markdown.error.colour", props.get(0));
-            prop.setProperty("markdown.succsesfullreply.colour", props.get(1));
-            prop.setProperty("markdown.nocommandresponce.colour", props.get(2));
-            prop.setProperty("rcon.remember", props.get(3));
-            prop.setProperty("querry.mc.refreshrate", props.get(4));
-            prop.setProperty("querry.api.mojang.refreshrate", props.get(5));
-            prop.setProperty("message.send.on.login", props.get(6));
-            prop.setProperty("message.overwrite.say", props.get(7));
-            prop.setProperty("message.username", props.get(8));
+            prop.setProperty("rcon.remember", props.get(0));
+            prop.setProperty("querry.mc.refreshrate", props.get(1));
+            prop.setProperty("querry.api.mojang.refreshrate", props.get(2));
+            prop.setProperty("message.send.on.login", props.get(3));
+            prop.setProperty("message.overwrite.say", props.get(4));
+            prop.setProperty("message.username", props.get(5));
             prop.store(output, "RconClient properties" + System.lineSeparator() + "Created by: LukeOnuke - https://github.com/LukeOnuke");
 
         } catch (FileNotFoundException ex) {
@@ -242,15 +239,12 @@ public class Data {
         Properties prop = new Properties();
         try (InputStream input = new FileInputStream(config)) {
             prop.load(input);
-            arl.add(prop.getProperty("markdown.error.colour", defaults.get(0)));
-            arl.add(prop.getProperty("markdown.succsesfullreply.colour", defaults.get(1)));
-            arl.add(prop.getProperty("markdown.nocommandresponce.colour", defaults.get(2)));
-            arl.add(prop.getProperty("rcon.remember", defaults.get(3)));
-            arl.add(prop.getProperty("querry.mc.refreshrate", defaults.get(4)));
-            arl.add(prop.getProperty("querry.api.mojang.refreshrate", defaults.get(5)));
-            arl.add(prop.getProperty("message.send.on.login", defaults.get(6)));
-            arl.add(prop.getProperty("message.overwrite.say", defaults.get(7)));
-            arl.add(prop.getProperty("message.username", defaults.get(8)));
+            arl.add(prop.getProperty("rcon.remember", defaults.get(0)));
+            arl.add(prop.getProperty("querry.mc.refreshrate", defaults.get(1)));
+            arl.add(prop.getProperty("querry.api.mojang.refreshrate", defaults.get(2)));
+            arl.add(prop.getProperty("message.send.on.login", defaults.get(3)));
+            arl.add(prop.getProperty("message.overwrite.say", defaults.get(4)));
+            arl.add(prop.getProperty("message.username", defaults.get(5)));
         } catch (FileNotFoundException ex) {
             Logger.getLogger(Data.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {

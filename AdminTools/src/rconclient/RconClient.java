@@ -2,9 +2,7 @@ package rconclient;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.SocketException;
 import javafx.application.Application;
-import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -13,8 +11,6 @@ import javafx.stage.Stage;
 import net.kronos.rkon.core.ex.AuthenticationException;
 import rconclient.textprocessing.TellrawFormatter;
 import rconclient.util.*;
-import simplefxdialog.Dialog;
-import simplefxdialog.img.DialogImage;
 
 /*
 *   Image credits 
@@ -69,8 +65,12 @@ public class RconClient extends Application {
         stage.setTitle("Admin Tools - " + d.getHost() + ":" + d.getPort() + barebonesq);
         //Setting the icon
         stage.getIcons().add(new Image(RconClient.class.getResourceAsStream("/rconclient/image/icon.png")));
-
+        
         stage.show();
+        
+        //Setting the max width and max height
+        stage.setMinHeight(650.0d);
+        stage.setMinWidth(973.0d);
     }
 
     /**

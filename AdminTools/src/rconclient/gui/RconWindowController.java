@@ -1,41 +1,26 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package rconclient.gui;
 
-import java.awt.Desktop;
 import java.io.IOException;
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.net.URL;
-import java.security.InvalidKeyException;
-import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Platform;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.concurrent.Worker;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontPosture;
-import javafx.scene.text.Text;
-import javafx.scene.text.TextFlow;
-import javax.crypto.BadPaddingException;
-import javax.crypto.IllegalBlockSizeException;
-import javax.crypto.NoSuchPaddingException;
+import javafx.scene.web.WebEngine;
+import javafx.scene.web.WebView;
 import net.kronos.rkon.core.ex.AuthenticationException;
-import rconclient.security.Mozaic;
 import rconclient.util.CustomRcon;
 import rconclient.textprocessing.Markup;
 import rconclient.textprocessing.TellrawFormatter;
@@ -59,7 +44,7 @@ public class RconWindowController implements Initializable {
     @FXML
     private TextField rconSend;
     @FXML
-    private TextFlow rcon;
+    private WebView rcon;
     @FXML
     private AnchorPane rootPane;
     @FXML
@@ -73,9 +58,15 @@ public class RconWindowController implements Initializable {
     @FXML
     private AnchorPane rconPane;
 
+    //Web engine
+    private WebEngine rconWebEngine;
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
+        //Instantiate web engine
+        rcon.contextMenuEnabledProperty().set(false);
+        rconWebEngine = rcon.getEngine();
+
         //Get if barebones argument was given and transition to barebones mode if it was given
         if (Data.arguments.length > 0) {
             if (Data.arguments[0].equals("barebones")) {
@@ -88,45 +79,13 @@ public class RconWindowController implements Initializable {
 
         //Read and set the rcon text from the data property if Data.rconTextData isnt null or write welcon message and set data
         if (Data.rconTextData != null) {
-            rcon.getChildren().clear();
-            rcon.getChildren().addAll(Data.rconTextData);
+            refresh();
         } else {
+            //Initilise rcon text data
+            Data.rconTextData = new ArrayList<String>();
             //Write welcome message if rcon children data is clear
             //Write welcome message
-            AnchorPane credits = new AnchorPane();
-            Label creditsLabel = new Label("Admin Tools - Made by LukeOnuke");
-            Hyperlink hl = new Hyperlink("https://github.com/LukeOnuke");
-
-            credits.setPrefSize(200, 60);
-            credits.setStyle("-fx-background-color: #3d3d3d;-fx-border-color: #5c5c5c;-fx-border-width: 1px;");
-
-            creditsLabel.setStyle("-fx-text-fill: white;");
-
-            hl.setOnAction(e -> {
-                if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
-                    try {
-                        Desktop.getDesktop().browse(new URI("https://github.com/LukeOnuke"));
-                    } catch (URISyntaxException | IOException ex) {
-                        Logger.getLogger(RconWindowController.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                }
-            });
-
-            AnchorPane.setBottomAnchor(hl, 10.0);
-            AnchorPane.setLeftAnchor(hl, 2.0);
-
-            AnchorPane.setBottomAnchor(creditsLabel, 40.0);
-            AnchorPane.setLeftAnchor(creditsLabel, 5.0);
-
-            credits.getChildren().add(creditsLabel);
-            credits.getChildren().add(hl);
-
-            rcon.getChildren().add(credits);
-
-            writeRcon("");
-
-            //Set rcon children
-            Data.rconTextData = rcon.getChildren();
+            write("§aAdmin§bTools§r, a administration tool by §9§lLukeOnuke§r");
         }
 
         //Auto scroll
@@ -165,11 +124,11 @@ public class RconWindowController implements Initializable {
                 sidePane.setDisable(true);
 
                 Data d = Data.getInstance();
-                writeRconInternal("Connecting to " + d.getHost() + ":" + d.getPort());
+                write("§bConnecting to " + d.getHost() + ":" + d.getPort());
                 try {
                     CustomRcon cr = CustomRcon.getInstance();
                     //write connected message if its enabled
-                    if(d.getMessageNotify()){
+                    if (d.getMessageNotify()) {
                         cr.command(TellrawFormatter.assembleLoginTellraw(d.getMessageUsername()));
                     }
                 } catch (IOException ex) {
@@ -194,40 +153,49 @@ public class RconWindowController implements Initializable {
                 //Write succsesfull connection
                 if (connected) {
                     Platform.runLater(() -> {
-                        writeRconInternal("Connected to " + d.getHost() + ": " + d.getPort());
+                        write("§bConnected to " + d.getHost() + ": " + d.getPort());
                     });
                     rconSend.setDisable(false);
                     sendButton.setDisable(false);
                     sidePane.setDisable(false);
                 } else {
                     Platform.runLater(() -> {
-                        write("Couldnt connect to " + d.getHost() + ": " + d.getPort(), Color.RED);
+                        write("§cCouldnt connect to " + d.getHost() + ": " + d.getPort());
                     });
                 }
             });
             connect.start();
+
             Data.startingUp = false;
         }
-        
     }
 
-    public void writeRcon(String message) {
-        write(message + "\n", Color.WHITE);
+    public void write(String message) {
+        Data.rconTextData.add(Markup.generateMarkupParagraph(message));
+        refresh(); //refresh
+        //scroll to bottom
+        Platform.runLater(() -> {
+            rcon.getEngine().getLoadWorker().stateProperty().addListener(new ChangeListener<Worker.State>() {
+                @Override
+                public void changed(ObservableValue<? extends Worker.State> observable, Worker.State oldValue, Worker.State newValue) {
+                    if (newValue == Worker.State.SUCCEEDED) {
+                        rcon.getEngine().executeScript("window.scrollTo(0, document.body.scrollHeight);");
+                    }
+                }
+            });
+        });
     }
 
-    public void writeRconInternal(String message) {
-        write(message + "\n", Color.rgb(0, 213, 255));
-    }
+    public void refresh() {
+        StringBuilder sb = new StringBuilder();
+        Data.rconTextData.set(0, "<style>body{background-color: #383838; font-family: Consolas, monaco, monospace;}</style>" + Data.rconTextData.get(0)); //add the style shit
+        for (String element : Data.rconTextData) {
 
-    public void writeRconResponce(String message) {
-        write(message + "\n", Markup.rconReplyMarkup(message));
-    }
-
-    public void write(String message, Color color) {
-        Text t = new Text(message);
-        t.setFill(color);
-        t.setFont(Font.font("Consolas", FontPosture.REGULAR, 14));
-        rcon.getChildren().add(t);
+            sb.append(element);
+        }
+        Platform.runLater(() -> {
+            rconWebEngine.loadContent(sb.toString());
+        });
     }
 
     @FXML
@@ -236,7 +204,7 @@ public class RconWindowController implements Initializable {
         try {
             cRcon = CustomRcon.getInstance();
             if (!rconSend.getText().equals("")) {
-                writeRcon(Utill.getDate() + rconSend.getText());
+                write(Utill.getDate() + rconSend.getText());
 
                 //Internal command interpreter
                 boolean isRightToSend = true; //Boolean that is checked when sending commands to server
@@ -249,7 +217,7 @@ public class RconWindowController implements Initializable {
                                 + "By pressing on you will be issuing a stop command to the server")) {
 
                             isRightToSend = false;
-                            writeRconInternal("Stopping the server and exiting in 2 (two) seconds");
+                            write("§bStopping the server and exiting in 2 (two) seconds");
                             cRcon.command("stop");
                             sendButton.disableProperty().set(true);
                             rconSend.disableProperty().set(true);
@@ -267,7 +235,7 @@ public class RconWindowController implements Initializable {
                     //Help command
                     case "!help":
                         isRightToSend = false;
-                        writeRconInternal("Admin Tools internal command interpreter help: " + System.lineSeparator()
+                        write("§bAdmin Tools internal command interpreter help: " + System.lineSeparator()
                                 + "\t!help - Help command" + System.lineSeparator()
                                 + "\t!clear - Clear the console" + System.lineSeparator()
                                 + "\t!exit - Exit the program and close the rcon connection" + System.lineSeparator());
@@ -275,13 +243,13 @@ public class RconWindowController implements Initializable {
                     //Clear command - clears the console
                     case "!clear":
                         isRightToSend = false;
-                        rcon.getChildren().clear();
-                        writeRconInternal("Cleared console");
+                        Data.rconTextData.clear();
+                        write("§bCleared console");
                         break;
                     //Clear command - clears the console
                     case "!login":
                         isRightToSend = false;
-                        rcon.getChildren().clear();
+                        Data.rconTextData.clear();
                         WindowLoader.loadLogin(rootPane);
                         break;
 
@@ -289,7 +257,7 @@ public class RconWindowController implements Initializable {
                     case "!exit":
                         isRightToSend = false;
 
-                        writeRconInternal("Closing connection and exiting...");
+                        write("§bClosing connection and exiting...");
 
                         cRcon.disconnect();
                         System.exit(0);
@@ -300,7 +268,7 @@ public class RconWindowController implements Initializable {
 
                 if (isRightToSend) {
                     //Send and recive recsponce
-                    writeRconResponce(Utill.removeSpigotFormatting(cRcon.command(rconSend.getText())));
+                    write(cRcon.command(rconSend.getText()));
                 }
             }
         } catch (IOException | AuthenticationException ex) {
@@ -317,13 +285,11 @@ public class RconWindowController implements Initializable {
 
     @FXML
     private void loadSettings() {
-        Data.rconTextData = rcon.getChildren();
         WindowLoader.loadSettings(rootPane);
     }
 
     @FXML
     private void loadStatus() {
-        Data.rconTextData = rcon.getChildren();
         WindowLoader.loadStatus(rootPane);
     }
 }

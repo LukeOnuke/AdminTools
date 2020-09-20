@@ -8,9 +8,9 @@
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
-<?import javafx.scene.text.TextFlow?>
+<?import javafx.scene.web.WebView?>
 
-<AnchorPane id="AnchorPane" fx:id="rootPane" prefHeight="593.0" prefWidth="973.0" xmlns="http://javafx.com/javafx/8.0.251" xmlns:fx="http://javafx.com/fxml/1" fx:controller="rconclient.gui.RconWindowController">
+<AnchorPane id="AnchorPane" fx:id="rootPane" prefHeight="593.0" prefWidth="973.0" xmlns="http://javafx.com/javafx/8.0.261" xmlns:fx="http://javafx.com/fxml/1" fx:controller="rconclient.gui.RconWindowController">
     <stylesheets>
         <URL value="@Style.css" />
     </stylesheets>
@@ -25,7 +25,7 @@
             </Label>
             <ScrollPane fx:id="rconScroll" fitToHeight="true" fitToWidth="true" layoutX="15.0" layoutY="14.0" prefHeight="524.0" prefWidth="873.0" AnchorPane.bottomAnchor="55.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="13.0" AnchorPane.topAnchor="14.0">
                <content>
-                  <TextFlow fx:id="rcon" prefHeight="518.0" prefWidth="467.0" styleClass="rcon" />
+                  <WebView fx:id="rcon" prefHeight="200.0" prefWidth="200.0"/>
                </content>
             </ScrollPane>
          </children>

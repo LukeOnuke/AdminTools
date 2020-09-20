@@ -13,10 +13,11 @@
     -fx-border-width: 0px 0px 0px 1px;
 }
 
+/* Fix bug v4.0.0
 .rcon{
     -fx-border-color: #5c5c5c;
     -fx-background-color: #383838;
-}
+}*/
 
 .rconTextField{
     -fx-text-box-border: #5c5c5c;

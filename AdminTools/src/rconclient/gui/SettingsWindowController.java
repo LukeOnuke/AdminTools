@@ -115,7 +115,7 @@ public class SettingsWindowController implements Initializable {
 
             if (isSuccsesfull) {
                 ArrayList<String> data = Data.read();
-                data.set(3, String.valueOf(rconRemember.isSelected()));
+                data.set(0, String.valueOf(rconRemember.isSelected()));
                 Data.write(data);
 
                 ArrayList<String> credentials = Data.readCredentials();
@@ -159,11 +159,11 @@ public class SettingsWindowController implements Initializable {
     @FXML
     private void apply() {
         ArrayList<String> data = Data.read();
-        data.set(4, settingsQuerryRR.getText());
-        data.set(5, String.valueOf(Math.round(settingsApiRequestR.getValue())));
-        data.set(6, String.valueOf(settingsMsgNotify.selectedProperty().get()));
-        data.set(7, String.valueOf(settingsMsgOverrideSay.selectedProperty().get()));
-        data.set(8, settingsMsgUsername.getText());
+        data.set(1, settingsQuerryRR.getText());
+        data.set(2, String.valueOf(Math.round(settingsApiRequestR.getValue())));
+        data.set(3, String.valueOf(settingsMsgNotify.selectedProperty().get()));
+        data.set(4, String.valueOf(settingsMsgOverrideSay.selectedProperty().get()));
+        data.set(5, settingsMsgUsername.getText());
         Data.write(data);
         Data.refresh();
     }
