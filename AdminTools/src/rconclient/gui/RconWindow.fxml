@@ -10,7 +10,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.web.WebView?>
 
-<AnchorPane id="AnchorPane" fx:id="rootPane" prefHeight="593.0" prefWidth="973.0" xmlns="http://javafx.com/javafx/8.0.261" xmlns:fx="http://javafx.com/fxml/1" fx:controller="rconclient.gui.RconWindowController">
+<AnchorPane id="AnchorPane" fx:id="rootPane" prefHeight="650.0" prefWidth="973.0" xmlns="http://javafx.com/javafx/8.0.261" xmlns:fx="http://javafx.com/fxml/1" fx:controller="rconclient.gui.RconWindowController">
     <stylesheets>
         <URL value="@Style.css" />
     </stylesheets>

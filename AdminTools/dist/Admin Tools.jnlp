@@ -9,7 +9,7 @@
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
     <jar href="lib\AdminToolsPreloader.jar" size="855007" download="progress" />
-    <jar href="AdminTools.jar" size="3888227" download="eager" />
+    <jar href="AdminTools.jar" size="3888190" download="eager" />
     <jar href="lib\SimpleFxDialog.jar" size="104631" download="eager" />
     <jar href="lib\gson-2.8.2.jar" size="232932" download="eager" />
     <jar href="lib\rkon-core.jar" size="6010" download="eager" />
