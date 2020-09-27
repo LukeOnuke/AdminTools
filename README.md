@@ -13,34 +13,28 @@ Features:
  - Server status
  - Minecraft services status (eg. authserver, api...)
  - Barebones mode
- 
- **Images outdated, will update them soon**
- 
-## With multiplatform in mind admin tools can be used anywhere.
-![admin tools](https://i.imgur.com/Rqxxcbg.png)
+ - Multiplatform
 
-For more documentation visit the [wiki](https://github.com/LukeOnuke/AdminTools/wiki).
+For more documentation visit the [wiki](https://admintools.lukeonuke.com/docs/).
 
 Found a bug? Report it [here](https://github.com/LukeOnuke/AdminTools/issues/new)
 
 Downloadable as:
-- [EXE installer](https://github.com/LukeOnuke/AdminTools/releases) - **recommended way to install**
 - [JAR file](https://github.com/LukeOnuke/AdminTools/releases) with all dependencies **[.zip]**
 
 ## Setup
  - Make sure your server have RCON enabled and running. 
- - Run the installer and follow the installation steps
+ - Follow the installation steps
 
-*if installed by .exe, the directory is in AppData\Local - `C:\Users\User\AppData\Local\Admin Tools\app`  
-*if installed by .jar, the file is in the folder with the .jar
+*if installed by .jar, the instalation folder is in the folder with the .jar
 
 ## Gallery
 ### RCON
-![rcon](https://i.imgur.com/PchJsn3.png)
+![rcon](https://i.imgur.com/7TqPOjW.png)
 ### Server and Mojang servers status
-![status](https://i.imgur.com/xlsjx7I.png)
+![status](https://i.imgur.com/TmCAHSu.png)
 ### Settings
-![Settings](https://i.imgur.com/6KbtzCf.png)
+![Settings](https://i.imgur.com/Grk7aBq.png)
 
 ## Libraries used
 [rkon-core](https://github.com/Kronos666/rkon-core)  - by [Kronos666](https://github.com/Kronos666)
