@@ -1,13 +1,22 @@
-# Welcome to MkDocs
+# Welcome to the AdminTools documentation
+It seems that the docs builder `worked` wow!
 
-For full documentation visit [mkdocs.org](https://www.mkdocs.org).
+```java
+	public static class Version5{
+		public static String getIsDone(){
+			return "no";
+		}
+	}
+```
 
-## Commands
+```css
+	.credcard:hover{
+		-fx-background-color: -at-accent;
+	}
+```
 
-* `mkdocs new [dir-name]` - Create a new project.
-* `mkdocs serve` - Start the live-reloading docs server.
-* `mkdocs build` - Build the documentation site.
-* `mkdocs -h` - Print help message and exit.
+## Preamble
+	The documentation is **still a wip** and will be fully done with release **v5.0.0**
 
 ## Project layout
 

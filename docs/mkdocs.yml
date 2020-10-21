@@ -1,2 +1,9 @@
 site_name: AdminTools
-theme: readthedocs
+theme:
+    name: readthedocs
+    highlightjs: true
+    hljs_languages:
+        - java
+        - css
+        - xml
+        - json
