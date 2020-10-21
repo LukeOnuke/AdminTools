@@ -16,7 +16,7 @@ It seems that the docs builder `worked` wow!
 ```
 
 ## Preamble
-	The documentation is **still a wip** and will be fully done with release **v5.0.0**
+The documentation is **still a wip** and will be fully done with release **v5.0.0**
 
 ## Project layout
 
