@@ -1,6 +1,7 @@
 site_name: AdminTools
+theme: readthedocs
 theme:
-    name: slate
+    name: readthedocs
     highlightjs: true
     hljs_languages:
         - java
