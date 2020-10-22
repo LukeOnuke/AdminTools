@@ -1,5 +1,4 @@
 site_name: AdminTools
-theme: readthedocs
 theme:
     name: readthedocs
     highlightjs: true
