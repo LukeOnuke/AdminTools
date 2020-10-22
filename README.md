@@ -15,7 +15,7 @@ Features:
  - Barebones mode
  - Multiplatform
 
-For more documentation visit the [wiki](https://admintools.lukeonuke.com/docs/).
+**For more documentation visit the [docs (wiki)](https://docs.admintools.app/en/latest/).**
 
 Found a bug? Report it [here](https://github.com/LukeOnuke/AdminTools/issues/new)
 
