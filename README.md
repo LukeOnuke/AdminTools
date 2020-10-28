@@ -8,7 +8,9 @@ Program with administration tools for Minecraft servers.
 
 Features:
  - Dark mode
+ - Themes
  - Rcon client
+ - Multi client support
  - Minecraft markdown in rcon console
  - Server status
  - Minecraft services status (eg. authserver, api...)

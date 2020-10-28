@@ -1,7 +1,8 @@
 # Scripting
 AdminTools uses Admin Tools Script for its scripting.
+*Work In Progress, check back on version 6 release*
 
-*Added in version 5.0.0 .*
+*Will be added in version 6.0.0 .*
 
 File ends with `.atsf` and **can not contain** any dots or mc formatting codes.
 
@@ -23,7 +24,7 @@ It is recomended by the atsf file convention to name your scripts with underscor
 The convention specifying naming and contents of `atsf` files
 
 ## Naming
-File ends with `.atsf` and **can not contain** any dots or mc formatting codes
+File ends with `.atsf` and **can not contain** any dots , mc formatting codes or spaces
 
 `.atsf` stands for Admin Tools Script File.
 
@@ -42,4 +43,4 @@ Words are separated by underscores ( _ ).
 Example : `valid_name.atsf`
 
 ## Contents
-*Work In Progress, check back on version 5 release*
+*Work In Progress, check back on version 6 release*
