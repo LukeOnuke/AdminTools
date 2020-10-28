@@ -30,7 +30,7 @@ Downloadable as:
 
 *if installed by .jar, the instalation folder is in the folder with the .jar
 
-## Gallery
+## Gallery (out of date)
 ### RCON
 ![rcon](https://i.imgur.com/7TqPOjW.png)
 ### Server and Mojang servers status
