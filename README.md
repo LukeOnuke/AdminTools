@@ -46,6 +46,7 @@ Downloadable as:
 [MinecraftServerPing](https://github.com/jamietech/MinecraftServerPing) - by [jamietech](https://github.com/jamietech)
 
 ## Legal info
+Icons from [fontsawsome](https://fontawesome.com/), [under the Creative Commons Attribution 4.0 licence](https://fontawesome.com/license). *svg was scaled down*
 LukeOnuke is not affiliated with Mojang Synergies AB.  
 "Minecraft" is a trademark of Mojang Synergies AB.  
 Gear Icon made by [Freepik](https://www.flaticon.com/authors/freepik) from www.flaticon.com  
