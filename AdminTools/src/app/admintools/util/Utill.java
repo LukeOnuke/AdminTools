@@ -58,7 +58,6 @@ public class Utill {
     }
 
     public static void exit(int code) {
-        Platform.exit();
         System.exit(code);
     }
 }

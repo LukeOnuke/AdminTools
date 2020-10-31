@@ -33,8 +33,12 @@ import app.admintools.util.Utill;
 import app.admintools.util.WindowLoader;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
-import simplefxdialog.Dialog;
-import simplefxdialog.img.DialogImage;
+import com.lukeonuke.simplefxdialog.Dialog;
+import com.lukeonuke.simplefxdialog.exception.NotSupportedException;
+import com.lukeonuke.simplefxdialog.img.DialogImage;
+import com.lukeonuke.simplefxdialog.tray.TrayDialog;
+import java.awt.AWTException;
+import java.awt.TrayIcon;
 
 /**
  *
@@ -112,7 +116,8 @@ public class RconWindowController implements Initializable {
                     boolean isUpToDate = true;
                     if (!updateStats.get("draft").getAsBoolean()) {
                         if (!updateStats.get("tag_name").getAsString().equals("v" + this.getClass().getPackage().getImplementationVersion())) {
-                            write("§a[AVCS] §4Newer version found §9" + updateStats.get("tag_name").getAsString() + "\n      §f" + updateStats.get("name").getAsString() + "\n      Get it from github: §ahttps://github.com/LukeOnuke/AdminTools/releases/latest");
+                            write("§a[AVCS] §4Newer version found §9" + updateStats.get("tag_name").getAsString() + "\n      §f" + updateStats.get("name").getAsString() + "\n      Get it from github: §ahttps://get.admintools.app/");
+                            
                             isUpToDate = false;
                         }
                     }
@@ -123,7 +128,7 @@ public class RconWindowController implements Initializable {
                     write("§a[AVCS] §4Couldnt fetch version info - Probably reached the api rate limit");
                 }
 
-            }, "Autonomous version controll");
+            }, "Autonomous version control");
             vChecker.start();
         }
 
@@ -173,19 +178,19 @@ public class RconWindowController implements Initializable {
                 } catch (IOException ex) {
                     connected = false;
                     Platform.runLater(() -> {
-                        Dialog.okDialog(DialogImage.error, "Connnection Error", "Couldn't connect to server.\n Probably an incorect IP.");
+                        Dialog.okDialog(DialogImage.ERROR, "Connnection Error", "Couldn't connect to server.\n Probably an incorect IP.");
                         WindowLoader.loadHome(rootPane);
                     });
                 } catch (AuthenticationException ex) {
                     connected = false;
                     Platform.runLater(() -> {
-                        Dialog.okDialog(DialogImage.error, "Connnection Error", "Couldn't authenticate with server. \nIncorrect password.");
+                        Dialog.okDialog(DialogImage.ERROR, "Connnection Error", "Couldn't authenticate with server. \nIncorrect password.");
                         WindowLoader.loadHome(rootPane);
                     });
                 } catch (Exception ex) {
                     connected = false;
                     Platform.runLater(() -> {
-                        Dialog.okDialog(DialogImage.error, "Error", "General exception\n" + ex.getMessage());
+                        Dialog.okDialog(DialogImage.ERROR, "Error", "General exception\n" + ex.getMessage());
                         WindowLoader.loadHome(rootPane);
                     });
                 }
@@ -246,7 +251,7 @@ public class RconWindowController implements Initializable {
                 switch (command) {
                     //Stop command
                     case "stop":
-                        if (Dialog.okCancelDialog(DialogImage.warning, "Are you sure?", "Do you realy want to stop the server?"
+                        if (Dialog.okCancelDialog(DialogImage.WARNING, "Are you sure?", "Do you realy want to stop the server?"
                                 + System.lineSeparator()
                                 + "By pressing on you will be issuing a stop command to the server")) {
 

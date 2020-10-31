@@ -20,8 +20,8 @@ import javafx.scene.layout.AnchorPane;
 import app.admintools.gui.theme.ThemeReader;
 import app.admintools.util.Data;
 import app.admintools.util.WindowLoader;
-import simplefxdialog.Dialog;
-import simplefxdialog.img.DialogImage;
+import com.lukeonuke.simplefxdialog.Dialog;
+import com.lukeonuke.simplefxdialog.img.DialogImage;
 
 /**
  * FXML Controller class
@@ -92,7 +92,7 @@ public class SettingsWindowController implements Initializable {
     private void onKeyPressed(KeyEvent ke) {
         if (ke.getText().equals("s") && ke.isControlDown()) {
             apply();
-            Dialog.okDialog(DialogImage.info, "Settings saved", "Your settings have been saved");
+            Dialog.okDialog(DialogImage.INFO, "Settings saved", "Your settings have been saved");
         }
     }
 

@@ -27,8 +27,8 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import javafx.collections.ListChangeListener;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
-import simplefxdialog.Dialog;
-import simplefxdialog.img.DialogImage;
+import com.lukeonuke.simplefxdialog.Dialog;
+import com.lukeonuke.simplefxdialog.img.DialogImage;
 
 /**
  * FXML Controller class
@@ -89,7 +89,7 @@ public class HomeWindowController implements Initializable {
                 new File(CredentialsIO.PATH).createNewFile();
             }
         } catch (IOException ioe) {
-            Dialog.okDialog(DialogImage.error, "FATAL ERROR", ioe.getMessage());
+            Dialog.okDialog(DialogImage.ERROR, "FATAL ERROR", ioe.getMessage());
             Utill.exit(1);
         }
     }
