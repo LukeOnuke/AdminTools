@@ -38,7 +38,7 @@ public class WindowLoader {
         loadWindow(rootPane, "/app/admintools/gui/StatusWindow.fxml");
     }
 
-    public static void loadLogin(AnchorPane rootPane) {
+    public static void loadHome(AnchorPane rootPane) {
         loadWindow(rootPane, "/app/admintools/gui/HomeWindow.fxml");
         Data.isOnStatusWindow = false;
     }

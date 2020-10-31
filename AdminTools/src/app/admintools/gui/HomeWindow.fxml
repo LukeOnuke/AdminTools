@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.net.URL?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -24,6 +24,7 @@
                     <children>
                         <FlowPane fx:id="credCards" hgap="10.0" layoutX="16.0" layoutY="65.0" prefHeight="474.0" prefWidth="843.0" vgap="10.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="62.0" />
                         <Text boundsType="VISUAL" layoutX="829.0" layoutY="40.0" onMouseClicked="#addNew" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="plus" text="+" wrappingWidth="34.2041015625" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0" />
+                  <Label fx:id="indicatorLabel" layoutX="20.0" layoutY="20.0" prefHeight="20.0" prefWidth="359.0" styleClass="text" underline="true" AnchorPane.leftAnchor="19.0" AnchorPane.topAnchor="19.0" />
                     </children>
                 </AnchorPane>
             </children>

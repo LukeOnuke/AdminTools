@@ -15,7 +15,6 @@ import java.util.logging.Logger;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ToggleButton;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import app.admintools.gui.credentials.credwizard.CredWizard;
@@ -24,6 +23,10 @@ import app.admintools.security.credentials.CredentialsIO;
 import app.admintools.util.Data;
 import app.admintools.util.Utill;
 import app.admintools.util.WindowLoader;
+import java.util.concurrent.atomic.AtomicBoolean;
+import javafx.collections.ListChangeListener;
+import javafx.scene.Node;
+import javafx.scene.control.Label;
 import simplefxdialog.Dialog;
 import simplefxdialog.img.DialogImage;
 
@@ -44,17 +47,36 @@ public class HomeWindowController implements Initializable {
     private ToggleButton statusButton;
     @FXML
     private ToggleButton settingsButton;
+    @FXML
+    private Label indicatorLabel;
+    private AtomicBoolean isWizardOpen = new AtomicBoolean(false);
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        //Check beforehand
+        if (credCards.getChildren().isEmpty()) {
+            indicatorLabel.setText("Credentials empty, click the plus icon to add more!");
+        } else {
+            indicatorLabel.setText("");
+        }
+        //Add listener
+        credCards.getChildren().addListener((ListChangeListener<? super Node>) es -> {
+            if (credCards.getChildren().isEmpty()) {
+                indicatorLabel.setText("Credentials empty, click the plus icon to add more!");
+            } else {
+                indicatorLabel.setText("");
+            }
+        });
+
         refresh();
     }
 
     //Refreshes the credcards
     private void refresh() {
+        //Sets the credcards
         credCards.getChildren().clear();
         try {
             if (new File(CredentialsIO.PATH).exists()) {
@@ -74,19 +96,23 @@ public class HomeWindowController implements Initializable {
 
     @FXML
     private void addNew() {
-        Credentials cred = CredWizard.showCredWizard();
-        if (cred != null) {
-            try {
-                ArrayList<Credentials> credList = CredentialsIO.readCredentials();
-                if (credList == null) {
-                    credList = new ArrayList<Credentials>();
+        if (!isWizardOpen.get()) {
+            isWizardOpen.set(true);
+            Credentials cred = CredWizard.showCredWizard();
+            if (cred != null) {
+                try {
+                    ArrayList<Credentials> credList = CredentialsIO.readCredentials();
+                    if (credList == null) {
+                        credList = new ArrayList<Credentials>();
+                    }
+                    credList.add(cred);
+                    CredentialsIO.writeCredentials(credList);
+                    refresh();
+                } catch (IOException ex) {
+                    Logger.getLogger(HomeWindowController.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                credList.add(cred);
-                CredentialsIO.writeCredentials(credList);
-                refresh();
-            } catch (IOException ex) {
-                Logger.getLogger(HomeWindowController.class.getName()).log(Level.SEVERE, null, ex);
             }
+            isWizardOpen.set(false);
         }
     }
 
@@ -103,8 +129,7 @@ public class HomeWindowController implements Initializable {
     private void loadSettings() {
         if (Data.getInstance().getSelectedCredentials() != null) {
             WindowLoader.loadSettings(rootPane);
-        }
-        else{
+        } else {
             settingsButton.setSelected(false);
         }
     }
@@ -113,8 +138,7 @@ public class HomeWindowController implements Initializable {
     private void loadStatus() {
         if (Data.getInstance().getSelectedCredentials() != null) {
             WindowLoader.loadStatus(rootPane);
-        }
-        else{
+        } else {
             statusButton.setSelected(false);
         }
     }

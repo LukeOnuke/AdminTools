@@ -27,6 +27,7 @@ import app.admintools.security.credentials.CredentialsIO;
 import app.admintools.util.CustomRcon;
 import app.admintools.util.Data;
 import app.admintools.util.WindowLoader;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
  *
@@ -49,6 +50,7 @@ public class CredCard {
         Label ipField;
         SVGPath editIcon;
         AnchorPane edit;
+        AtomicBoolean isOpenWindow = new AtomicBoolean();
 
         title = new Label();
         minus = new Text();
@@ -99,24 +101,31 @@ public class CredCard {
                     Logger.getLogger(CredCard.class.getName()).log(Level.SEVERE, null, ex);
                 }
             } else if (id.equals("edit")) {
-                //Show credentials wizard
-                Credentials editedCreds = CredWizard.showCredWizard(credentials);
-                if (editedCreds != null) {
-                    try {
-                        FlowPane parrent = (FlowPane) ap.getParent();
-                        ArrayList<Credentials> creds = CredentialsIO.readCredentials();
-                        creds.remove(credentials); //Remove the old one (this one)
-                        creds.add(editedCreds); //Add the edited one (new one)
-                        CredentialsIO.writeCredentials(creds);
-                        parrent.getChildren().remove(ap); //Remove this card
-                        //Display new card
-                        parrent.getChildren().add(editedCreds.getCredCard());
-                    } catch (IOException ex) {
-                        Logger.getLogger(CredCard.class.getName()).log(Level.SEVERE, null, ex);
+                if (!isOpenWindow.get()) {
+                    isOpenWindow.set(true);
+                    //Show credentials wizard
+                    Credentials editedCreds = CredWizard.showCredWizard(credentials);
+                    if (editedCreds != null) {
+                        try {
+                            FlowPane parrent = (FlowPane) ap.getParent();
+                            ArrayList<Credentials> creds = CredentialsIO.readCredentials();
+                            creds.remove(credentials); //Remove the old one (this one)
+                            creds.add(editedCreds); //Add the edited one (new one)
+                            CredentialsIO.writeCredentials(creds);
+                            parrent.getChildren().remove(ap); //Remove this card
+                            //Display new card
+                            parrent.getChildren().add(editedCreds.getCredCard());
+                        } catch (IOException ex) {
+                            Logger.getLogger(CredCard.class.getName()).log(Level.SEVERE, null, ex);
+                        }
                     }
+                    isOpenWindow.set(false);
                 }
+
             } else {
+                //Nullify the current custom rcon instance
                 CustomRcon.setToNull();
+                //set tje credentials
                 Data.getInstance().setSelectedCredentials(credentials);
                 WindowLoader.loadRcon(((AnchorPane) ap.getScene().getRoot()));
             }

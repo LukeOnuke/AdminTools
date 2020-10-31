@@ -102,27 +102,27 @@ public class RconWindowController implements Initializable {
             write("§aAdmin§bTools§r, an administration tool by §9§lLukeOnuke§r");
 
             Thread vChecker = new Thread(() -> {
-                    //Write if new version avalable
-                    write("§a[AVCS] §fChecking for new verison");
+                //Write if new version avalable
+                write("§a[AVCS] §fChecking for new verison");
 
-                    JsonObject updateStats;
-                    try {
-                        updateStats = new Gson().fromJson(Utill.getHTTPRequest("https://api.github.com/repos/LukeOnuke/AdminTools/releases/latest"), JsonObject.class);
+                JsonObject updateStats;
+                try {
+                    updateStats = new Gson().fromJson(Utill.getHTTPRequest("https://api.github.com/repos/LukeOnuke/AdminTools/releases/latest"), JsonObject.class);
 
-                        boolean isUpToDate = true;
-                        if (!updateStats.get("draft").getAsBoolean()) {
-                            if (!updateStats.get("tag_name").getAsString().equals("v" + this.getClass().getPackage().getImplementationVersion())) {
-                                write("§a[AVCS] §4Newer version found §9" + updateStats.get("tag_name").getAsString() + "\n      §f" + updateStats.get("name").getAsString() + "\n      Get it from github: §ahttps://github.com/LukeOnuke/AdminTools/releases/latest");
-                                isUpToDate = false;
-                            }
+                    boolean isUpToDate = true;
+                    if (!updateStats.get("draft").getAsBoolean()) {
+                        if (!updateStats.get("tag_name").getAsString().equals("v" + this.getClass().getPackage().getImplementationVersion())) {
+                            write("§a[AVCS] §4Newer version found §9" + updateStats.get("tag_name").getAsString() + "\n      §f" + updateStats.get("name").getAsString() + "\n      Get it from github: §ahttps://github.com/LukeOnuke/AdminTools/releases/latest");
+                            isUpToDate = false;
                         }
-                        if (isUpToDate) {
-                            write("§a[AVCS] §fLatest version");
-                        }
-                    } catch (IOException ex) {
-                        write("§a[AVCS] §4Couldnt fetch version info - Probably reached the api rate limit");
                     }
-                
+                    if (isUpToDate) {
+                        write("§a[AVCS] §fLatest version");
+                    }
+                } catch (IOException ex) {
+                    write("§a[AVCS] §4Couldnt fetch version info - Probably reached the api rate limit");
+                }
+
             }, "Autonomous version controll");
             vChecker.start();
         }
@@ -174,19 +174,19 @@ public class RconWindowController implements Initializable {
                     connected = false;
                     Platform.runLater(() -> {
                         Dialog.okDialog(DialogImage.error, "Connnection Error", "Couldn't connect to server.\n Probably an incorect IP.");
-                        WindowLoader.loadLogin(rootPane);
+                        WindowLoader.loadHome(rootPane);
                     });
                 } catch (AuthenticationException ex) {
                     connected = false;
                     Platform.runLater(() -> {
                         Dialog.okDialog(DialogImage.error, "Connnection Error", "Couldn't authenticate with server. \nIncorrect password.");
-                        WindowLoader.loadLogin(rootPane);
+                        WindowLoader.loadHome(rootPane);
                     });
                 } catch (Exception ex) {
                     connected = false;
                     Platform.runLater(() -> {
                         Dialog.okDialog(DialogImage.error, "Error", "General exception\n" + ex.getMessage());
-                        WindowLoader.loadLogin(rootPane);
+                        WindowLoader.loadHome(rootPane);
                     });
                 }
                 //Write succsesfull connection
@@ -233,18 +233,17 @@ public class RconWindowController implements Initializable {
         });
     }
 
-    @FXML
-    private void send() {
+    private void sendCommand(String command) {
         CustomRcon cRcon;
         try {
             cRcon = CustomRcon.getInstance();
-            if (!rconSend.getText().equals("")) {
-                write(Utill.getDate() + rconSend.getText());
+            if (!command.equals("")) {
+                write(Utill.getDate() + command);
 
                 //Internal command interpreter
                 boolean isRightToSend = true; //Boolean that is checked when sending commands to server
 
-                switch (rconSend.getText()) {
+                switch (command) {
                     //Stop command
                     case "stop":
                         if (Dialog.okCancelDialog(DialogImage.warning, "Are you sure?", "Do you realy want to stop the server?"
@@ -262,7 +261,7 @@ public class RconWindowController implements Initializable {
                                 } catch (InterruptedException ex) {
 
                                 }
-                                System.exit(0);
+                                Utill.exit(0);
                             });
                             t.start();
                         }
@@ -285,7 +284,7 @@ public class RconWindowController implements Initializable {
                     case "!login":
                         isRightToSend = false;
                         Data.rconTextData.clear();
-                        WindowLoader.loadLogin(rootPane);
+                        WindowLoader.loadHome(rootPane);
                         break;
 
                     //Exit command - exits the program
@@ -303,7 +302,7 @@ public class RconWindowController implements Initializable {
 
                 if (isRightToSend) {
                     //Send and recive recsponce
-                    write(cRcon.command(rconSend.getText()));
+                    write(cRcon.command(command));
                 }
             }
         } catch (IOException | AuthenticationException ex) {
@@ -311,11 +310,16 @@ public class RconWindowController implements Initializable {
         }
 
         //Set command history
-        commandHistory.add(rconSend.getText());
+        commandHistory.add(command);
         //Reset command history deviation
         commandHistoryDeviation = 0;
         //Reset textfield
         rconSend.setText("");
+    }
+
+    @FXML
+    private void send() {
+        sendCommand(rconSend.getText());
     }
 
     @FXML
@@ -330,6 +334,6 @@ public class RconWindowController implements Initializable {
 
     @FXML
     private void loadHome() {
-        WindowLoader.loadLogin(rootPane);
+        WindowLoader.loadHome(rootPane);
     }
 }

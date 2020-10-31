@@ -100,7 +100,7 @@ public class StatusWindowController implements Initializable {
 
     @FXML
     private void loadHome() {
-        WindowLoader.loadLogin(rootPane);
+        WindowLoader.loadHome(rootPane);
     }
 
     @FXML

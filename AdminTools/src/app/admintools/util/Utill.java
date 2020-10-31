@@ -1,21 +1,13 @@
 package app.admintools.util;
 
-import java.awt.AWTException;
-import java.awt.SystemTray;
-import java.awt.Toolkit;
-import java.awt.TrayIcon;
-import java.awt.TrayIcon.MessageType;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javafx.application.Platform;
-import javafx.embed.swing.SwingFXUtils;
-import javafx.scene.image.Image;
 
 /**
  *
@@ -24,7 +16,7 @@ import javafx.scene.image.Image;
 public class Utill {
 
     public static String getDate() {
-        SimpleDateFormat sd = new SimpleDateFormat("[ HH:mm:ss ] ");
+        SimpleDateFormat sd = new SimpleDateFormat("[HH:mm:ss] ");
         return sd.format(new Date());
     }
 

@@ -12,9 +12,6 @@ import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import net.kronos.rkon.core.ex.AuthenticationException;
 import app.admintools.textprocessing.TellrawFormatter;
-import app.admintools.util.Utill;
-import com.google.gson.Gson;
-import com.google.gson.JsonObject;
 
 /*
 *   Image credits 
