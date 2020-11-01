@@ -2,7 +2,7 @@
 [![made with java](https://camo.githubusercontent.com/f323bfd5013976480497e79198bee01b7c5356a4/687474703a2f2f466f7254686542616467652e636f6d2f696d616765732f6261646765732f6d6164652d776974682d6a6176612e737667)](https://www.java.com/)
 
 
-[![daym](https://img.shields.io/github/downloads/LukeOnuke/AdminTools/total)](https://github.com/LukeOnuke/AdminTools/releases) [![Spiget Downloads](https://img.shields.io/spiget/downloads/81484?label=Spigot%20downloads)](https://www.spigotmc.org/resources/admin-tools.81484/) ![wow here](https://img.shields.io/github/license/LukeOnuke/AdminTools) ![wow](https://img.shields.io/github/v/release/LukeOnuke/AdminTools?include_prereleases) [![Documentation Status](https://readthedocs.org/projects/admintools/badge/?version=latest)](https://admintools.readthedocs.io/en/latest/?badge=latest)
+[![daym](https://img.shields.io/github/downloads/LukeOnuke/AdminTools/total)](https://github.com/LukeOnuke/AdminTools/releases) [![Spiget Downloads](https://img.shields.io/spiget/downloads/81484?label=spigot%20downloads)](https://www.spigotmc.org/resources/admin-tools.81484/) ![wow here](https://img.shields.io/github/license/LukeOnuke/AdminTools) ![wow](https://img.shields.io/github/v/release/LukeOnuke/AdminTools?include_prereleases) [![Documentation Status](https://readthedocs.org/projects/admintools/badge/?version=latest)](https://admintools.readthedocs.io/en/latest/?badge=latest)
 
 Program with administration tools for Minecraft servers.
 
