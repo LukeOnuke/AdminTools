@@ -12,6 +12,7 @@ Spigot : [https://www.spigotmc.org/threads/admin-tools.451976/](https://www.spig
 
 
 ## Legal
+Icons from [fontsawsome](https://fontawesome.com/), [under the Creative Commons Attribution 4.0 licence](https://fontawesome.com/license). *svg was scaled down*
 This program is licensed under the **GPL-V3 license**
 LukeOnuke (the author of this program) and all the contributers aren't asociated with Mojang Synergies AB
 Some images contained in the program either contain parts of images copyrighted by Mojang Synergies AB or they are copyrighted by Mojang Synergies AB
@@ -40,7 +41,7 @@ If you are on **windows** :
  
  
  
-## Themes
+# Themes
  Themes were added in `v5.0.0`
  
  Theme file structure

@@ -1,6 +1,7 @@
 site_name: AdminTools
+theme_dir: material/
 theme:
-    name: material
+    name: 
     custom_dir: material/
     highlightjs: true
     hljs_languages:
@@ -9,4 +10,11 @@ theme:
         - xml
         - json
 markdown_extensions:
+    - toc:
+        permalink: #
     - tables
+    - admonition
+    - def_list
+    - mdx_gh_links:
+        user: LukeOnuke
+        repo: AdminTools
