@@ -1,6 +1,6 @@
 site_name: AdminTools
 theme:
-    name: readthedocs
+    name: material
     highlightjs: true
     hljs_languages:
         - java
