@@ -49,14 +49,14 @@ If you are on **windows** :
  ThemeMainFolder
  |
  |--- style.css
- |--- consolecolor.css
+ |--- consolecolor.txt
  ```
  
 ## Creating a theme
 You can create themes by copying the default theme and pasting it into the `/Assets/Themes/` folder. 
  
 After copy pasting the default theme rename it to what you want.
-!!!WARNING
+!!! WARNING
 ```
 Themes can not contain spaces in their file name, otherwise the theme wont work.
 ```
