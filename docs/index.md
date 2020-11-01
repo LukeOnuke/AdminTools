@@ -38,7 +38,7 @@ If you are on **windows** :
  3. Open the directory
  4. Place a shortcut to the *program file*(**AdminTools.jar**)
  
- # Themes
+ ## Themes
  Themes were added in `v5.0.0`
  
  Theme file structure
