@@ -38,7 +38,9 @@ If you are on **windows** :
  3. Open the directory
  4. Place a shortcut to the *program file*(**AdminTools.jar**)
  
- ## Themes
+ 
+ 
+## Themes
  Themes were added in `v5.0.0`
  
  Theme file structure
@@ -49,19 +51,19 @@ If you are on **windows** :
  |--- consolecolor.css
  ```
  
- ## Creating a theme
- You can create themes by copying the default theme and pasting it into the `/Assets/Themes/` folder. 
+## Creating a theme
+You can create themes by copying the default theme and pasting it into the `/Assets/Themes/` folder. 
  
- After copy pasting the default theme rename it to what you want.
-  !!!WARNING
- ```
- Themes can not contain spaces in their file name, otherwise the theme wont work.
- ```
+After copy pasting the default theme rename it to what you want.
+!!!WARNING
+```
+Themes can not contain spaces in their file name, otherwise the theme wont work.
+```
  
- Then change the given valiues in the css to easly create a theme. This part :
+Then change the given valiues in the css to easly create a theme. This part :
  
- ```css
- *{
+```css
+*{
     /*Modify these valiues for creating new themes easly*/
     /*
      *      ___ _____   _____ _                              
@@ -84,16 +86,17 @@ If you are on **windows** :
     -at-bordercolor: #5c5c5c;
     -at-text: white;
 }
- ```
- Change the "Default theme" to The name of your theme.
  
- Now you can change the color valiues.
+```
+Change the "Default theme" to The name of your theme.
  
- If you need to change the color hex valiue in `consolecolor.txt`
+Now you can change the color valiues.
  
- You can also change the other parts of the css. If you create a theme and publish it, add it to the theme list.
+If you need to change the color hex valiue in `consolecolor.txt`
  
- ## Theme list 
+You can also change the other parts of the css. If you create a theme and publish it, add it to the theme list.
+ 
+## Theme list 
 |Theme name| Theme author | Theme github link | Bundled in latest version? |
 |--|--|--|--|
 | Default | LukeOnuke | [link](https://github.com/LukeOnuke/AdminTools/tree/master/AdminTools/Assets/Themes/Default) | yes |

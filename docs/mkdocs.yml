@@ -1,9 +1,12 @@
 site_name: AdminTools
 theme:
     name: material
+    custom_dir: material/
     highlightjs: true
     hljs_languages:
         - java
         - css
         - xml
         - json
+markdown_extensions:
+    - tables
