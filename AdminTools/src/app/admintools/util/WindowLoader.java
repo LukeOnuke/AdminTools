@@ -6,15 +6,12 @@
 package app.admintools.util;
 
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.animation.FadeTransition;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import app.admintools.gui.RconWindowController;
 import app.admintools.gui.SettingsWindowController;
 
 /**
@@ -84,7 +81,7 @@ public class WindowLoader {
             windowStage.setHeight(height);
 
         } catch (IOException ex) {
-            Logger.getLogger(RconWindowController.class.getName()).log(Level.SEVERE, null, ex);
+            AtLogger.logException(ex);
         }
 
     }

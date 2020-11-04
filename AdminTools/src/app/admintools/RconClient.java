@@ -12,6 +12,13 @@ import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import net.kronos.rkon.core.ex.AuthenticationException;
 import app.admintools.textprocessing.TellrawFormatter;
+import app.admintools.util.AtLogger;
+import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.logging.FileHandler;
+import java.util.logging.Logger;
+import java.util.logging.SimpleFormatter;
 
 /*
 *   Image credits 
@@ -24,16 +31,41 @@ import app.admintools.textprocessing.TellrawFormatter;
  *
  */
 public class RconClient extends Application {
-    
 
     @Override
     public void start(Stage stage) throws Exception {
+        //Initilise logger
+        Logger logger = Logger.getLogger("ATLOG"); //Create logger instance
+        FileHandler fh; //Create writer
+        File pathToLogDir = new File("log/"); //Path to log dir
+        try {
+            if(!pathToLogDir.exists()){
+                pathToLogDir.mkdir();
+            }
+            // This block configure the logger with handler and formatter
+            //File name for log file
+            String fileName = new SimpleDateFormat("dd-MM-yyyy-@hh-mm-ss").format(new Date());
+            fileName = "log-" + fileName + ".log";
+            //Initilise the file handeler
+            fh = new FileHandler("log/" + fileName);
+            logger.addHandler(fh);
+            //Formatter for the logger
+            SimpleFormatter formatter = new SimpleFormatter();
+            fh.setFormatter(formatter);
+
+            // the following statement is used to log any messages  
+            logger.info("Initilising");
+
+        } catch (SecurityException | IOException e) {
+            System.err.println("Error in startup");
+        }
+
         Data d = Data.getInstance();
+
         Parent root;
 
         //Load homepage
         root = FXMLLoader.load(getClass().getResource("/app/admintools/gui/HomeWindow.fxml"));
-
 
         //Set selected theme css
         root.getStylesheets().add("file:Assets/Themes/" + d.getSelectedTheme() + "/style.css");
@@ -54,12 +86,8 @@ public class RconClient extends Application {
                         cr.command(TellrawFormatter.assembleLogoutTellraw(d.getMessageUsername()));
                     }
                     cr.disconnect();
-                } catch (IOException ex) {
-
-                } catch (AuthenticationException ex) {
-
-                } catch(NullPointerException npex){
-                    
+                } catch (IOException | AuthenticationException | NullPointerException ex) {
+                    AtLogger.logException(ex);
                 }
                 Platform.exit();
                 System.exit(0);

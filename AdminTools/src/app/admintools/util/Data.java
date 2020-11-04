@@ -15,8 +15,6 @@ import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Properties;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import app.admintools.security.credentials.Credentials;
 
 /**
@@ -169,9 +167,9 @@ public class Data {
             prop.store(output, "AdminTools properties" + System.lineSeparator() + "Created by: LukeOnuke - https://github.com/LukeOnuke");
 
         } catch (FileNotFoundException ex) {
-            Logger.getLogger(Data.class.getName()).log(Level.SEVERE, null, ex);
+            AtLogger.logException(ex);
         } catch (IOException ex) {
-            Logger.getLogger(Data.class.getName()).log(Level.SEVERE, null, ex);
+            AtLogger.logException(ex);
         }
     }
 
@@ -194,9 +192,9 @@ public class Data {
             arl.add(prop.getProperty("message.username", defaults.get(5)));
             arl.add(prop.getProperty("theme.selected", defaults.get(6)));
         } catch (FileNotFoundException ex) {
-            Logger.getLogger(Data.class.getName()).log(Level.SEVERE, null, ex);
+            AtLogger.logException(ex);
         } catch (IOException ex) {
-            Logger.getLogger(Data.class.getName()).log(Level.SEVERE, null, ex);
+            AtLogger.logException(ex);
         }
 
         return arl;

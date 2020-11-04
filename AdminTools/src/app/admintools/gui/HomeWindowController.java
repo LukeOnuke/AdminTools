@@ -10,8 +10,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ToggleButton;
@@ -20,6 +18,7 @@ import javafx.scene.layout.FlowPane;
 import app.admintools.gui.credentials.credwizard.CredWizard;
 import app.admintools.security.credentials.Credentials;
 import app.admintools.security.credentials.CredentialsIO;
+import app.admintools.util.AtLogger;
 import app.admintools.util.Data;
 import app.admintools.util.Utill;
 import app.admintools.util.WindowLoader;
@@ -89,6 +88,7 @@ public class HomeWindowController implements Initializable {
                 new File(CredentialsIO.PATH).createNewFile();
             }
         } catch (IOException ioe) {
+            AtLogger.logException(ioe);
             Dialog.okDialog(DialogImage.ERROR, "FATAL ERROR", ioe.getMessage());
             Utill.exit(1);
         }
@@ -109,7 +109,7 @@ public class HomeWindowController implements Initializable {
                     CredentialsIO.writeCredentials(credList);
                     refresh();
                 } catch (IOException ex) {
-                    Logger.getLogger(HomeWindowController.class.getName()).log(Level.SEVERE, null, ex);
+                    AtLogger.logException(ex);
                 }
             }
             isWizardOpen.set(false);

@@ -1,14 +1,14 @@
 site_name: AdminTools
 theme_dir: material/
-theme:
-    name: 
-    custom_dir: material/
-    highlightjs: true
-    hljs_languages:
-        - java
-        - css
-        - xml
-        - json
+#theme:
+#    name: 
+#    custom_dir: material/
+#    highlightjs: true
+#    hljs_languages:
+#        - java
+#        - css
+#        - xml
+#        - json
 markdown_extensions:
     - toc:
         permalink: #

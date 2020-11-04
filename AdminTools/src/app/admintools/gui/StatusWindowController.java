@@ -9,8 +9,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -30,6 +28,7 @@ import app.admintools.querry.mc.MinecraftPingReply;
 import app.admintools.querry.mc.QuerryUtils;
 import app.admintools.threadmanager.ThreadManager;
 import app.admintools.threadmanager.ThreadType;
+import app.admintools.util.AtLogger;
 import app.admintools.util.Data;
 
 /**
@@ -117,7 +116,7 @@ public class StatusWindowController implements Initializable {
             try {
                 arrStatus = ApiQuerry.querry(); //querry
             } catch (IOException ex) {
-                Logger.getLogger(StatusWindowController.class.getName()).log(Level.SEVERE, null, ex);
+                AtLogger.logException(ex);
             }
             final ArrayList<String> arrStatus_ = arrStatus; //final arraylist
             Platform.runLater(() -> {
@@ -151,7 +150,7 @@ public class StatusWindowController implements Initializable {
                         Thread.sleep(500);
                     }
                 } catch (InterruptedException ex) {
-
+                    AtLogger.logException(ex);
                 }
                 System.out.println(Data.isOnStatusWindow);
                 tickApi();
@@ -191,12 +190,12 @@ public class StatusWindowController implements Initializable {
                         }
 
                     } catch (Exception e) {
-
+                        AtLogger.logException(e);
                     }
                 });
 
             } catch (IOException ex) {
-
+                AtLogger.logException(ex);
             }
 
         });
@@ -218,7 +217,7 @@ public class StatusWindowController implements Initializable {
                     Thread.sleep(500);
                 }
             } catch (InterruptedException ex) {
-                Logger.getLogger(StatusWindowController.class.getName()).log(Level.SEVERE, null, ex);
+                AtLogger.logException(ex);
             }
             tickMcRefresh();
 

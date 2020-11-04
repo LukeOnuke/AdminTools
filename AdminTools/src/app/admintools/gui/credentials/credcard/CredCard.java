@@ -7,8 +7,6 @@ package app.admintools.gui.credentials.credcard;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
@@ -24,6 +22,7 @@ import javafx.util.Duration;
 import app.admintools.gui.credentials.credwizard.CredWizard;
 import app.admintools.security.credentials.Credentials;
 import app.admintools.security.credentials.CredentialsIO;
+import app.admintools.util.AtLogger;
 import app.admintools.util.CustomRcon;
 import app.admintools.util.Data;
 import app.admintools.util.WindowLoader;
@@ -98,7 +97,7 @@ public class CredCard {
                     CredentialsIO.writeCredentials(creds);
                     ((FlowPane) ap.getParent()).getChildren().remove(ap);
                 } catch (IOException ex) {
-                    Logger.getLogger(CredCard.class.getName()).log(Level.SEVERE, null, ex);
+                    AtLogger.logException(ex);
                 }
             } else if (id.equals("edit")) {
                 if (!isOpenWindow.get()) {
@@ -116,7 +115,7 @@ public class CredCard {
                             //Display new card
                             parrent.getChildren().add(editedCreds.getCredCard());
                         } catch (IOException ex) {
-                            Logger.getLogger(CredCard.class.getName()).log(Level.SEVERE, null, ex);
+                            AtLogger.logException(ex);
                         }
                     }
                     isOpenWindow.set(false);

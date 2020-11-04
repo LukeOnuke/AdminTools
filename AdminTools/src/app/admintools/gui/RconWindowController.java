@@ -6,7 +6,6 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -28,17 +27,14 @@ import app.admintools.gui.theme.ThemeReader;
 import app.admintools.util.CustomRcon;
 import app.admintools.textprocessing.Markup;
 import app.admintools.textprocessing.TellrawFormatter;
+import app.admintools.util.AtLogger;
 import app.admintools.util.Data;
 import app.admintools.util.Utill;
 import app.admintools.util.WindowLoader;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.lukeonuke.simplefxdialog.Dialog;
-import com.lukeonuke.simplefxdialog.exception.NotSupportedException;
 import com.lukeonuke.simplefxdialog.img.DialogImage;
-import com.lukeonuke.simplefxdialog.tray.TrayDialog;
-import java.awt.AWTException;
-import java.awt.TrayIcon;
 
 /**
  *
@@ -125,6 +121,7 @@ public class RconWindowController implements Initializable {
                         write("§a[AVCS] §fLatest version");
                     }
                 } catch (IOException ex) {
+                    AtLogger.logException(ex);
                     write("§a[AVCS] §4Couldnt fetch version info - Probably reached the api rate limit");
                 }
 
@@ -176,18 +173,21 @@ public class RconWindowController implements Initializable {
                         cr.command(TellrawFormatter.assembleLoginTellraw(d.getMessageUsername()));
                     }
                 } catch (IOException ex) {
+                    AtLogger.logException(ex);
                     connected = false;
                     Platform.runLater(() -> {
                         Dialog.okDialog(DialogImage.ERROR, "Connnection Error", "Couldn't connect to server.\n Probably an incorect IP.");
                         WindowLoader.loadHome(rootPane);
                     });
                 } catch (AuthenticationException ex) {
+                    AtLogger.logException(ex);
                     connected = false;
                     Platform.runLater(() -> {
                         Dialog.okDialog(DialogImage.ERROR, "Connnection Error", "Couldn't authenticate with server. \nIncorrect password.");
                         WindowLoader.loadHome(rootPane);
                     });
                 } catch (Exception ex) {
+                    AtLogger.logException(ex);
                     connected = false;
                     Platform.runLater(() -> {
                         Dialog.okDialog(DialogImage.ERROR, "Error", "General exception\n" + ex.getMessage());
@@ -207,7 +207,7 @@ public class RconWindowController implements Initializable {
                         write("§cCouldnt connect to " + d.getSelectedCredentials().getIP() + ":" + d.getSelectedCredentials().getPort());
                     });
                 }
-            });
+            }, "Connector Thread");
             connect.start();
 
             Data.startingUp = false;
@@ -225,7 +225,7 @@ public class RconWindowController implements Initializable {
         try {
             color = ThemeReader.getConsoleColor(Data.getInstance().getSelectedTheme());
         } catch (FileNotFoundException ex) {
-            //TODO : Add ze window warning
+            AtLogger.logException(ex);
         }
 
         Data.rconTextData.set(0, "<style>body {background-color: " + color + "; font-family: \"Lucida Console\", Courier, monospace;}</style>" + Data.rconTextData.get(0)); //add the style shit
@@ -244,7 +244,7 @@ public class RconWindowController implements Initializable {
             cRcon = CustomRcon.getInstance();
             if (!command.equals("")) {
                 write(Utill.getDate() + command);
-
+                AtLogger.log(Level.INFO, "Command sent to execution manager: " + command);
                 //Internal command interpreter
                 boolean isRightToSend = true; //Boolean that is checked when sending commands to server
 
@@ -264,7 +264,7 @@ public class RconWindowController implements Initializable {
                                 try {
                                     Thread.sleep(2000);
                                 } catch (InterruptedException ex) {
-
+                                    AtLogger.logException(ex);
                                 }
                                 Utill.exit(0);
                             });
@@ -311,7 +311,7 @@ public class RconWindowController implements Initializable {
                 }
             }
         } catch (IOException | AuthenticationException ex) {
-            Logger.getLogger(RconWindowController.class.getName()).log(Level.SEVERE, null, ex);
+            AtLogger.logException(ex);
         }
 
         //Set command history
