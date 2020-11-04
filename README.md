@@ -30,7 +30,7 @@ Downloadable as:
 
 *if installed by .jar, the instalation folder is in the folder with the .jar
 
-## Gallery (out of date)
+## Gallery
 ### Home
 ![home](https://admintools.app/img/0.png)
 ### RCON
