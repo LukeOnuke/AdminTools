@@ -31,12 +31,14 @@ Downloadable as:
 *if installed by .jar, the instalation folder is in the folder with the .jar
 
 ## Gallery (out of date)
+### Home
+![home](https://admintools.app/img/0.png)
 ### RCON
-![rcon](https://i.imgur.com/7TqPOjW.png)
+![rcon](https://admintools.app/img/1.png)
 ### Server and Mojang servers status
-![status](https://i.imgur.com/TmCAHSu.png)
+![status](https://admintools.app/img/2.png)
 ### Settings
-![Settings](https://i.imgur.com/Grk7aBq.png)
+![Settings](https://admintools.app/img/3.png)
 
 ## Libraries used
 [rkon-core](https://github.com/Kronos666/rkon-core)  - by [Kronos666](https://github.com/Kronos666)
