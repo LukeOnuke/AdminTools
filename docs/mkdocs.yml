@@ -1,6 +1,6 @@
 site_name: AdminTools
 theme:
-    name: cerulean
+    name: slate
     nav_style: dark
     highlightjs: true
     hljs_languages:
