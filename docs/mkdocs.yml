@@ -2,18 +2,13 @@ site_name: AdminTools
 theme:
     name: slate
     nav_style: dark
-    highlightjs: true
-    hljs_languages:
-        - java
-        - css
-        - xml
-        - json
 markdown_extensions:
     - toc:
         permalink: #
     - tables
     - admonition
     - def_list
+    - footnotes
     - mdx_gh_links:
         user: LukeOnuke
         repo: AdminTools

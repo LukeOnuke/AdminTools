@@ -56,10 +56,7 @@ If you are on **windows** :
 You can create themes by copying the default theme and pasting it into the `/Assets/Themes/` folder. 
  
 After copy pasting the default theme rename it to what you want.
-!!! WARNING
-```
-Themes can not contain spaces in their file name, otherwise the theme wont work.
-```
+!!! WARNING Themes can not contain spaces in their file name, otherwise the theme wont work.
  
 Then change the given valiues in the css to easly create a theme. This part :
  
