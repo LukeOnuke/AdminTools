@@ -1,8 +1,7 @@
 site_name: AdminTools
-theme_dir: material/
 theme:
-    name: null
-    custom_dir: 'material'
+    name: cerulean
+    nav_style: dark
     highlightjs: true
     hljs_languages:
         - java
