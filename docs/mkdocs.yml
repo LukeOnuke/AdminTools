@@ -2,7 +2,7 @@ site_name: AdminTools
 theme_dir: material/
 theme:
     name: null
-    custom_dir: 'material/'
+    custom_dir: 'material'
     highlightjs: true
     hljs_languages:
         - java
