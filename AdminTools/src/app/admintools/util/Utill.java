@@ -59,4 +59,31 @@ public class Utill {
     public static void exit(int code) {
         System.exit(code);
     }
+    
+    /**
+     * https://stackoverflow.com/questions/924394/how-to-get-the-filename-without-the-extension-in-java
+     * @param str
+     * @return
+     */
+    public static String stripExtension (String str) {
+        // Handle null case specially.
+
+        if (str == null) return null;
+
+        // Get position of last '.'.
+
+        int pos = str.lastIndexOf(".");
+
+        // If there wasn't any '.' just return the string as is.
+
+        if (pos == -1) return str;
+
+        // Otherwise return the string, up to the dot.
+
+        return str.substring(0, pos);
+    }
+    
+    public static String removeArrrayFormatting(String string){
+        return string.replace(",", "").replace("[", "").replace("]", "");
+    }
 }

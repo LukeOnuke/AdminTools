@@ -112,6 +112,7 @@ public class HomeWindowController implements Initializable {
                     AtLogger.logException(ex);
                 }
             }
+            
             isWizardOpen.set(false);
         }
     }

@@ -176,7 +176,7 @@ public class CredWizard {
 
         //Create window
         Scene scene = new Scene(ap);
-        scene.getStylesheets().add("file:Assets/Themes/" + Data.getInstance().getSelectedTheme() + "/style.css"); //Themes
+        scene.getStylesheets().add("file:Assets/themes/" + Data.getInstance().getSelectedTheme() + "/style.css"); //Themes
         Stage stage = new Stage();
         stage.setScene(scene);
         stage.setAlwaysOnTop(true);

@@ -68,7 +68,7 @@ public class RconClient extends Application {
         root = FXMLLoader.load(getClass().getResource("/app/admintools/gui/HomeWindow.fxml"));
 
         //Set selected theme css
-        root.getStylesheets().add("file:Assets/Themes/" + d.getSelectedTheme() + "/style.css");
+        root.getStylesheets().add("file:Assets/themes/" + d.getSelectedTheme() + "/style.css");
 
         Scene scene = new Scene(root);
 
@@ -86,8 +86,10 @@ public class RconClient extends Application {
                         cr.command(TellrawFormatter.assembleLogoutTellraw(d.getMessageUsername()));
                     }
                     cr.disconnect();
-                } catch (IOException | AuthenticationException | NullPointerException ex) {
+                } catch (IOException | AuthenticationException ex) {
                     AtLogger.logException(ex);
+                } catch (NullPointerException ex) {
+                    //Its normal for it to trow a null pointer exception on exit if no connection is avalable
                 }
                 Platform.exit();
                 System.exit(0);

@@ -35,6 +35,9 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.lukeonuke.simplefxdialog.Dialog;
 import com.lukeonuke.simplefxdialog.img.DialogImage;
+import java.io.File;
+import java.util.Arrays;
+import java.util.Scanner;
 
 /**
  *
@@ -113,7 +116,7 @@ public class RconWindowController implements Initializable {
                     if (!updateStats.get("draft").getAsBoolean()) {
                         if (!updateStats.get("tag_name").getAsString().equals("v" + this.getClass().getPackage().getImplementationVersion())) {
                             write("§a[AVCS] §4Newer version found §9" + updateStats.get("tag_name").getAsString() + "\n      §f" + updateStats.get("name").getAsString() + "\n      Get it from github: §ahttps://get.admintools.app/");
-                            
+
                             isUpToDate = false;
                         }
                     }
@@ -166,6 +169,7 @@ public class RconWindowController implements Initializable {
 
                 Data d = Data.getInstance();
                 write("§bConnecting to " + d.getSelectedCredentials().getIP() + ":" + d.getSelectedCredentials().getPort());
+                AtLogger.log(Level.INFO, "Connecting to server");
                 try {
                     CustomRcon cr = CustomRcon.getInstance();
                     //write connected message if its enabled
@@ -238,6 +242,11 @@ public class RconWindowController implements Initializable {
         });
     }
 
+    /**
+     * 1-st layer interpreter command send
+     *
+     * @param command the command to be sent
+     */
     private void sendCommand(String command) {
         CustomRcon cRcon;
         try {
@@ -248,66 +257,77 @@ public class RconWindowController implements Initializable {
                 //Internal command interpreter
                 boolean isRightToSend = true; //Boolean that is checked when sending commands to server
 
-                switch (command) {
-                    //Stop command
-                    case "stop":
-                        if (Dialog.okCancelDialog(DialogImage.WARNING, "Are you sure?", "Do you realy want to stop the server?"
-                                + System.lineSeparator()
-                                + "By pressing on you will be issuing a stop command to the server")) {
+                ArrayList<String> splitCommand = new ArrayList<>(Arrays.asList(command.trim().split("\\s+")));
 
-                            isRightToSend = false;
-                            write("§bStopping the server and exiting in 2 (two) seconds");
-                            cRcon.command("stop");
-                            sendButton.disableProperty().set(true);
-                            rconSend.disableProperty().set(true);
-                            Thread t = new Thread(() -> {
-                                try {
-                                    Thread.sleep(2000);
-                                } catch (InterruptedException ex) {
-                                    AtLogger.logException(ex);
-                                }
-                                Utill.exit(0);
-                            });
-                            t.start();
-                        }
-                        break;
-                    //Help command
-                    case "!help":
-                        isRightToSend = false;
-                        write("§bAdmin Tools internal command interpreter help: " + System.lineSeparator()
-                                + "\t!help - Help command" + System.lineSeparator()
-                                + "\t!clear - Clear the console" + System.lineSeparator()
-                                + "\t!exit - Exit the program and close the rcon connection" + System.lineSeparator());
-                        break;
-                    //Clear command - clears the console
-                    case "!clear":
-                        isRightToSend = false;
-                        Data.rconTextData.clear();
-                        write("§bCleared console");
-                        break;
-                    //Clear command - clears the console
-                    case "!login":
-                        isRightToSend = false;
-                        Data.rconTextData.clear();
-                        WindowLoader.loadHome(rootPane);
-                        break;
+                if (command.equals("stop")) {
+                    if (Dialog.okCancelDialog(DialogImage.WARNING, "Are you sure?", "Do you realy want to stop the server?"
+                            + System.lineSeparator()
+                            + "By pressing on you will be issuing a stop command to the server")) {
 
-                    //Exit command - exits the program
-                    case "!exit":
                         isRightToSend = false;
+                        write("§bStopping the server and exiting in 2 (two) seconds");
+                        cRcon.command("stop");
+                        sendButton.disableProperty().set(true);
+                        rconSend.disableProperty().set(true);
+                        Thread t = new Thread(() -> {
+                            try {
+                                Thread.sleep(2000);
+                            } catch (InterruptedException ex) {
+                                AtLogger.logException(ex);
+                            }
+                            Utill.exit(0);
+                        });
+                        t.start();
 
-                        write("§bClosing connection and exiting...");
+                    }
+                } else if (command.equals("!help")) {
+                    isRightToSend = false;
+                    write("§bAdmin Tools internal command interpreter help: " + System.lineSeparator()
+                            + "\t!help - Help command" + System.lineSeparator()
+                            + "\t!clear - Clear the console" + System.lineSeparator()
+                            + "\t!exit - Exit the program and close the rcon connection" + System.lineSeparator());
+                } else if (command.equals("!clear")) {
+                    isRightToSend = false;
+                    Data.rconTextData.clear();
+                    write("§bCleared console");
+                } else if (command.equals("!exit")) {
+                    isRightToSend = false;
 
-                        cRcon.disconnect();
-                        System.exit(0);
-                        break;
-                    default:
-                        break;
+                    write("§bClosing connection and exiting...");
+
+                    Utill.exit(commandHistoryDeviation);
+                } else if (splitCommand.get(0).equals("!if")) {
+                    isRightToSend = false;
+                    if (logicalOperations(splitCommand.get(1))) {
+                        splitCommand.remove(0);
+                        splitCommand.remove(0);
+                        /*
+                        *Send the command that is after the if instruction ex. &if yes==yes <command>
+                        *Send it this way so that it allows for nested if-s
+                         */
+                        sendCommand(Utill.removeArrrayFormatting(splitCommand.toString()));
+                    }
+                    //Print statement
+                } else if (splitCommand.get(0).equals("!print")) {
+                    isRightToSend = false;
+                    splitCommand.remove(0);
+                    write(Utill.removeArrrayFormatting(splitCommand.toString())); //Send the text after the print instruction
+
+                }
+
+                for (int i = 0; i < listScripts().size(); i++) {
+                    if (command.startsWith("@" + Utill.stripExtension(listScripts().get(i)))) {
+                        isRightToSend = false;
+                        ArrayList<String> args = new ArrayList<>(Arrays.asList(command.split("[ ]")));
+                        args.remove(0);
+                        executeScript(getScript(listScripts().get(i)), args);
+                    }
                 }
 
                 if (isRightToSend) {
                     //Send and recive recsponce
                     write(cRcon.command(command));
+                    AtLogger.log(Level.INFO, "Command sent to server : " + command);
                 }
             }
         } catch (IOException | AuthenticationException ex) {
@@ -340,5 +360,56 @@ public class RconWindowController implements Initializable {
     @FXML
     private void loadHome() {
         WindowLoader.loadHome(rootPane);
+    }
+
+    public static ArrayList<String> listScripts() {
+        ArrayList<String> themeDir = new ArrayList<String>(); //Netbeans takes a shite than complaians
+        File[] themes = new File("Assets/scripts/").listFiles(); //Get a array of all files in the script folder
+        for (File theme : themes) { //Go through them all
+            if (theme.isFile()) {
+                themeDir.add(theme.getName());  //Add its name to the returning arraylist if its a directory
+            }
+        }
+        return themeDir;
+    }
+
+    public static String getScript(String scriptName) {
+        return "Assets/scripts/" + scriptName;
+    }
+
+    private void executeScript(String scriptPath, ArrayList<String> args) throws FileNotFoundException {
+        // pass the path to the file as a parameter 
+        File file = new File(scriptPath);
+        Scanner sc = new Scanner(file);
+
+        write("┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉");
+
+        while (sc.hasNextLine()) {
+            String instruction = sc.nextLine();
+            if (instruction != null) {
+                for (int i = 0; i < args.size(); i++) {
+                    instruction = instruction.replace("arg" + i, args.get(i));
+                }
+
+                if (instruction.startsWith("#")) {
+                    //Comment
+                } else if (instruction.startsWith("@")) {
+                    //Call to new script, ignored
+
+                } else {
+                    //Minecraft command, or 1-st layer interpreter command
+                    sendCommand(instruction);
+                }
+            }
+        }
+    }
+
+    public static boolean logicalOperations(String operation) {
+        if (operation.contains("==")) {
+            return operation.split("==")[0].equals(operation.split("==")[1]); //Return true if the bit before the == is equal to the bit after the ==
+        } else if (operation.contains("!=")) {
+            return !operation.split("!=")[0].equals(operation.split("!=")[1]); //Return true if the bit before the != is not equal to the bit after the !=
+        }
+        return false;
     }
 }

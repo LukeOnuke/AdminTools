@@ -114,7 +114,7 @@ public class SettingsWindowController implements Initializable {
 
         //Actualy have to refresh the theme
         //And refresh the Data singleton
-        rootPane.getStylesheets().add("file:Assets/Themes/" + Data.refresh().getSelectedTheme() + "/style.css");
+        rootPane.getStylesheets().add("file:Assets/themes/" + Data.refresh().getSelectedTheme() + "/style.css");
     }
 
     @FXML

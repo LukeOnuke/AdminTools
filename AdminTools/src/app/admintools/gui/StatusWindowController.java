@@ -152,7 +152,6 @@ public class StatusWindowController implements Initializable {
                 } catch (InterruptedException ex) {
                     AtLogger.logException(ex);
                 }
-                System.out.println(Data.isOnStatusWindow);
                 tickApi();
             }
         });
@@ -181,16 +180,18 @@ public class StatusWindowController implements Initializable {
 
                 //Set player list
                 Platform.runLater(() -> {
-                    try {
-                        if (sOnlinePlayers.getItems() != null) {
-                            sOnlinePlayers.getItems().clear();
-                        }
-                        for (int i = 0; i < data.getPlayers().getSample().size(); i++) {
-                            sOnlinePlayers.getItems().add(data.getPlayers().getSample().get(i).getName());
-                        }
+                    if (data.getPlayers().getSample() != null) {
+                        try {
+                            if (sOnlinePlayers.getItems() != null) {
+                                sOnlinePlayers.getItems().clear();
+                            }
+                            for (int i = 0; i < data.getPlayers().getSample().size(); i++) {
+                                sOnlinePlayers.getItems().add(data.getPlayers().getSample().get(i).getName());
+                            }
 
-                    } catch (Exception e) {
-                        AtLogger.logException(e);
+                        } catch (Exception e) {
+                            AtLogger.logException(e);
+                        }
                     }
                 });
 

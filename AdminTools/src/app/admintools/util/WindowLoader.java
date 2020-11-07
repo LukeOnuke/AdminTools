@@ -48,7 +48,7 @@ public class WindowLoader {
             AnchorPane ap = FXMLLoader.load(SettingsWindowController.class.getResource(url)); //Get anchorpane
 
             //Set style for selected theme
-            ap.getStylesheets().add("file:Assets/Themes/" + d.getSelectedTheme() + "/style.css");
+            ap.getStylesheets().add("file:Assets/themes/" + d.getSelectedTheme() + "/style.css");
 
             //Create stage      yes
             Scene scene2 = new Scene(ap);

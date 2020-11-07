@@ -111,6 +111,9 @@ public class Markup {
                     //reset
                     lastColor = ChatColour.GRAY;
                     strongArr.add(getParagraphElement(removeFirstChar(inSplitText), ChatColour.GRAY, "normal", "none"));
+                } else {
+                    lastColor = ChatColour.GRAY;
+                    strongArr.add(getParagraphElement(inSplitText, ChatColour.GRAY, "normal", "none"));
                 }
             }
         }

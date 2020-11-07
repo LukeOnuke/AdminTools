@@ -3,11 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/lukak/Documents/NetBeansProjects/AdminTools/Assets/Themes/Aqua/style.css</file>
             <file>file:/C:/Users/lukak/Documents/NetBeansProjects/AdminTools/src/app/admintools/util/Utill.java</file>
+            <file>file:/C:/Users/lukak/Documents/NetBeansProjects/AdminTools/src/app/admintools/gui/StatusWindowController.java</file>
             <file>file:/C:/Users/lukak/Documents/NetBeansProjects/AdminTools/src/app/admintools/gui/RconWindowController.java</file>
-            <file>file:/C:/Users/lukak/Documents/NetBeansProjects/AdminTools/src/app/admintools/RconClient.java</file>
-            <file>file:/C:/Users/lukak/Documents/NetBeansProjects/AdminTools/Assets/Themes/Default/style.css</file>
+            <file>file:/C:/Users/lukak/Documents/NetBeansProjects/AdminTools/src/app/admintools/gui/theme/ThemeReader.java</file>
             <file>file:/C:/Users/lukak/Documents/NetBeansProjects/AdminTools/src/app/admintools/gui/HomeWindowController.java</file>
         </group>
     </open-files>

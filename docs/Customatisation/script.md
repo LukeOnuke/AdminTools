@@ -1,15 +1,13 @@
 # Scripting
 AdminTools uses Admin Tools Script for its scripting.
-*Work In Progress, check back on version 6 release*
-
-*Will be added in version 6.0.0 .*
+*Added in version 6.0.0`
 
 File ends with `.atsf` and **can not contain** any dots or mc formatting codes.
 
 Example of valid names :
- - `server_shutdown.atsf`
+ - `serverShutdown.atsf`
  - `script1.atsf`
- - `good_script.atsf`
+ - `goodScript.atsf`
 
 Examples of invalid names:
 
@@ -17,7 +15,7 @@ Examples of invalid names:
  - `§cinvalid§9name§f.atsf`
 
 
-It is recomended by the atsf file convention to name your scripts with underscores to seperate words.
+It is recomended by the atsf file convention to name your scripts with big letters to seperate words.
 
 ## ATSF file convention
 
@@ -29,18 +27,17 @@ File ends with `.atsf` and **can not contain** any dots , mc formatting codes or
 `.atsf` stands for Admin Tools Script File.
 
 Example of valid names :
- - `server_shutdown.atsf`
+ - `serverShutdown.atsf`
  - `script1.atsf`
- - `good_script.atsf`
+ - `goodScript.atsf`
 
 Examples of invalid names:
 
  - `yeet.me.atsf`
  - `§cinvalid§9name§f.atsf`
 
-Words are separated by underscores ( _ ).
+Words are separated by big letters (cammel case).
 
-Example : `valid_name.atsf`
+Example : `validName.atsf`
 
 ## Contents
-*Work In Progress, check back on version 6 release*
