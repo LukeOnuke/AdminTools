@@ -1,0 +1,8 @@
+#this is a comment
+list
+whitelist add arg0
+whitelist remove arg0
+#this here is a if statement
+!if arg0==LukeOnuke whitelist add Luke_oNuke
+!print yes yes
+!if arg0!=yeet !print yeet
