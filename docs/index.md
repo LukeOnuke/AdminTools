@@ -38,8 +38,3 @@ If you are on **windows** :
  2. Create a new directory called `AdminTools`
  3. Open the directory
  4. Place a shortcut to the *program file*(**AdminTools.jar**)
- 
-# Customatisation
-Scripting : /Customatisation/script.md
-
-Themes : /Customatisation/themes.md
