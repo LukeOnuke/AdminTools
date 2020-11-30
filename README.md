@@ -47,6 +47,9 @@ Downloadable as:
 
 [MinecraftServerPing](https://github.com/jamietech/MinecraftServerPing) - by [jamietech](https://github.com/jamietech)
 
+# Special thanks
+Special thanks to JegKompletson, for creating the new admin tools icon.
+
 ## Legal info
 Icons from [fontsawsome](https://fontawesome.com/), [under the Creative Commons Attribution 4.0 licence](https://fontawesome.com/license). *svg was scaled down*
 LukeOnuke is not affiliated with Mojang Synergies AB.  
