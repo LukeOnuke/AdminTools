@@ -4,6 +4,8 @@
 
 [![daym](https://img.shields.io/github/downloads/LukeOnuke/AdminTools/total)](https://github.com/LukeOnuke/AdminTools/releases) [![Spiget Downloads](https://img.shields.io/spiget/downloads/81484?label=spigot%20downloads)](https://www.spigotmc.org/resources/admin-tools.81484/) ![wow here](https://img.shields.io/github/license/LukeOnuke/AdminTools) ![wow](https://img.shields.io/github/v/release/LukeOnuke/AdminTools?include_prereleases) [![Documentation Status](https://readthedocs.org/projects/admintools/badge/?version=latest)](https://admintools.readthedocs.io/en/latest/?badge=latest)
 
+***TRANSITION TO JAVA 11, use the full release. Prereleases are there just for snapshot testers***
+
 Program with administration tools for Minecraft servers.
 
 Features:
