@@ -38,3 +38,6 @@ If you are on **windows** :
  2. Create a new directory called `AdminTools`
  3. Open the directory
  4. Place a shortcut to the *program file*(**AdminTools.jar**)
+
+## Snapshots
+Snapshots are provided when there are big changes to the program itself, **use them at your own risk as they are not stress tested**.
