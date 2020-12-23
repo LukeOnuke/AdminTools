@@ -159,13 +159,26 @@
 
         </dependency>
 
-
         <dependency>
             <groupId>com.lukeonuke</groupId>
             <artifactId>simplefxdialog</artifactId>
             <version>2.0.0</version>
         </dependency>
+
+        <dependency>
+            <groupId>com.github.Vatuu</groupId>
+            <artifactId>discord-rpc</artifactId>
+            <version>1.6.2</version>
+        </dependency>
+
     </dependencies>
+
+    <repositories>
+        <repository>
+            <id>jitpack.io</id>
+            <url>https://jitpack.io</url>
+        </repository>
+    </repositories>
 
     <build>
         <plugins>
@@ -250,12 +263,12 @@
                                 <addDependencies>true</addDependencies>
                                 <preCp>anything</preCp>
                             </classPath>
-                            <icon>${project.basedir}/src/main/resources/icon-baked.ico</icon>
+                            <icon>src/main/resources/img/icon-baked.ico</icon>
                             <jre>
                                 <jdkPreference>preferJdk</jdkPreference>
                                 <path>jdk/</path> <!-- Bundled java -->
                                 <opts>
-
+                                    <opt>-splash:Assets/img/splash_screen.png</opt>
                                 </opts>
                             </jre>
                             <versionInfo>

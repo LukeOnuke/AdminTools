@@ -2,6 +2,7 @@ package app.admintools.gui;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.net.SocketException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -124,7 +125,7 @@ public class RconWindowController implements Initializable {
                         write("§a[AVCS] §fLatest version");
                     }
                 } catch (IOException ex) {
-                    AtLogger.logException(ex);
+                    AtLogger.logger.warning(AtLogger.formatException(ex));
                     write("§a[AVCS] §4Couldnt fetch version info - Probably reached the api rate limit");
                 }
 
@@ -169,7 +170,7 @@ public class RconWindowController implements Initializable {
 
                 Data d = Data.getInstance();
                 write("§bConnecting to " + d.getSelectedCredentials().getIP() + ":" + d.getSelectedCredentials().getPort());
-                AtLogger.log(Level.INFO, "Connecting to server");
+                AtLogger.logger.info("Connecting to server");
                 try {
                     CustomRcon cr = CustomRcon.getInstance();
                     //write connected message if its enabled
@@ -177,21 +178,21 @@ public class RconWindowController implements Initializable {
                         cr.command(TellrawFormatter.assembleLoginTellraw(d.getMessageUsername()));
                     }
                 } catch (IOException ex) {
-                    AtLogger.logException(ex);
+                    AtLogger.logger.warning(AtLogger.formatException(ex));
                     connected = false;
                     Platform.runLater(() -> {
                         Dialog.okDialog(DialogImage.ERROR, "Connnection Error", "Couldn't connect to server.\n Probably an incorect IP.");
                         WindowLoader.loadHome(rootPane);
                     });
                 } catch (AuthenticationException ex) {
-                    AtLogger.logException(ex);
+                    AtLogger.logger.warning(AtLogger.formatException(ex));
                     connected = false;
                     Platform.runLater(() -> {
                         Dialog.okDialog(DialogImage.ERROR, "Connnection Error", "Couldn't authenticate with server. \nIncorrect password.");
                         WindowLoader.loadHome(rootPane);
                     });
                 } catch (Exception ex) {
-                    AtLogger.logException(ex);
+                    AtLogger.logger.warning(AtLogger.formatException(ex));
                     connected = false;
                     Platform.runLater(() -> {
                         Dialog.okDialog(DialogImage.ERROR, "Error", "General exception\n" + ex.getMessage());
@@ -229,7 +230,7 @@ public class RconWindowController implements Initializable {
         try {
             color = ThemeReader.getConsoleColor(Data.getInstance().getSelectedTheme());
         } catch (FileNotFoundException ex) {
-            AtLogger.logException(ex);
+            AtLogger.logger.warning(AtLogger.formatException(ex));
         }
 
         Data.rconTextData.set(0, "<style>body {background-color: " + color + "; font-family: \"Lucida Console\", Courier, monospace;}</style>" + Data.rconTextData.get(0)); //add the style shit
@@ -253,7 +254,7 @@ public class RconWindowController implements Initializable {
             cRcon = CustomRcon.getInstance();
             if (!command.equals("")) {
                 write(Utill.getDate() + command);
-                AtLogger.log(Level.INFO, "Command sent to execution manager: " + command);
+                AtLogger.logger.info("Command sent to execution manager: " + command);
                 //Internal command interpreter
                 boolean isRightToSend = true; //Boolean that is checked when sending commands to server
 
@@ -273,7 +274,7 @@ public class RconWindowController implements Initializable {
                             try {
                                 Thread.sleep(2000);
                             } catch (InterruptedException ex) {
-                                AtLogger.logException(ex);
+                                AtLogger.logger.warning(AtLogger.formatException(ex));
                             }
                             Utill.exit(0);
                         });
@@ -325,13 +326,13 @@ public class RconWindowController implements Initializable {
                 }
 
                 if (isRightToSend) {
-                    //Send and recive recsponce
+                    //Send and recive response
                     write(cRcon.command(command));
-                    AtLogger.log(Level.INFO, "Command sent to server : " + command);
+                    AtLogger.logger.info("Command sent to server : " + command);
                 }
             }
         } catch (IOException | AuthenticationException ex) {
-            AtLogger.logException(ex);
+            AtLogger.logger.warning(AtLogger.formatException(ex));
         }
 
         //Set command history

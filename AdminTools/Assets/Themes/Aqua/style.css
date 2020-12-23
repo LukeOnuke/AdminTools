@@ -388,3 +388,8 @@ pane{
     -fx-fill: -at-accent;
     -fx-font-size: 50px;
 }
+
+.splash{
+    -fx-background-color: -at-background;
+    -fx-background-image: url('Assets/img/splash_screen.png');
+}

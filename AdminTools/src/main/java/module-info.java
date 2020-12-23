@@ -1,4 +1,5 @@
 module app.admintools {
+
     requires javafx.controls;
     requires javafx.graphics;
     requires javafx.base;
@@ -10,6 +11,7 @@ module app.admintools {
     requires rkon.core;
     requires simplefxdialog;
     requires gson;
+    requires discord.rpc;
 
     requires java.logging;
 

@@ -388,3 +388,10 @@ pane{
     -fx-fill: -at-accent;
     -fx-font-size: 50px;
 }
+
+.splash{
+    -fx-background-color: -at-darkbackground;
+    -fx-background-image: url("/Assets/img/.png");
+    -fx-background-position: center center;
+    -fx-background-size: cover;
+}

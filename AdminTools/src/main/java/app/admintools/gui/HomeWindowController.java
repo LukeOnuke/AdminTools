@@ -88,7 +88,7 @@ public class HomeWindowController implements Initializable {
                 new File(CredentialsIO.PATH).createNewFile();
             }
         } catch (IOException ioe) {
-            AtLogger.logException(ioe);
+            AtLogger.logger.warning(AtLogger.formatException(ioe));
             Dialog.okDialog(DialogImage.ERROR, "FATAL ERROR", ioe.getMessage());
             Utill.exit(1);
         }
@@ -109,7 +109,7 @@ public class HomeWindowController implements Initializable {
                     CredentialsIO.writeCredentials(credList);
                     refresh();
                 } catch (IOException ex) {
-                    AtLogger.logException(ex);
+                    AtLogger.logger.warning(AtLogger.formatException(ex));
                 }
             }
             

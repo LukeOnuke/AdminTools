@@ -97,7 +97,7 @@ public class CredCard {
                     CredentialsIO.writeCredentials(creds);
                     ((FlowPane) ap.getParent()).getChildren().remove(ap);
                 } catch (IOException ex) {
-                    AtLogger.logException(ex);
+                    AtLogger.logger.warning(AtLogger.formatException(ex));
                 }
             } else if (id.equals("edit")) {
                 if (!isOpenWindow.get()) {
@@ -115,7 +115,7 @@ public class CredCard {
                             //Display new card
                             parrent.getChildren().add(editedCreds.getCredCard());
                         } catch (IOException ex) {
-                            AtLogger.logException(ex);
+                            AtLogger.logger.warning(AtLogger.formatException(ex));
                         }
                     }
                     isOpenWindow.set(false);

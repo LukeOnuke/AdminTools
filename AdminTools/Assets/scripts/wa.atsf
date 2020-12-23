@@ -1,6 +1,2 @@
-!print §aWhitelist add shortcut §farg0 §carg1
-
-
-
-
-!print yes
+!print §aWhitelist add shortcut §farg0
+whitelist add arg0

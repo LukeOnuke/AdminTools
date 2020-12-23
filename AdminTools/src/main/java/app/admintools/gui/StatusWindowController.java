@@ -116,7 +116,7 @@ public class StatusWindowController implements Initializable {
             try {
                 arrStatus = ApiQuerry.querry(); //querry
             } catch (IOException ex) {
-                AtLogger.logException(ex);
+                AtLogger.logger.warning(AtLogger.formatException(ex));
             }
             final ArrayList<String> arrStatus_ = arrStatus; //final arraylist
             Platform.runLater(() -> {
@@ -150,7 +150,7 @@ public class StatusWindowController implements Initializable {
                         Thread.sleep(500);
                     }
                 } catch (InterruptedException ex) {
-                    AtLogger.logException(ex);
+                    AtLogger.logger.warning(AtLogger.formatException(ex));
                 }
                 tickApi();
             }
@@ -190,13 +190,13 @@ public class StatusWindowController implements Initializable {
                             }
 
                         } catch (Exception e) {
-                            AtLogger.logException(e);
+                            AtLogger.logger.warning(AtLogger.formatException(e));
                         }
                     }
                 });
 
             } catch (IOException ex) {
-                AtLogger.logException(ex);
+                AtLogger.logger.warning(AtLogger.formatException(ex));
             }
 
         });
@@ -218,7 +218,7 @@ public class StatusWindowController implements Initializable {
                     Thread.sleep(500);
                 }
             } catch (InterruptedException ex) {
-                AtLogger.logException(ex);
+                AtLogger.logger.warning(AtLogger.formatException(ex));
             }
             tickMcRefresh();
 

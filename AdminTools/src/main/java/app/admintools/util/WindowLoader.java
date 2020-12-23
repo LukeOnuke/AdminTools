@@ -81,7 +81,7 @@ public class WindowLoader {
             windowStage.setHeight(height);
 
         } catch (IOException ex) {
-            AtLogger.logException(ex);
+            AtLogger.logger.warning(AtLogger.formatException(ex));
         }
 
     }

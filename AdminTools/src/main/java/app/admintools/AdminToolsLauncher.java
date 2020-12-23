@@ -1,5 +1,6 @@
 package app.admintools;
 
+import app.admintools.gui.splash.SplashScreen;
 import app.admintools.textprocessing.TellrawFormatter;
 import app.admintools.util.AtLogger;
 import app.admintools.util.CustomRcon;
@@ -11,6 +12,10 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
+import net.arikia.dev.drpc.DiscordEventHandlers;
+import net.arikia.dev.drpc.DiscordRPC;
+import net.arikia.dev.drpc.DiscordRichPresence;
 import net.kronos.rkon.core.ex.AuthenticationException;
 
 import java.io.File;
@@ -28,11 +33,10 @@ import java.util.logging.SimpleFormatter;
 public class AdminToolsLauncher extends Application {
     @Override
     public void start(Stage stage) throws Exception {
-        //Initilise logger
-        Logger logger = Logger.getLogger("ATLOG"); //Create logger instance
         FileHandler fh; //Create writer
         File pathToLogDir = new File("log/"); //Path to log dir
         try {
+            //See if the log exists
             if(!pathToLogDir.exists()){
                 pathToLogDir.mkdir();
             }
@@ -42,13 +46,13 @@ public class AdminToolsLauncher extends Application {
             fileName = "log-" + fileName + ".log";
             //Initilise the file handeler
             fh = new FileHandler("log/" + fileName);
-            logger.addHandler(fh);
+            AtLogger.logger.addHandler(fh);
             //Formatter for the logger
             SimpleFormatter formatter = new SimpleFormatter();
             fh.setFormatter(formatter);
 
-            // the following statement is used to log any messages
-            logger.info("Initilising");
+            // the following statement is used to log initialsation
+            AtLogger.logger.info("Initilising");
 
         } catch (SecurityException | IOException e) {
             System.err.println("Error in startup");
@@ -70,10 +74,9 @@ public class AdminToolsLauncher extends Application {
 
         stage.setOnCloseRequest((event) -> {
             Thread closer = new Thread(() -> {
-                AtLogger.log(Level.INFO, "Closing");
-                Platform.runLater(() -> {
-                    stage.hide(); //magic
-                });
+                AtLogger.logger.info("Closing");
+                //magic
+                Platform.runLater(stage::hide);
 
                 try {
                     CustomRcon cr = CustomRcon.getInstance();
@@ -81,16 +84,17 @@ public class AdminToolsLauncher extends Application {
                         cr.command(TellrawFormatter.assembleLogoutTellraw(d.getMessageUsername()));
                     }
                     cr.disconnect();
-                    AtLogger.log(Level.INFO, "Successfully disconnected");
+                    AtLogger.logger.info( "Successfully disconnected");
                 } catch (IOException | AuthenticationException ex) {
-                    AtLogger.logException(ex);
+                    AtLogger.logger.warning(AtLogger.formatException(ex));
                 } catch (NullPointerException ex) {
                     //Its normal for it to trow a null pointer exception on exit if no connection is avalable
                 }
+                DiscordRPC.discordShutdown();
+                AtLogger.logger.info( "Shutdown discordRPC");
                 Platform.exit();
                 System.exit(0);
-            });
-            closer.setName("Closer Thread");
+            }, "CloserThread");
             closer.start();
         });
 
@@ -99,11 +103,34 @@ public class AdminToolsLauncher extends Application {
         //Setting the icon
         stage.getIcons().add(new Image(AdminTools.class.getResourceAsStream("/gui/icon.png")));
 
-        stage.show();
+
+
+        Stage splash = new Stage(StageStyle.TRANSPARENT);
+        splash.setScene(new Scene(new SplashScreen()));
+        splash.show();
+        Thread splashThread = new Thread(() -> {
+            try{
+                Thread.sleep(2000);
+            } catch (InterruptedException ie) {
+                AtLogger.logger.warning(AtLogger.formatException(ie));
+            }
+            Platform.runLater(() -> {
+                splash.hide();
+                stage.setAlwaysOnTop(true);
+                stage.show();
+                stage.setAlwaysOnTop(false);
+            });
+        }, "splash/launcher");
+        splashThread.start();
 
         //Setting the max width and max height
         stage.setMinHeight(650.0d);
         stage.setMinWidth(973.0d);
+
+        //Discord
+        AtLogger.logger.info( "Connecting to discord");
+
+        AtLogger.logger.info( "Set rpc presence");
     }
 
     public static void launchAdminTools(String[] args){

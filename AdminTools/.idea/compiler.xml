@@ -6,11 +6,8 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="admin-tools" />
+        <module name="AdminTools" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="AdminTools" target="11" />
-    </bytecodeTargetLevel>
   </component>
 </project>

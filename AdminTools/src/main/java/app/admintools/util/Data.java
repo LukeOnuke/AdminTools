@@ -12,6 +12,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.lang.module.ModuleDescriptor;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Properties;
@@ -51,6 +52,8 @@ public class Data {
      * Selected credentials
      */
     private static Credentials credentials = null;
+
+    private static final String VERSION = "7.0.0.0.0";
 
     //Singleton
     private static Data instance = null;
@@ -167,9 +170,9 @@ public class Data {
             prop.store(output, "AdminTools properties" + System.lineSeparator() + "Created by: LukeOnuke - https://github.com/LukeOnuke");
 
         } catch (FileNotFoundException ex) {
-            AtLogger.logException(ex);
+            AtLogger.logger.warning(AtLogger.formatException(ex));
         } catch (IOException ex) {
-            AtLogger.logException(ex);
+            AtLogger.logger.warning(AtLogger.formatException(ex));
         }
     }
 
@@ -191,10 +194,8 @@ public class Data {
             arl.add(prop.getProperty("message.overwrite.say", defaults.get(4)));
             arl.add(prop.getProperty("message.username", defaults.get(5)));
             arl.add(prop.getProperty("theme.selected", defaults.get(6)));
-        } catch (FileNotFoundException ex) {
-            AtLogger.logException(ex);
         } catch (IOException ex) {
-            AtLogger.logException(ex);
+            AtLogger.logger.warning(AtLogger.formatException(ex));
         }
 
         return arl;
