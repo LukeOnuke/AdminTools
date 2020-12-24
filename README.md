@@ -20,6 +20,8 @@ Features:
  - Barebones mode
  - Multiplatform
 
+Community discord : [https://discord.gg/HAS9rmcWZF](https://discord.gg/HAS9rmcWZF)
+
 **For more documentation visit the [docs (wiki)](https://docs.admintools.app/en/latest/).**
 
 Found a bug? Report it [here](https://github.com/LukeOnuke/AdminTools/issues/new)
