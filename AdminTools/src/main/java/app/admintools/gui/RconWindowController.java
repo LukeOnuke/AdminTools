@@ -7,6 +7,8 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
+
+import app.admintools.util.*;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -25,13 +27,8 @@ import javafx.scene.web.WebErrorEvent;
 import javafx.scene.web.WebView;
 import net.kronos.rkon.core.ex.AuthenticationException;
 import app.admintools.gui.theme.ThemeReader;
-import app.admintools.util.CustomRcon;
 import app.admintools.textprocessing.Markup;
 import app.admintools.textprocessing.TellrawFormatter;
-import app.admintools.util.AtLogger;
-import app.admintools.util.Data;
-import app.admintools.util.Utill;
-import app.admintools.util.WindowLoader;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.lukeonuke.simplefxdialog.Dialog;
@@ -81,7 +78,7 @@ public class RconWindowController implements Initializable {
         rconWebEngine.setOnError(new EventHandler<WebErrorEvent>() {
             @Override
             public void handle(WebErrorEvent event) {
-                System.err.println(event);
+                AtLogger.logger.severe(event.getMessage());
             }
         });
 
@@ -217,6 +214,8 @@ public class RconWindowController implements Initializable {
 
             Data.startingUp = false;
         }
+
+        DRPC.statusManagingServer();
     }
 
     public void write(String message) {

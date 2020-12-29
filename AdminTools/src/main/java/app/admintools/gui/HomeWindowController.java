@@ -10,6 +10,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+
+import app.admintools.util.*;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ToggleButton;
@@ -18,10 +20,7 @@ import javafx.scene.layout.FlowPane;
 import app.admintools.gui.credentials.credwizard.CredWizard;
 import app.admintools.security.credentials.Credentials;
 import app.admintools.security.credentials.CredentialsIO;
-import app.admintools.util.AtLogger;
-import app.admintools.util.Data;
-import app.admintools.util.Utill;
-import app.admintools.util.WindowLoader;
+
 import java.util.concurrent.atomic.AtomicBoolean;
 import javafx.collections.ListChangeListener;
 import javafx.scene.Node;
@@ -71,6 +70,9 @@ public class HomeWindowController implements Initializable {
         });
 
         refresh();
+
+        DRPC.updateStatus(DRPC.generatePresence("In home"));
+        AtLogger.logger.info("Set home status");
     }
 
     //Refreshes the credcards

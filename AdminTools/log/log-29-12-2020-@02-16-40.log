@@ -1,0 +1,11 @@
+[2020-12-29 02:16:40] (app.admintools.AdminTools main) [INFO   ] Initilising 
+[2020-12-29 02:16:40] (app.admintools.AdminTools main) [INFO   ] Is development version, snapshot 26d12m2020y001v 
+[2020-12-29 02:16:40] (app.admintools.AdminTools main) [INFO   ] AdminTools version : 7.0.0
+	As int : 70000
+	As full : 7.0.0.0.0 
+[2020-12-29 02:16:41] (app.admintools.util.DRPC updateStatus) [INFO   ] Updated status :  
+[2020-12-29 02:16:41] (app.admintools.gui.HomeWindowController initialize) [INFO   ] Set home status 
+[2020-12-29 02:16:42] (app.admintools.AdminToolsLauncher lambda$start$3) [INFO   ] Connecting to discord 
+[2020-12-29 02:16:42] (app.admintools.AdminToolsLauncher lambda$start$3) [INFO   ] Connected to discord 
+[2020-12-29 02:17:05] (app.admintools.AdminToolsLauncher lambda$start$0) [INFO   ] Closing 
+[2020-12-29 02:17:05] (app.admintools.AdminToolsLauncher lambda$start$0) [INFO   ] Shutdown discordRPC 

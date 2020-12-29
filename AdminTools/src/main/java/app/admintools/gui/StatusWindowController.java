@@ -45,7 +45,7 @@ public class StatusWindowController implements Initializable {
     Naming scheme is:
     sd<number>
     s-status
-    d-tot
+    d-dot
     statusDot<number> but shortened
      */
     @FXML

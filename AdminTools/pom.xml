@@ -7,7 +7,7 @@
     <groupId>app.admintools</groupId>
     <artifactId>admin-tools</artifactId>
     <version>7.0.0.0</version>
-    
+
 
     <properties>
         <maven.compiler.source>11</maven.compiler.source>
@@ -237,52 +237,6 @@
                         </goals>
                         <configuration>
                             <createDependencyReducedPom>false</createDependencyReducedPom>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-
-            <plugin>
-                <groupId>com.akathist.maven.plugins.launch4j</groupId>
-                <artifactId>launch4j-maven-plugin</artifactId>
-                <version>1.7.25</version>
-                <executions>
-                    <execution>
-                        <id>l4j-clui</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>launch4j</goal>
-                        </goals>
-                        <configuration>
-                            <headerType>gui</headerType>
-                            <jar>${project.build.directory}/${project.artifactId}-${project.version}.jar</jar>
-                            <outfile>${project.build.directory}/admin-tools-${project.version}.exe</outfile>
-                            <downloadUrl>http://java.com/download</downloadUrl>
-                            <classPath>
-                                <mainClass>app.admintools.AdminTools</mainClass>
-                                <addDependencies>true</addDependencies>
-                                <preCp>anything</preCp>
-                            </classPath>
-                            <icon>src/main/resources/img/icon-baked.ico</icon>
-                            <jre>
-                                <jdkPreference>preferJdk</jdkPreference>
-                                <path>jdk/</path> <!-- Bundled java -->
-                                <opts>
-                                    <opt>-splash:Assets/img/splash_screen.png</opt>
-                                </opts>
-                            </jre>
-                            <versionInfo>
-                                <fileVersion>${project.version}</fileVersion>
-                                <txtFileVersion>${project.version}</txtFileVersion>
-                                <fileDescription>${project.name}</fileDescription>
-                                <copyright>GNU GPL V3</copyright>
-                                <productVersion>${project.version}</productVersion>
-                                <txtProductVersion>${project.version}</txtProductVersion>
-                                <productName>${project.name}</productName>
-                                <companyName>admintools.app</companyName>
-                                <internalName>admintools</internalName>
-                                <originalFilename>admintools.exe</originalFilename>
-                            </versionInfo>
                         </configuration>
                     </execution>
                 </executions>

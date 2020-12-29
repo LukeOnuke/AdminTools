@@ -8,6 +8,8 @@ package app.admintools.gui;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+
+import app.admintools.util.DRPC;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ChoiceBox;
@@ -71,6 +73,8 @@ public class SettingsWindowController implements Initializable {
         themeChoice.setValue(data.getSelectedTheme());
 
         refresh();
+
+        DRPC.statusManagingServer();
     }
 
     @FXML

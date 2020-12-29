@@ -4,6 +4,7 @@ import app.admintools.gui.splash.SplashScreen;
 import app.admintools.textprocessing.TellrawFormatter;
 import app.admintools.util.AtLogger;
 import app.admintools.util.CustomRcon;
+import app.admintools.util.DRPC;
 import app.admintools.util.Data;
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -13,9 +14,7 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import net.arikia.dev.drpc.DiscordEventHandlers;
 import net.arikia.dev.drpc.DiscordRPC;
-import net.arikia.dev.drpc.DiscordRichPresence;
 import net.kronos.rkon.core.ex.AuthenticationException;
 
 import java.io.File;
@@ -23,8 +22,6 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.logging.FileHandler;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 
 /**
@@ -33,31 +30,6 @@ import java.util.logging.SimpleFormatter;
 public class AdminToolsLauncher extends Application {
     @Override
     public void start(Stage stage) throws Exception {
-        FileHandler fh; //Create writer
-        File pathToLogDir = new File("log/"); //Path to log dir
-        try {
-            //See if the log exists
-            if(!pathToLogDir.exists()){
-                pathToLogDir.mkdir();
-            }
-            // This block configure the logger with handler and formatter
-            //File name for log file
-            String fileName = new SimpleDateFormat("dd-MM-yyyy-@hh-mm-ss").format(new Date());
-            fileName = "log-" + fileName + ".log";
-            //Initilise the file handeler
-            fh = new FileHandler("log/" + fileName);
-            AtLogger.logger.addHandler(fh);
-            //Formatter for the logger
-            SimpleFormatter formatter = new SimpleFormatter();
-            fh.setFormatter(formatter);
-
-            // the following statement is used to log initialsation
-            AtLogger.logger.info("Initilising");
-
-        } catch (SecurityException | IOException e) {
-            System.err.println("Error in startup");
-        }
-
         Data d = Data.getInstance();
 
         Parent root;
@@ -101,7 +73,7 @@ public class AdminToolsLauncher extends Application {
         //title
         stage.setTitle("Admin Tools");
         //Setting the icon
-        stage.getIcons().add(new Image(AdminTools.class.getResourceAsStream("/gui/icon.png")));
+        stage.getIcons().add(new Image(AdminTools.class.getResourceAsStream("/img/icon.png")));
 
 
 
@@ -110,6 +82,11 @@ public class AdminToolsLauncher extends Application {
         splash.show();
         Thread splashThread = new Thread(() -> {
             try{
+                //Discord
+                AtLogger.logger.info( "Connecting to discord");
+                DRPC.initialise();
+                AtLogger.logger.info("Connected to discord");
+
                 Thread.sleep(2000);
             } catch (InterruptedException ie) {
                 AtLogger.logger.warning(AtLogger.formatException(ie));
@@ -126,11 +103,6 @@ public class AdminToolsLauncher extends Application {
         //Setting the max width and max height
         stage.setMinHeight(650.0d);
         stage.setMinWidth(973.0d);
-
-        //Discord
-        AtLogger.logger.info( "Connecting to discord");
-
-        AtLogger.logger.info( "Set rpc presence");
     }
 
     public static void launchAdminTools(String[] args){
