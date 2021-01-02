@@ -1,7 +1,9 @@
 package app.admintools.gui.splash;
 
 import app.admintools.util.Data;
+import app.admintools.util.Version;
 import javafx.scene.Node;
+import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -32,14 +34,30 @@ public class SplashScreen extends AnchorPane {
         AnchorPane.setLeftAnchor(windowArea, 0d);
         AnchorPane.setTopAnchor(windowArea, 0d);
         AnchorPane.setBottomAnchor(windowArea, 20d);
+
         windowArea.setStyle("-fx-background-color: white;");
 
         // new Image(url)
+        ImageView img;
         Image image = new Image("file:Assets/img/splash_screen.png", this.getPrefWidth(), this.getPrefHeight() - 20, false, true);
 
-        ImageView img = new ImageView(image);
+        img = new ImageView(image);
         img.setSmooth(true);
-        windowArea.getChildren().add(img);
+
+        Label versionLabel = new Label();
+        Version version = Version.getInstance();
+
+        if(version.isDevelopmentVersion()){
+            versionLabel.setText("Development version : " + version.getSnapshotVersion() + "[" + version.getFullVersionNumber()+ "]");
+        }
+        versionLabel.setTranslateZ(-10);
+        versionLabel.setStyle("-fx-font-size: 20px;");
+        versionLabel.getStyleClass().add("text");
+
+        windowArea.getChildren().addAll(versionLabel, img);
+
+        AnchorPane.setBottomAnchor(versionLabel, 0d);
+        AnchorPane.setLeftAnchor(versionLabel, 0d);
 
         this.getStyleClass().add("splash");
     }

@@ -78,7 +78,7 @@ public class AdminToolsLauncher extends Application {
 
 
         Stage splash = new Stage(StageStyle.TRANSPARENT);
-        splash.setScene(new Scene(new SplashScreen()));
+        splash.setScene(new Scene(new SplashScreen(), -1.0, -1.0, true));
         splash.show();
         Thread splashThread = new Thread(() -> {
             try{
