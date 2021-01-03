@@ -118,7 +118,7 @@ public class Markup {
             }
         }
         //After the md is done , we can assemble the paragraph
-        strongArr.add(text);
+        //DebugMD - strongArr.add(text);
         String paragraph = "<p>";
         for (String strong : strongArr) {
             paragraph += strong;

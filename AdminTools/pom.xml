@@ -6,7 +6,7 @@
 
     <groupId>app.admintools</groupId>
     <artifactId>admin-tools</artifactId>
-    <version>7.0.0.0</version>
+    <version>7.0.0</version>
 
 
     <properties>
@@ -169,6 +169,12 @@
             <groupId>com.github.Vatuu</groupId>
             <artifactId>discord-rpc</artifactId>
             <version>1.6.2</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.8.1</version>
         </dependency>
 
     </dependencies>

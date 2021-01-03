@@ -232,7 +232,7 @@ public class RconWindowController implements Initializable {
             AtLogger.logger.warning(AtLogger.formatException(ex));
         }
 
-        Data.rconTextData.set(0, "<style>body {background-color: " + color + "; font-family: \"Lucida Console\", Courier, monospace;}</style>" + Data.rconTextData.get(0)); //add the style shit
+        Data.rconTextData.add(0, "<style>body {background-color: " + color + "; font-family: \"Lucida Console\", Courier, monospace;}</style>"); //add the style shit
         for (String element : Data.rconTextData) {
             sb.append(element);
         }
@@ -269,16 +269,6 @@ public class RconWindowController implements Initializable {
                         cRcon.command("stop");
                         sendButton.disableProperty().set(true);
                         rconSend.disableProperty().set(true);
-                        Thread t = new Thread(() -> {
-                            try {
-                                Thread.sleep(2000);
-                            } catch (InterruptedException ex) {
-                                AtLogger.logger.warning(AtLogger.formatException(ex));
-                            }
-                            Utill.exit(0);
-                        });
-                        t.start();
-
                     }
                 } else if (command.equals("!help")) {
                     isRightToSend = false;
@@ -294,6 +284,7 @@ public class RconWindowController implements Initializable {
                     isRightToSend = false;
 
                     write("§bClosing connection and exiting...");
+                    CustomRcon.getInstance().disconnect();
 
                     Utill.exit(commandHistoryDeviation);
                 } else if (splitCommand.get(0).equals("!if")) {
@@ -364,7 +355,7 @@ public class RconWindowController implements Initializable {
 
     public static ArrayList<String> listScripts() {
         ArrayList<String> themeDir = new ArrayList<String>(); //Netbeans takes a shite than complaians
-        File[] themes = new File("Assets/scripts/").listFiles(); //Get a array of all files in the script folder
+        File[] themes = new File(Utill.getPath("Assets/scripts/")).listFiles(); //Get a array of all files in the script folder
         for (File theme : themes) { //Go through them all
             if (theme.isFile()) {
                 themeDir.add(theme.getName());  //Add its name to the returning arraylist if its a directory
@@ -374,7 +365,7 @@ public class RconWindowController implements Initializable {
     }
 
     public static String getScript(String scriptName) {
-        return "Assets/scripts/" + scriptName;
+        return Utill.getPath("Assets/scripts/" + scriptName);
     }
 
     private void executeScript(String scriptPath, ArrayList<String> args) throws FileNotFoundException {

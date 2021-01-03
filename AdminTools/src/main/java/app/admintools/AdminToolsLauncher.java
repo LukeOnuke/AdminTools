@@ -2,10 +2,7 @@ package app.admintools;
 
 import app.admintools.gui.splash.SplashScreen;
 import app.admintools.textprocessing.TellrawFormatter;
-import app.admintools.util.AtLogger;
-import app.admintools.util.CustomRcon;
-import app.admintools.util.DRPC;
-import app.admintools.util.Data;
+import app.admintools.util.*;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
@@ -38,7 +35,7 @@ public class AdminToolsLauncher extends Application {
         root = FXMLLoader.load(getClass().getResource("/gui/fxml/HomeWindow.fxml"));
 
         //Set selected theme css
-        root.getStylesheets().add("file:Assets/themes/" + d.getSelectedTheme() + "/style.css");
+        Utill.setSelectedTheme(root);
 
         Scene scene = new Scene(root);
 
@@ -73,7 +70,7 @@ public class AdminToolsLauncher extends Application {
         //title
         stage.setTitle("Admin Tools");
         //Setting the icon
-        stage.getIcons().add(new Image(AdminTools.class.getResourceAsStream("/img/icon.png")));
+        stage.getIcons().add(new Image(AdminTools.class.getResourceAsStream(Utill.getPath("/img/icon.png"))));
 
 
 

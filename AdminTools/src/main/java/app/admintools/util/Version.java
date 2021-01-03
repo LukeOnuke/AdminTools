@@ -1,18 +1,17 @@
 package app.admintools.util;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class Version {
-    private final String VERSION_NUMBER = "7.0.0.0.0";
+    private final String VERSION_NUMBER = "7.0.0";
     /**
      * Snapshot version, only used if isDevelopmentVersion is true
      *
      * Version number goes like 23d12m2020y001v .  So its [Day Of Release]d[Month Of Release]m[Year Of Release]y[Snapshot Number]v
      */
-    private final String SNAPSHOT_VER = "2d1m2021y001v";
+    private final String SNAPSHOT_VER = "3d1m2021y001v";
     private final boolean isDevelopmentVersion = true;
     private static Version instance = null;
 
@@ -40,7 +39,7 @@ public class Version {
     }
 
     public int getVersionAsInt(){
-        ArrayList<String> splitVer = new ArrayList<String>(Arrays.asList(VERSION_NUMBER.split("[.]")));
+        ArrayList<String> splitVer = new ArrayList<>(Arrays.asList(VERSION_NUMBER.split("[.]")));
         final AtomicInteger multiplier = new AtomicInteger(10000);
         final AtomicInteger result = new AtomicInteger(0);
         splitVer.forEach((verSegment) -> {

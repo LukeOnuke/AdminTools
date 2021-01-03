@@ -8,6 +8,8 @@ package app.admintools.gui.credentials.credwizard;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.concurrent.atomic.AtomicBoolean;
+
+import app.admintools.util.Utill;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
@@ -176,7 +178,7 @@ public class CredWizard {
 
         //Create window
         Scene scene = new Scene(ap);
-        scene.getStylesheets().add("file:Assets/themes/" + Data.getInstance().getSelectedTheme() + "/style.css"); //Themes
+        Utill.setSelectedTheme(scene);
         Stage stage = new Stage();
         stage.setScene(scene);
         stage.setAlwaysOnTop(true);

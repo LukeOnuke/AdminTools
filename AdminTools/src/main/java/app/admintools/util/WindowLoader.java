@@ -21,22 +21,22 @@ import app.admintools.gui.SettingsWindowController;
 public class WindowLoader {
 
     public static void loadRcon(AnchorPane rootPane) {
-        loadWindow(rootPane, "/gui/fxml/RconWindow.fxml");
+        loadWindow(rootPane, Utill.getPath("/gui/fxml/RconWindow.fxml"));
         Data.isOnStatusWindow = false;
     }
 
     public static void loadSettings(AnchorPane rootPane) {
-        loadWindow(rootPane, "/gui/fxml/SettingsWindow.fxml");
+        loadWindow(rootPane, Utill.getPath("/gui/fxml/SettingsWindow.fxml"));
         Data.isOnStatusWindow = false;
     }
 
     public static void loadStatus(AnchorPane rootPane) {
         Data.isOnStatusWindow = true;
-        loadWindow(rootPane, "/gui/fxml/StatusWindow.fxml");
+        loadWindow(rootPane, Utill.getPath("/gui/fxml/StatusWindow.fxml"));
     }
 
     public static void loadHome(AnchorPane rootPane) {
-        loadWindow(rootPane, "/gui/fxml/HomeWindow.fxml");
+        loadWindow(rootPane, Utill.getPath("/gui/fxml/HomeWindow.fxml"));
         Data.isOnStatusWindow = false;
     }
 
@@ -48,7 +48,7 @@ public class WindowLoader {
             AnchorPane ap = FXMLLoader.load(SettingsWindowController.class.getResource(url)); //Get anchorpane
 
             //Set style for selected theme
-            ap.getStylesheets().add("file:Assets/themes/" + d.getSelectedTheme() + "/style.css");
+            Utill.setSelectedTheme(ap);
 
             //Create stage      yes
             Scene scene2 = new Scene(ap);

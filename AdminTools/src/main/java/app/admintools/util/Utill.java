@@ -1,6 +1,12 @@
 package app.admintools.util;
 
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
+import org.apache.commons.lang3.SystemUtils;
+
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
@@ -85,5 +91,25 @@ public class Utill {
     
     public static String removeArrrayFormatting(String string){
         return string.replace(",", "").replace("[", "").replace("]", "");
+    }
+
+    public static String getPath(String path){
+        if(SystemUtils.IS_OS_WINDOWS){
+            return path.replace("\\", "/");
+        }
+            return path.replace("\\", File.separator).replace("/", File.separator);
+
+    }
+
+    public static void setSelectedTheme(AnchorPane anchorPane){
+        anchorPane.getStylesheets().add(Utill.getPath("file:Assets/themes/" + Data.getInstance().getSelectedTheme() + "/style.css"));
+    }
+
+    public static void setSelectedTheme(Parent root){
+        root.getStylesheets().add(Utill.getPath("file:Assets/themes/" + Data.getInstance().getSelectedTheme() + "/style.css"));
+    }
+
+    public static void setSelectedTheme(Scene scene){
+        scene.getStylesheets().add(Utill.getPath("file:Assets/themes/" + Data.getInstance().getSelectedTheme() + "/style.css"));
     }
 }

@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import app.admintools.util.DRPC;
+import app.admintools.util.Utill;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ChoiceBox;
@@ -118,7 +119,7 @@ public class SettingsWindowController implements Initializable {
 
         //Actualy have to refresh the theme
         //And refresh the Data singleton
-        rootPane.getStylesheets().add("file:Assets/themes/" + Data.refresh().getSelectedTheme() + "/style.css");
+        Utill.setSelectedTheme(rootPane);
     }
 
     @FXML

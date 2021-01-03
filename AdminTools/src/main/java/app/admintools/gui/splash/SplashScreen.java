@@ -1,6 +1,7 @@
 package app.admintools.gui.splash;
 
 import app.admintools.util.Data;
+import app.admintools.util.Utill;
 import app.admintools.util.Version;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
@@ -23,7 +24,7 @@ public class SplashScreen extends AnchorPane {
     }
 
     private void setup() {
-        this.getStylesheets().add("file:Assets/themes/" + Data.getInstance().getSelectedTheme() + "/style.css");
+        Utill.setSelectedTheme(this);
         this.setPrefHeight(300d);
         this.setPrefWidth(510d);
         AnchorPane.setBottomAnchor(progressBar, 0d);
