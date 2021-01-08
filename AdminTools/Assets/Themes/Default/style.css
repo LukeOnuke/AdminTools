@@ -391,7 +391,7 @@ pane{
 
 .splash{
     -fx-background-color: -at-darkbackground;
-    -fx-background-image: url("/Assets/img/.png");
+    -fx-background-image: url("/assets/img/splash_screen.png");
     -fx-background-position: center center;
     -fx-background-size: cover;
 }

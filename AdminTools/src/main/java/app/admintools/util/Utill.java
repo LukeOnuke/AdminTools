@@ -102,14 +102,14 @@ public class Utill {
     }
 
     public static void setSelectedTheme(AnchorPane anchorPane){
-        anchorPane.getStylesheets().add(Utill.getPath("file:Assets/themes/" + Data.getInstance().getSelectedTheme() + "/style.css"));
+        anchorPane.getStylesheets().add(Utill.getPath("file:assets/themes/" + Data.getInstance().getSelectedTheme() + "/style.css"));
     }
 
     public static void setSelectedTheme(Parent root){
-        root.getStylesheets().add(Utill.getPath("file:Assets/themes/" + Data.getInstance().getSelectedTheme() + "/style.css"));
+        root.getStylesheets().add(Utill.getPath("file:assets/themes/" + Data.getInstance().getSelectedTheme() + "/style.css"));
     }
 
     public static void setSelectedTheme(Scene scene){
-        scene.getStylesheets().add(Utill.getPath("file:Assets/themes/" + Data.getInstance().getSelectedTheme() + "/style.css"));
+        scene.getStylesheets().add(Utill.getPath("file:assets/themes/" + Data.getInstance().getSelectedTheme() + "/style.css"));
     }
 }

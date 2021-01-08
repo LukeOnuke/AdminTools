@@ -11,7 +11,7 @@ public class Version {
      *
      * Version number goes like 23d12m2020y001v .  So its [Day Of Release]d[Month Of Release]m[Year Of Release]y[Snapshot Number]v
      */
-    private final String SNAPSHOT_VER = "3d1m2021y001v";
+    private final String SNAPSHOT_VER = "9d1m2021y001v";
     private final boolean isDevelopmentVersion = true;
     private static Version instance = null;
 

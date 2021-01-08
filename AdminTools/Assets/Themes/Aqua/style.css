@@ -391,5 +391,5 @@ pane{
 
 .splash{
     -fx-background-color: -at-background;
-    -fx-background-image: url('Assets/img/splash_screen.png');
+    -fx-background-image: url('assets/img/splash_screen.png');
 }

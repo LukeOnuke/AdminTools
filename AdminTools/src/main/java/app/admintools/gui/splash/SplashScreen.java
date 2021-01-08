@@ -40,7 +40,7 @@ public class SplashScreen extends AnchorPane {
 
         // new Image(url)
         ImageView img;
-        Image image = new Image("file:Assets/img/splash_screen.png", this.getPrefWidth(), this.getPrefHeight() - 20, false, true);
+        Image image = new Image("file:assets/img/splash_screen.png", this.getPrefWidth(), this.getPrefHeight() - 20, false, true);
 
         img = new ImageView(image);
         img.setSmooth(true);

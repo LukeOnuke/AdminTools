@@ -22,7 +22,7 @@ public class ThemeReader {
 
     public static ArrayList<String> listThemes() {
         ArrayList<String> themeDir = new ArrayList<String>(); //Netbeans takes a shite than complaians
-        File[] themes = new File(Utill.getPath("Assets/themes/")).listFiles(); //Get a array of all files in the themes folder
+        File[] themes = new File(Utill.getPath("assets/themes/")).listFiles(); //Get a array of all files in the themes folder
         for (File theme : themes) { //Go through them all
             if (theme.isDirectory()) {
                 themeDir.add(theme.getName());  //Add its name to the returning arraylist if its a directory
@@ -32,11 +32,11 @@ public class ThemeReader {
     }
 
     public static String getCss(String themeName) {
-        return Utill.getPath("file:Assets/themes/" + themeName + "/style.css");
+        return Utill.getPath("file:assets/themes/" + themeName + "/style.css");
     }
 
     public static String getConsoleColor(String themeName) throws FileNotFoundException {
-        File metaFile = new File(Utill.getPath("Assets/themes/" + themeName + "/consolecolor.txt"));
+        File metaFile = new File(Utill.getPath("assets/themes/" + themeName + "/consolecolor.txt"));
         Scanner reader = new Scanner(metaFile);
         String color = reader.nextLine();
         reader.close();

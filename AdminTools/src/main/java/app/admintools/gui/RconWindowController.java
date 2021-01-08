@@ -238,7 +238,6 @@ public class RconWindowController implements Initializable {
         }
         Platform.runLater(() -> {
             rconWebEngine.loadContent(sb.toString());
-
         });
     }
 
@@ -265,7 +264,7 @@ public class RconWindowController implements Initializable {
                             + "By pressing on you will be issuing a stop command to the server")) {
 
                         isRightToSend = false;
-                        write("§bStopping the server and exiting in 2 (two) seconds");
+                        write("§bStopping the server.");
                         cRcon.command("stop");
                         sendButton.disableProperty().set(true);
                         rconSend.disableProperty().set(true);
@@ -355,7 +354,7 @@ public class RconWindowController implements Initializable {
 
     public static ArrayList<String> listScripts() {
         ArrayList<String> themeDir = new ArrayList<String>(); //Netbeans takes a shite than complaians
-        File[] themes = new File(Utill.getPath("Assets/scripts/")).listFiles(); //Get a array of all files in the script folder
+        File[] themes = new File(Utill.getPath("assets/scripts/")).listFiles(); //Get a array of all files in the script folder
         for (File theme : themes) { //Go through them all
             if (theme.isFile()) {
                 themeDir.add(theme.getName());  //Add its name to the returning arraylist if its a directory
@@ -365,7 +364,7 @@ public class RconWindowController implements Initializable {
     }
 
     public static String getScript(String scriptName) {
-        return Utill.getPath("Assets/scripts/" + scriptName);
+        return Utill.getPath("assets/scripts/" + scriptName);
     }
 
     private void executeScript(String scriptPath, ArrayList<String> args) throws FileNotFoundException {

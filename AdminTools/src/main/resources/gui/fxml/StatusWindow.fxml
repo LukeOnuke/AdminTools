@@ -14,7 +14,7 @@
 
 <AnchorPane id="AnchorPane" fx:id="rootPane" prefHeight="650.0" prefWidth="973.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.admintools.gui.StatusWindowController">
     <!---<stylesheets>
-        <URL value="@../../../Assets/themes/Default/style.css" />
+        <URL value="@../../../assets/themes/Default/style.css" />
     </stylesheets>-->
     <children>
         <AnchorPane layoutX="71.0" prefHeight="593.0" prefWidth="902.0" styleClass="settingsPane" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="71.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">

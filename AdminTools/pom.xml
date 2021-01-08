@@ -202,7 +202,7 @@
                             <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
                         </manifest>
                         <manifestEntries>
-                            <SplashScreen-Image>Assets/img/splash_screen.png</SplashScreen-Image>
+                            <SplashScreen-Image>assets/img/splash_screen.png</SplashScreen-Image>
                         </manifestEntries>
                     </archive>
                 </configuration>
