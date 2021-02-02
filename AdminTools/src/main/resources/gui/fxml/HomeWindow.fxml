@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.shape.SVGPath?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" fx:id="rootPane" prefHeight="650.0" prefWidth="973.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.admintools.gui.HomeWindowController">
+<AnchorPane id="AnchorPane" fx:id="rootPane" prefHeight="650.0" prefWidth="973.0" stylesheets="@../../../../../assets/themes/default/style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.admintools.gui.HomeWindowController">
     <!--<stylesheets>
         <URL value="" />
     </stylesheets>-->
@@ -20,9 +22,18 @@
                         <Text layoutX="14.0" layoutY="51.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="title" text="Home" />
                     </children>
                 </AnchorPane>
-                <AnchorPane layoutX="16.0" layoutY="87.0" prefHeight="549.0" prefWidth="873.0" styleClass="borderPane" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="85.0">
+                <AnchorPane layoutX="16.0" layoutY="87.0" prefHeight="549.0" prefWidth="873.0" scaleZ="10.0" styleClass="borderPane" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="85.0">
                     <children>
-                        <FlowPane fx:id="credCards" hgap="10.0" layoutX="16.0" layoutY="65.0" prefHeight="474.0" prefWidth="843.0" vgap="10.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="62.0" />
+                  <StackPane layoutX="17.0" layoutY="65.0" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="60.0">
+                     <children>
+                        <SVGPath content="m 155.86461,30.43715 v 5.42e-4 a 8.6530731,8.4096025 0 0 0 -7.49854,4.25304 l -18.90013,31.81474 a 2.0764848,2.0180591 0 0 0 0.76147,2.756695 2.0764848,2.0180591 0 0 0 0.93863,0.268065 l 0.003,0.003 h 8.60416 l 0.0154,-0.01016 a 2.0764848,2.0180591 0 0 0 1.59832,-0.99932 v -0.002 a 2.0764848,2.0180591 0 0 0 0.0754,-0.130955 2.0764848,2.0180591 0 0 0 0.003,-0.003 c 0,0 8.53743,-16.768025 17.51856,-33.334372 v -0.0035 l 0.33927,-0.620512 0.008,-0.01538 a 9.1893586,8.9307987 0 0 1 0.006,-0.01099 c 0.44859,-0.755598 1.00273,-1.432207 1.92251,-2.25616 l -0.005,-0.0052 c 0.0377,-0.04188 0.11309,-0.08142 0.15078,-0.12217 0.0754,-0.07779 0.18849,-0.154423 0.26389,-0.235106 0.64837,-0.547745 1.54554,-1.01943 2.5671,-1.34649 h -8.3384 a 8.6530731,8.4096025 0 0 0 -0.005,0 8.6530731,8.4096025 0 0 0 -0.0242,0 z m 11.35599,0.479006 c -1.89989,0.0052 -3.7357,0.656259 -5.19266,1.834721 -0.0324,0.0286 -0.0754,0.05535 -0.0754,0.08349 a 8.6530731,8.4096025 0 0 1 2.60481,6.013494 8.6530731,8.4096025 0 0 1 0,0.01185 v 7.976537 20.678523 a 2.0764848,2.0180591 0 0 0 2.07706,2.018416 h 7.20337 a 2.0764848,2.0180591 0 0 0 2.07707,-2.018416 V 38.871597 c 0,0 3.8e-4,-0.0078 -0.003,-0.0233 -0.006,-0.08021 -0.0377,-0.941164 -0.3845,-1.974029 -0.33926,-1.084638 -1.04418,-2.481172 -2.3334,-3.663731 -1.44376,-1.326516 -3.50952,-2.242661 -5.73472,-2.291757 -0.0754,-0.0021 -0.11309,-0.0021 -0.18848,-0.0021 z" depthTest="ENABLE" mouseTransparent="true" scaleX="10.0" scaleY="10.0" styleClass="logo" translateX="-180.0" translateY="-100.0" translateZ="1.0" StackPane.alignment="BOTTOM_RIGHT">
+                           <StackPane.margin>
+                              <Insets />
+                           </StackPane.margin>
+                        </SVGPath>
+                              <FlowPane fx:id="credCards" hgap="10.0" prefHeight="474.0" prefWidth="843.0" translateZ="10.0" vgap="10.0" />
+                     </children>
+                  </StackPane>
                         <Text boundsType="VISUAL" layoutX="829.0" layoutY="40.0" onMouseClicked="#addNew" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="plus" text="+" wrappingWidth="34.2041015625" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0" />
                   <Label fx:id="indicatorLabel" layoutX="20.0" layoutY="20.0" prefHeight="20.0" prefWidth="359.0" styleClass="text" underline="true" AnchorPane.leftAnchor="19.0" AnchorPane.topAnchor="19.0" />
                     </children>

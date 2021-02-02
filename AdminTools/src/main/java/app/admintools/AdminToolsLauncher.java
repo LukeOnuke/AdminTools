@@ -3,6 +3,10 @@ package app.admintools;
 import app.admintools.gui.splash.SplashScreen;
 import app.admintools.textprocessing.TellrawFormatter;
 import app.admintools.util.*;
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import com.lukeonuke.simplefxdialog.Dialog;
+import com.lukeonuke.simplefxdialog.img.DialogImage;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
@@ -83,6 +87,29 @@ public class AdminToolsLauncher extends Application {
                 AtLogger.logger.info( "Connecting to discord");
                 DRPC.initialise();
                 AtLogger.logger.info("Connected to discord");
+
+                //AVCS
+                Thread vChecker = new Thread(() -> {
+                    //Write if new version avalable
+                    AtLogger.logger.info("Checking for new verison");
+
+                    JsonObject updateStats;
+                    try {
+                        updateStats = new Gson().fromJson(Utill.getHTTPRequest("https://api.github.com/repos/LukeOnuke/AdminTools/releases/latest"), JsonObject.class);
+                        if (!updateStats.get("draft").getAsBoolean()) {
+                            if (!updateStats.get("tag_name").getAsString().equals("v" + Version.getInstance().getFullVersionNumber())) {
+                                Platform.runLater(() -> {
+                                    Dialog.okDialog(DialogImage.INFO_EXCLAMATION, "New version available!", "New version found " + updateStats.get("tag_name").getAsString() + "\n" + updateStats.get("name").getAsString() + "\nGet it from github : https://get.admintools.app");
+                                });
+                            }
+                        }
+                        AtLogger.logger.info("Check complete");
+                    } catch (IOException ex) {
+                        AtLogger.logger.warning(AtLogger.formatException(ex));
+                    }
+
+                }, "Autonomous version control");
+                vChecker.start();
 
                 Thread.sleep(2000);
             } catch (InterruptedException ie) {

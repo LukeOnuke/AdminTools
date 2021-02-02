@@ -6,6 +6,8 @@
 package app.admintools.util;
 
 import java.io.IOException;
+
+import app.admintools.gui.splash.SplashScreen;
 import javafx.animation.FadeTransition;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;

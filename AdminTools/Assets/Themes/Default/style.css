@@ -360,6 +360,7 @@ pane{
 
 /*Login card, now called credcard*/
 .loginCard{
+    -fx-opacity: 1;
     -fx-background-color: linear-gradient(to top right, -at-darkaccent 75%, -at-accent 100%);
     -fx-margin: 10px;
 }
@@ -394,4 +395,16 @@ pane{
     -fx-background-image: url("/assets/img/splash_screen.png");
     -fx-background-position: center center;
     -fx-background-size: cover;
+}
+
+.transparent{
+    -fx-opacity: 0;
+}
+
+.transparent:child{
+    -fx-opacity: 1;
+}
+
+.logo{
+    -fx-fill: -at-bordercolor;
 }

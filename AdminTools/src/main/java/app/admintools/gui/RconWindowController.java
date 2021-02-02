@@ -101,33 +101,6 @@ public class RconWindowController implements Initializable {
             //Write welcome message if rcon children data is clear
             //Write welcome message
             write("§aAdmin§bTools§r, an administration tool by §9§lLukeOnuke§r");
-
-            Thread vChecker = new Thread(() -> {
-                //Write if new version avalable
-                write("§a[AVCS] §fChecking for new verison");
-
-                JsonObject updateStats;
-                try {
-                    updateStats = new Gson().fromJson(Utill.getHTTPRequest("https://api.github.com/repos/LukeOnuke/AdminTools/releases/latest"), JsonObject.class);
-
-                    boolean isUpToDate = true;
-                    if (!updateStats.get("draft").getAsBoolean()) {
-                        if (!updateStats.get("tag_name").getAsString().equals("v" + this.getClass().getPackage().getImplementationVersion())) {
-                            write("§a[AVCS] §4Newer version found §9" + updateStats.get("tag_name").getAsString() + "\n      §f" + updateStats.get("name").getAsString() + "\n      Get it from github: §ahttps://get.admintools.app/");
-
-                            isUpToDate = false;
-                        }
-                    }
-                    if (isUpToDate) {
-                        write("§a[AVCS] §fLatest version");
-                    }
-                } catch (IOException ex) {
-                    AtLogger.logger.warning(AtLogger.formatException(ex));
-                    write("§a[AVCS] §4Couldnt fetch version info - Probably reached the api rate limit");
-                }
-
-            }, "Autonomous version control");
-            vChecker.start();
         }
 
         //Auto scroll
