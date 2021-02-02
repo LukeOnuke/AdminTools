@@ -59,5 +59,4 @@ Special thanks to JegKompletson, for creating the new admin tools icon.
 Icons from [fontsawsome](https://fontawesome.com/), [under the Creative Commons Attribution 4.0 licence](https://fontawesome.com/license). *svg was scaled down*
 LukeOnuke is not affiliated with Mojang Synergies AB.  
 "Minecraft" is a trademark of Mojang Synergies AB.  
-Gear Icon made by [Freepik](https://www.flaticon.com/authors/freepik) from www.flaticon.com  
 This program and its code is licensed on the [GNU GPL V3.0 licence](https://github.com/LukeOnuke/AdminTools/blob/master/LICENSE)
