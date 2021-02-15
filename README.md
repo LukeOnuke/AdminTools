@@ -7,8 +7,6 @@
 ***Prereleases are there just for snapshot testers***
 ***Art and backend rework, snapshots may look diffrent than the provided images. Snapshots may use diffrent art for gui***
 
-### I have a lot of irl stuffs to deal with rn ($hit has hit the fan) so admintools 7.0.0 development will slow down untill i can get it all sorted out.
-
 Program with administration tools for Minecraft servers.
 
 Features:
