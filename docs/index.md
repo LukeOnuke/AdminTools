@@ -41,3 +41,5 @@ If you are on **windows** :
 
 ## Snapshots
 Snapshots are provided when there are big changes to the program itself, **use them at your own risk as they are not stress tested**.
+
+# Settings

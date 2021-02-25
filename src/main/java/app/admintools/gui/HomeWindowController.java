@@ -47,7 +47,7 @@ public class HomeWindowController implements Initializable {
     private ToggleButton settingsButton;
     @FXML
     private Label indicatorLabel;
-    private AtomicBoolean isWizardOpen = new AtomicBoolean(false);
+    private final AtomicBoolean isWizardOpen = new AtomicBoolean(false);
 
     /**
      * Initializes the controller class.
@@ -76,6 +76,7 @@ public class HomeWindowController implements Initializable {
     }
 
     //Refreshes the credcards
+    @SuppressWarnings("ResultOfMethodCallIgnored")
     private void refresh() {
         //Sets the credcards
         credCards.getChildren().clear();
@@ -105,7 +106,7 @@ public class HomeWindowController implements Initializable {
                 try {
                     ArrayList<Credentials> credList = CredentialsIO.readCredentials();
                     if (credList == null) {
-                        credList = new ArrayList<Credentials>();
+                        credList = new ArrayList<>();
                     }
                     credList.add(cred);
                     CredentialsIO.writeCredentials(credList);

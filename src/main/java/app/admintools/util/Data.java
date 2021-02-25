@@ -15,6 +15,7 @@ import java.io.OutputStream;
 import java.lang.module.ModuleDescriptor;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Properties;
 import app.admintools.security.credentials.Credentials;
 
@@ -26,7 +27,6 @@ public class Data {
     //All the variables
 
     static File config = new File("admintools.properties");
-    private ArrayList<String> data;
 
     //public data
     /**
@@ -60,9 +60,18 @@ public class Data {
 
     private Data() {
         if (!config.exists()) {
-            write(defaults);
+            try {
+                write(DataType.RCON_REMEMBER, defaults.get(DataType.RCON_REMEMBER));
+                write(DataType.QUERRY_API_REFRESHRATE, defaults.get(DataType.QUERRY_API_REFRESHRATE));
+                write(DataType.QUERRY_MC_REFRESHRATE, defaults.get(DataType.QUERRY_MC_REFRESHRATE));
+                write(DataType.MESSAGE_SEND_ON_LOGON, defaults.get(DataType.MESSAGE_SEND_ON_LOGON));
+                write(DataType.MESSAGE_OVERWRITE_SAY, defaults.get(DataType.MESSAGE_OVERWRITE_SAY));
+                write(DataType.USERNAME, defaults.get(DataType.USERNAME));
+                write(DataType.THEME, defaults.get(DataType.THEME));
+            } catch (IOException e) {
+                AtLogger.logger.severe(AtLogger.formatException(e));
+            }
         }
-        data = read();
     }
 
     /**
@@ -110,8 +119,8 @@ public class Data {
      *
      * @return remember property
      */
-    public boolean getRconRemember() {
-        return Boolean.parseBoolean(data.get(0));
+    public boolean getRconRemember() throws IOException {
+        return Boolean.parseBoolean(read(DataType.RCON_REMEMBER));
     }
 
     /**
@@ -119,8 +128,8 @@ public class Data {
      *
      * @return refresh rate
      */
-    public int getQuerryMcRefreshRate() {
-        return Integer.parseInt(data.get(1));
+    public int getQuerryMcRefreshRate() throws IOException {
+        return Integer.parseInt(read(DataType.QUERRY_MC_REFRESHRATE));
     }
 
     /**
@@ -128,52 +137,50 @@ public class Data {
      *
      * @return refresh rate
      */
-    public double getQuerryMojangApiRefreshRate() {
-        return Double.parseDouble(data.get(2));
+    public double getQuerryMojangApiRefreshRate() throws IOException {
+        return Double.parseDouble(read(DataType.QUERRY_API_REFRESHRATE));
     }
 
-    public boolean getMessageNotify() {
-        return Boolean.parseBoolean(data.get(3));
+    public boolean getMessageNotify() throws IOException {
+        return Boolean.parseBoolean(read(DataType.MESSAGE_SEND_ON_LOGON));
     }
 
-    public boolean getMessageOverwriteSay() {
-        return Boolean.parseBoolean(data.get(4));
+    public boolean getMessageOverwriteSay() throws IOException {
+        return Boolean.parseBoolean(read(DataType.MESSAGE_OVERWRITE_SAY));
     }
 
-    public String getMessageUsername() {
-        return data.get(5);
+    public String getMessageUsername() throws IOException {
+        return read(DataType.USERNAME);
     }
 
-    public String getSelectedTheme() {
-        return data.get(6);
+    public String getSelectedTheme() throws IOException {
+        return read(DataType.THEME);
     }
     /**
      * Default valiues for the properties
+     * "false", "10", "100", "false", "false", "username", "Default"
      */
-    public static ArrayList<String> defaults = new ArrayList<>(Arrays.asList(new String[]{"false", "10", "100", "false", "false", "username", "Default"}));
+    public static HashMap<String, String> defaults = new HashMap<>(){{
+        put(DataType.RCON_REMEMBER, "false");
+        put(DataType.QUERRY_MC_REFRESHRATE, "10");
+        put(DataType.QUERRY_API_REFRESHRATE, "100");
+        put(DataType.MESSAGE_SEND_ON_LOGON, "false");
+        put(DataType.MESSAGE_OVERWRITE_SAY, "false");
+        put(DataType.USERNAME, "username");
+        put(DataType.THEME, "default");
+    }};
 
     /**
      * Writes the properties to disk
      *
-     * @param props the properties that need to be written
+     * @param key Key
+     * @param value The valiue to write
      */
-    public static void write(ArrayList<String> props) {
+    public static void write(String key, String value) throws IOException {
         Properties prop = new Properties();
-        try (OutputStream output = new FileOutputStream(config)) {
-            prop.setProperty("rcon.remember", props.get(0));
-            prop.setProperty("querry.mc.refreshrate", props.get(1));
-            prop.setProperty("querry.api.mojang.refreshrate", props.get(2));
-            prop.setProperty("message.send.on.login", props.get(3));
-            prop.setProperty("message.overwrite.say", props.get(4));
-            prop.setProperty("message.username", props.get(5));
-            prop.setProperty("theme.selected", props.get(6));
-            prop.store(output, "AdminTools properties" + System.lineSeparator() + "Created by: LukeOnuke - https://github.com/LukeOnuke");
-
-        } catch (FileNotFoundException ex) {
-            AtLogger.logger.warning(AtLogger.formatException(ex));
-        } catch (IOException ex) {
-            AtLogger.logger.warning(AtLogger.formatException(ex));
-        }
+        OutputStream output = new FileOutputStream(config);
+        prop.setProperty(key, value);
+        prop.store(output, "AdminTools properties" + System.lineSeparator() + "Created by: LukeOnuke - https://github.com/LukeOnuke");
     }
 
     /**
@@ -181,23 +188,10 @@ public class Data {
      *
      * @return ArrayList of properites
      */
-    public static ArrayList<String> read() {
-        ArrayList<String> arl = new ArrayList<>();
-
+    public static String read(String key) throws IOException {
         Properties prop = new Properties();
-        try (InputStream input = new FileInputStream(config)) {
-            prop.load(input);
-            arl.add(prop.getProperty("rcon.remember", defaults.get(0)));
-            arl.add(prop.getProperty("querry.mc.refreshrate", defaults.get(1)));
-            arl.add(prop.getProperty("querry.api.mojang.refreshrate", defaults.get(2)));
-            arl.add(prop.getProperty("message.send.on.login", defaults.get(3)));
-            arl.add(prop.getProperty("message.overwrite.say", defaults.get(4)));
-            arl.add(prop.getProperty("message.username", defaults.get(5)));
-            arl.add(prop.getProperty("theme.selected", defaults.get(6)));
-        } catch (IOException ex) {
-            AtLogger.logger.warning(AtLogger.formatException(ex));
-        }
-
-        return arl;
+        InputStream input = new FileInputStream(config);
+        prop.load(input);
+        return prop.getProperty(key, defaults.get(key));
     }
 }

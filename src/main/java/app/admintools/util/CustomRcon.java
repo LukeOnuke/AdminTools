@@ -2,6 +2,8 @@ package app.admintools.util;
 
 import java.io.IOException;
 import java.net.Socket;
+import java.nio.charset.StandardCharsets;
+
 import net.kronos.rkon.core.Rcon;
 import net.kronos.rkon.core.ex.AuthenticationException;
 import app.admintools.textprocessing.TellrawFormatter;
@@ -20,10 +22,11 @@ public class CustomRcon extends Rcon {
             Data data = Data.getInstance();
             String host = data.getSelectedCredentials().getIP();
             int port = data.getSelectedCredentials().getPort();
-            byte[] password = data.getSelectedCredentials().getPassword().getBytes("UTF-8");
+            byte[] password = data.getSelectedCredentials().getPassword().getBytes(StandardCharsets.UTF_8);
 
             //Reading configuration from file
             //Constructing the instance
+            AtLogger.logger.info("DEBUG : " + host + " " + port + " " + new String(password, StandardCharsets.UTF_8) + " " + password.length);
             instance = new CustomRcon(host, port, password);
         }
         //Returns the instance

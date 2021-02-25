@@ -31,6 +31,6 @@ public class AtLogger {
     }
     
     public static String formatException(Exception ex){
-        return ex.getMessage();
+        return ex.getClass().getName() + " : " + ex.getMessage();
     }
 }

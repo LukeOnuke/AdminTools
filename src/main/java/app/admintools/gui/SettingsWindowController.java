@@ -5,12 +5,12 @@
  */
 package app.admintools.gui;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-import app.admintools.util.DRPC;
-import app.admintools.util.Utill;
+import app.admintools.util.*;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ChoiceBox;
@@ -21,8 +21,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import app.admintools.gui.theme.ThemeReader;
-import app.admintools.util.Data;
-import app.admintools.util.WindowLoader;
 import com.lukeonuke.simplefxdialog.Dialog;
 import com.lukeonuke.simplefxdialog.img.DialogImage;
 
@@ -60,18 +58,22 @@ public class SettingsWindowController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         Data data = Data.refresh();
-        settingsApiRequestR.setValue(data.getQuerryMojangApiRefreshRate());
-        settingsQuerryRR.setText(String.valueOf(data.getQuerryMcRefreshRate()));
-        settingsMsgOverrideSay.setSelected(data.getMessageOverwriteSay());
-        settingsMsgNotify.setSelected(data.getMessageNotify());
-        settingsMsgUsername.setText(data.getMessageUsername());
+        try{
+            settingsApiRequestR.setValue(data.getQuerryMojangApiRefreshRate());
+            settingsQuerryRR.setText(String.valueOf(data.getQuerryMcRefreshRate()));
+            settingsMsgOverrideSay.setSelected(data.getMessageOverwriteSay());
+            settingsMsgNotify.setSelected(data.getMessageNotify());
+            settingsMsgUsername.setText(data.getMessageUsername());
 
-        //Set choicebox choices
-        ThemeReader.listThemes().forEach((choice) -> {
-            themeChoice.getItems().add(choice);
-        });
+            //Set choicebox choices
+            ThemeReader.listThemes().forEach((choice) -> {
+                themeChoice.getItems().add(choice);
+            });
 
-        themeChoice.setValue(data.getSelectedTheme());
+            themeChoice.setValue(data.getSelectedTheme());
+        } catch (IOException e) {
+            AtLogger.logger.severe(AtLogger.formatException(e));
+        }
 
         refresh();
 
@@ -108,14 +110,18 @@ public class SettingsWindowController implements Initializable {
 
     @FXML
     private void apply() {
-        ArrayList<String> data = Data.read();
-        data.set(1, settingsQuerryRR.getText());
-        data.set(2, String.valueOf(Math.round(settingsApiRequestR.getValue())));
-        data.set(3, String.valueOf(settingsMsgNotify.selectedProperty().get()));
-        data.set(4, String.valueOf(settingsMsgOverrideSay.selectedProperty().get()));
-        data.set(5, settingsMsgUsername.getText());
-        data.set(6, themeChoice.getValue().toString());
-        Data.write(data);
+
+        try {
+            Data.write(DataType.QUERRY_MC_REFRESHRATE, settingsQuerryRR.getText());
+            Data.write(DataType.QUERRY_API_REFRESHRATE, String.valueOf(Math.round(settingsApiRequestR.getValue())));
+            Data.write(DataType.MESSAGE_SEND_ON_LOGON, String.valueOf(settingsMsgNotify.selectedProperty().get()));
+            Data.write(DataType.MESSAGE_OVERWRITE_SAY, String.valueOf(settingsMsgOverrideSay.selectedProperty().get()));
+            Data.write(DataType.USERNAME, settingsMsgUsername.getText());
+            Data.write(DataType.THEME, themeChoice.getValue().toString());
+        } catch (IOException e) {
+            AtLogger.logger.severe(AtLogger.formatException(e));
+        }
+
 
         //Actualy have to refresh the theme
         //And refresh the Data singleton
@@ -124,8 +130,8 @@ public class SettingsWindowController implements Initializable {
 
     @FXML
     private void reset() {
-        settingsQuerryRR.setText(Data.defaults.get(1));
-        settingsApiRequestR.setValue(Double.valueOf(Data.defaults.get(2)));
+        settingsQuerryRR.setText(Data.defaults.get(DataType.QUERRY_MC_REFRESHRATE));
+        settingsApiRequestR.setValue(Double.valueOf(Data.defaults.get(DataType.QUERRY_API_REFRESHRATE)));
         refresh();
     }
 }

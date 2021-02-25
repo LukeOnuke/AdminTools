@@ -149,7 +149,7 @@ public class StatusWindowController implements Initializable {
                         }
                         Thread.sleep(500);
                     }
-                } catch (InterruptedException ex) {
+                } catch (InterruptedException | IOException ex) {
                     AtLogger.logger.warning(AtLogger.formatException(ex));
                 }
                 tickApi();
@@ -217,7 +217,7 @@ public class StatusWindowController implements Initializable {
                     }
                     Thread.sleep(500);
                 }
-            } catch (InterruptedException ex) {
+            } catch (InterruptedException | IOException ex) {
                 AtLogger.logger.warning(AtLogger.formatException(ex));
             }
             tickMcRefresh();

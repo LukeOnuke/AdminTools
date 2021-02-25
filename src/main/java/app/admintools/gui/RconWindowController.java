@@ -1,14 +1,11 @@
 package app.admintools.gui;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.net.SocketException;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.ResourceBundle;
-import java.util.logging.Level;
-
+import app.admintools.gui.theme.ThemeReader;
+import app.admintools.textprocessing.Markup;
+import app.admintools.textprocessing.TellrawFormatter;
 import app.admintools.util.*;
+import com.lukeonuke.simplefxdialog.Dialog;
+import com.lukeonuke.simplefxdialog.img.DialogImage;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -26,15 +23,14 @@ import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebErrorEvent;
 import javafx.scene.web.WebView;
 import net.kronos.rkon.core.ex.AuthenticationException;
-import app.admintools.gui.theme.ThemeReader;
-import app.admintools.textprocessing.Markup;
-import app.admintools.textprocessing.TellrawFormatter;
-import com.google.gson.Gson;
-import com.google.gson.JsonObject;
-import com.lukeonuke.simplefxdialog.Dialog;
-import com.lukeonuke.simplefxdialog.img.DialogImage;
+
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.net.URL;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.ResourceBundle;
 import java.util.Scanner;
 
 /**
@@ -104,9 +100,7 @@ public class RconWindowController implements Initializable {
         }
 
         //Auto scroll
-        rcon.heightProperty().addListener((observable, oldValue, newValue) -> {
-            rconScroll.setVvalue(1.0d);
-        });
+        rcon.heightProperty().addListener((observable, oldValue, newValue) -> rconScroll.setVvalue(1.0d));
 
         //setup history entery
         rconSend.setOnKeyPressed((KeyEvent event) -> {
@@ -171,16 +165,12 @@ public class RconWindowController implements Initializable {
                 }
                 //Write succsesfull connection
                 if (connected) {
-                    Platform.runLater(() -> {
-                        write("§bConnected to " + d.getSelectedCredentials().getIP() + ":" + d.getSelectedCredentials().getPort());
-                    });
+                    Platform.runLater(() -> write("§bConnected to " + d.getSelectedCredentials().getIP() + ":" + d.getSelectedCredentials().getPort()));
                     rconSend.setDisable(false);
                     sendButton.setDisable(false);
                     sidePane.setDisable(false);
                 } else {
-                    Platform.runLater(() -> {
-                        write("§cCouldnt connect to " + d.getSelectedCredentials().getIP() + ":" + d.getSelectedCredentials().getPort());
-                    });
+                    Platform.runLater(() -> write("§cCouldnt connect to " + d.getSelectedCredentials().getIP() + ":" + d.getSelectedCredentials().getPort()));
                 }
             }, "Connector Thread");
             connect.start();
@@ -201,7 +191,7 @@ public class RconWindowController implements Initializable {
         String color = "#5"; //Default is purple to indicate something went wrong
         try {
             color = ThemeReader.getConsoleColor(Data.getInstance().getSelectedTheme());
-        } catch (FileNotFoundException ex) {
+        } catch (IOException ex) {
             AtLogger.logger.warning(AtLogger.formatException(ex));
         }
 
@@ -209,9 +199,7 @@ public class RconWindowController implements Initializable {
         for (String element : Data.rconTextData) {
             sb.append(element);
         }
-        Platform.runLater(() -> {
-            rconWebEngine.loadContent(sb.toString());
-        });
+        Platform.runLater(() -> rconWebEngine.loadContent(sb.toString()));
     }
 
     /**
@@ -326,7 +314,7 @@ public class RconWindowController implements Initializable {
     }
 
     public static ArrayList<String> listScripts() {
-        ArrayList<String> themeDir = new ArrayList<String>(); //Netbeans takes a shite than complaians
+        ArrayList<String> themeDir = new ArrayList<>(); //Netbeans takes a shite than complaians
         File[] themes = new File(Utill.getPath("assets/scripts/")).listFiles(); //Get a array of all files in the script folder
         for (File theme : themes) { //Go through them all
             if (theme.isFile()) {

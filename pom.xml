@@ -146,23 +146,15 @@
         </dependency>
 
         <dependency>
-            <groupId>net.kronos</groupId>
-            <artifactId>rkon-core</artifactId>
-            <version>1.1.2</version>
-
-        </dependency>
-
-        <dependency>
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
             <version>2.8.0</version>
-
         </dependency>
 
         <dependency>
-            <groupId>com.lukeonuke</groupId>
-            <artifactId>simplefxdialog</artifactId>
-            <version>2.0.0</version>
+            <groupId>com.github.LukeOnuke</groupId>
+            <artifactId>SimpleFxDialog</artifactId>
+            <version>v2.2.0</version>
         </dependency>
 
         <dependency>
@@ -175,6 +167,12 @@
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
             <version>3.8.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.github.Pequla</groupId>
+            <artifactId>RconCore</artifactId>
+            <version>v1.2</version>
         </dependency>
 
     </dependencies>

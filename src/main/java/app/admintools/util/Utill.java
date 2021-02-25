@@ -102,14 +102,26 @@ public class Utill {
     }
 
     public static void setSelectedTheme(AnchorPane anchorPane){
-        anchorPane.getStylesheets().add(Utill.getPath("file:assets/themes/" + Data.getInstance().getSelectedTheme() + "/style.css"));
+        try {
+            anchorPane.getStylesheets().add(Utill.getPath("file:assets/themes/" + Data.getInstance().getSelectedTheme() + "/style.css"));
+        } catch (IOException e) {
+            AtLogger.logger.severe(AtLogger.formatException(e));
+        }
     }
 
     public static void setSelectedTheme(Parent root){
-        root.getStylesheets().add(Utill.getPath("file:assets/themes/" + Data.getInstance().getSelectedTheme() + "/style.css"));
+        try {
+            root.getStylesheets().add(Utill.getPath("file:assets/themes/" + Data.getInstance().getSelectedTheme() + "/style.css"));
+        } catch (IOException e) {
+            AtLogger.logger.severe(AtLogger.formatException(e));
+        }
     }
 
     public static void setSelectedTheme(Scene scene){
-        scene.getStylesheets().add(Utill.getPath("file:assets/themes/" + Data.getInstance().getSelectedTheme() + "/style.css"));
+        try {
+            scene.getStylesheets().add(Utill.getPath("file:assets/themes/" + Data.getInstance().getSelectedTheme() + "/style.css"));
+        } catch (IOException e) {
+            AtLogger.logger.severe(AtLogger.formatException(e));
+        }
     }
 }
