@@ -26,7 +26,7 @@ jobs:
     - run: mkdir staging && cp target/*.jar staging
     - uses: actions/upload-artifact@v1
       with:
-        name: Package
+        name: WindowsPackage
         path: staging
   build-linux:
 
@@ -44,7 +44,7 @@ jobs:
     - run: mkdir staging && cp target/*.jar staging
     - uses: actions/upload-artifact@v1
       with:
-        name: Package
+        name: LinuxPackage
         path: staging
   build-macos:
 
@@ -62,5 +62,5 @@ jobs:
     - run: mkdir staging && cp target/*.jar staging
     - uses: actions/upload-artifact@v1
       with:
-        name: Package
+        name: MacosPackage
         path: staging
