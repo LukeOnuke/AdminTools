@@ -20,10 +20,6 @@ jobs:
       uses: actions/setup-java@v1
       with:
         java-version: 11
-    - name: Set up dependencies | rkon-core
-      run: mvn install:install-file -Dfile=https://github.com/Pequla/RconCore/releases/download/v1.2/rkon-core-1.2.jar -DgroupId=net.kronos -DartifactId=rkon-core -Dversion=1.1.2 -Dpackaging=jar -DgeneratePom=true
-    - name: Set up dependencies | simplefxdialog
-      run: mvn install:install-file -Dfile=https://github.com/LukeOnuke/SimpleFxDialog/releases/download/v2.0.0/SimpleFxDialog.jar -DgroupId=com.lukeonuke -DartifactId=simplefxdialog -Dversion=2.0.0 -Dpackaging=jar -DgeneratePom=true
     - name: Build with Maven
       run: mvn -B package --file pom.xml
   build-linux:
@@ -36,10 +32,6 @@ jobs:
       uses: actions/setup-java@v1
       with:
         java-version: 11
-    - name: Set up dependencies | rkon-core
-      run: mvn install:install-file -Dfile=https://github.com/Pequla/RconCore/releases/download/v1.2/rkon-core-1.2.jar -DgroupId=net.kronos -DartifactId=rkon-core -Dversion=1.1.2 -Dpackaging=jar -DgeneratePom=true
-    - name: Set up dependencies | simplefxdialog
-      run: mvn install:install-file -Dfile=https://github.com/LukeOnuke/SimpleFxDialog/releases/download/v2.0.0/SimpleFxDialog.jar -DgroupId=com.lukeonuke -DartifactId=simplefxdialog -Dversion=2.0.0 -Dpackaging=jar -DgeneratePom=true
     - name: Build with Maven
       run: mvn -B package --file pom.xml
   build-macos:
@@ -52,9 +44,5 @@ jobs:
       uses: actions/setup-java@v1
       with:
         java-version: 11
-    - name: Set up dependencies | rkon-core
-      run: mvn install:install-file -Dfile=https://github.com/Pequla/RconCore/releases/download/v1.2/rkon-core-1.2.jar -DgroupId=net.kronos -DartifactId=rkon-core -Dversion=1.1.2 -Dpackaging=jar -DgeneratePom=true
-    - name: Set up dependencies | simplefxdialog
-      run: mvn install:install-file -Dfile=https://github.com/LukeOnuke/SimpleFxDialog/releases/download/v2.0.0/SimpleFxDialog.jar -DgroupId=com.lukeonuke -DartifactId=simplefxdialog -Dversion=2.0.0 -Dpackaging=jar -DgeneratePom=true
     - name: Build with Maven
       run: mvn -B package --file pom.xml
