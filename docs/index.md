@@ -1,5 +1,5 @@
 # Admin tools
-[![daym](https://img.shields.io/github/downloads/LukeOnuke/AdminTools/total)](https://github.com/LukeOnuke/AdminTools/releases) [![Spiget Downloads](https://img.shields.io/spiget/downloads/81484?label=spigot%20downloads)](https://www.spigotmc.org/resources/admin-tools.81484/) ![wow here](https://img.shields.io/github/license/LukeOnuke/AdminTools) ![wow](https://img.shields.io/github/v/release/LukeOnuke/AdminTools?include_prereleases)
+[![daym](https://img.shields.io/github/downloads/LukeOnuke/AdminTools/total)](https://github.com/LukeOnuke/AdminTools/releases) [![Spiget Downloads](https://img.shields.io/spiget/downloads/81484?label=spigot%20downloads)](https://www.spigotmc.org/resources/admin-tools.81484/) ![wow here](https://img.shields.io/github/license/LukeOnuke/AdminTools) ![wow](https://img.shields.io/github/v/release/LukeOnuke/AdminTools?include_prereleases) [![Documentation Status](https://readthedocs.org/projects/admintools/badge/?version=latest)](https://docs.admintools.app/en/latest/?badge=latest)
 
 AdminTools is a administration program for minecraft servers.
 > Use the **sidebar** and **navbar** to navigate through the docs.
@@ -39,7 +39,8 @@ If you are on **windows** :
  3. Open the directory
  4. Place a shortcut to the *program file*(**AdminTools.jar**)
 
-## Snapshots
-Snapshots are provided when there are big changes to the program itself, **use them at your own risk as they are not stress tested**.
+## Snapshots and artifacts
+Snapshots are provided when there are big changes to the program itself, **keep in mind that they are development builds**.
 
+Artifacts can be gotten from the action tab of github, in the overview section.
 # Settings
