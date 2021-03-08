@@ -5,7 +5,8 @@
 [![licence](https://img.shields.io/github/license/lukeonuke/admintools?color=blue)](https://github.com/LukeOnuke/AdminTools/blob/master/LICENSE)
 
 
-#Admin Tools
+# Admin Tools
+
 The gui rcon administration program for minecraft servers, supporting varius features such as scripting,
 custom themes and many more.
 
