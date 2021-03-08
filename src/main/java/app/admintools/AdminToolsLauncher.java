@@ -97,7 +97,7 @@ public class AdminToolsLauncher extends Application {
                     try {
                         updateStats = new Gson().fromJson(Utill.getHTTPRequest("https://api.github.com/repos/LukeOnuke/AdminTools/releases/latest"), JsonObject.class);
                         if (!updateStats.get("draft").getAsBoolean()) {
-                            if (!updateStats.get("tag_name").getAsString().equals("v" + Version.getInstance().getFullVersionNumber())) {
+                            if (Version.getVersionAsInt(updateStats.get("tag_name").getAsString()) > Version.getVersionAsInt(("v" + Version.getInstance().getFullVersionNumber()))) {
                                 Platform.runLater(() -> {
                                     Dialog.okDialog(DialogImage.INFO_EXCLAMATION, "New version available!", "New version found " + updateStats.get("tag_name").getAsString() + "\n" + updateStats.get("name").getAsString() + "\nGet it from github : https://get.admintools.app");
                                 });

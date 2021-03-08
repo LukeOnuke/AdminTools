@@ -61,7 +61,7 @@ public class AdminTools {
             AtLogger.logger.info("Is development version, snapshot " + ver.getSnapshotVersion());
         }
 
-        AtLogger.logger.info("\nAdminTools version : " + ver.getStrippedVersion() + "\n\tAs int : " + ver.getVersionAsInt() + "\n\tAs full : " + ver.getFullVersionNumber()+ "\n\tSnapshot: " +ver.getSnapshotVersion());
+        AtLogger.logger.info("\nAdminTools version : " + ver.getStrippedVersion() + "\n\tAs int : " + ver.getVersionAsInt(ver.getFullVersionNumber()) + "\n\tAs full : " + ver.getFullVersionNumber()+ "\n\tSnapshot: " +ver.getSnapshotVersion());
         AdminToolsLauncher.launchAdminTools(args);
         System.exit(0);
     }

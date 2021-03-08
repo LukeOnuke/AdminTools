@@ -106,42 +106,42 @@
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-controls</artifactId>
-            <version>11.0.2</version>
+            <version>15.0.1</version>
 
         </dependency>
 
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-media</artifactId>
-            <version>11.0.2</version>
+            <version>15.0.1</version>
 
         </dependency>
 
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-base</artifactId>
-            <version>11.0.2</version>
+            <version>15.0.1</version>
 
         </dependency>
 
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-fxml</artifactId>
-            <version>11.0.2</version>
+            <version>15.0.1</version>
 
         </dependency>
 
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-graphics</artifactId>
-            <version>11.0.2</version>
+            <version>15.0.1</version>
 
         </dependency>
 
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-web</artifactId>
-            <version>11.0.2</version>
+            <version>15.0.1</version>
 
         </dependency>
 
@@ -241,6 +241,35 @@
                         </goals>
                         <configuration>
                             <createDependencyReducedPom>false</createDependencyReducedPom>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>io.github.fvarrui</groupId>
+                <artifactId>javapackager</artifactId>
+                <version>1.5.1</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>package</goal>
+                        </goals>
+                        <configuration>
+                            <!-- mandatory -->
+                            <mainClass>app.admintools.AdminTools</mainClass>
+                            <!-- optional -->
+                            <bundleJre>true</bundleJre>
+                            <generateInstaller>false</generateInstaller>
+                            <description>AdminTools app by LukeOnuke</description>
+                            <version>$version</version>
+                            <organizationName>LukeOnuke</organizationName>
+                            <iconFile>assets/img/icon-baked.ico</iconFile>
+                            <administratorRequired>false</administratorRequired>
+                            <platform>auto</platform>
+                            <additionalResources>
+                                <additionalResource>assets</additionalResource>
+                            </additionalResources>
                         </configuration>
                     </execution>
                 </executions>

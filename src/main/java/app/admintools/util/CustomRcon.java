@@ -26,7 +26,6 @@ public class CustomRcon extends Rcon {
 
             //Reading configuration from file
             //Constructing the instance
-            AtLogger.logger.info("DEBUG : " + host + " " + port + " " + new String(password, StandardCharsets.UTF_8) + " " + password.length);
             instance = new CustomRcon(host, port, password);
         }
         //Returns the instance
