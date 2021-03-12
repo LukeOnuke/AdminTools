@@ -80,6 +80,7 @@ public class AdminToolsLauncher extends Application {
 
         Stage splash = new Stage(StageStyle.TRANSPARENT);
         splash.setScene(new Scene(new SplashScreen(), -1.0, -1.0, true));
+        splash.getIcons().add(new Image(AdminToolsLauncher.class.getResourceAsStream(Utill.getPath("/img/icon.png"))));
         splash.show();
         Thread splashThread = new Thread(() -> {
             try{
