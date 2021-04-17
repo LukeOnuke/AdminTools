@@ -36,8 +36,8 @@ Docs : [https://docs.admintools.app/en/latest/](https://docs.admintools.app/en/l
    ```java -jar <jarname>.jar```
 
 # Special thanks
-Special thanks to JegKompletson, for creating the new admin tools icon.
-
+- Special thanks to JegKompletson, for creating the new admin tools icon.
+- Special thanks to kotyk7 (kotyk), for fixing spelling mistakes and making the messages clear.
 ---
 
 ## Legal info
