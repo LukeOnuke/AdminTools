@@ -1,0 +1,5 @@
+credentials.json
+admintools.properties
+target/**
+.idea/**
+log/**
