@@ -68,6 +68,7 @@ public class RconWindowController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         //Instantiate web engine
         rcon.contextMenuEnabledProperty().set(false);
+        rcon.getEngine().setUserDataDirectory(new File("/webdata"));
         rconWebEngine = rcon.getEngine();
 
         //Debug
