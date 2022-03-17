@@ -9,6 +9,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+
+import app.admintools.AdminTools;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -48,22 +50,6 @@ public class StatusWindowController implements Initializable {
     d-dot
     statusDot<number> but shortened
      */
-    @FXML
-    private Pane sd1;
-    @FXML
-    private Pane sd2;
-    @FXML
-    private Pane sd3;
-    @FXML
-    private Pane sd4;
-    @FXML
-    private Pane sd5;
-    @FXML
-    private Pane sd6;
-    @FXML
-    private Pane sd7;
-    @FXML
-    private ProgressBar pbApi;
 
     //For mc serv status
     @FXML
@@ -84,7 +70,6 @@ public class StatusWindowController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         tickMcRefresh();
-        tickApi();
     }
 
     @FXML
@@ -103,63 +88,6 @@ public class StatusWindowController implements Initializable {
     }
 
     @FXML
-    public void handleMouseClick(MouseEvent arg0) {
-        System.out.println("clicked on " + sOnlinePlayers.getSelectionModel().getSelectedItem());
-    }
-
-    private void refreshApiStatus() {
-        //set progressbar to spin
-        pbApi.setProgress(ProgressBar.INDETERMINATE_PROGRESS);
-        Thread st = new Thread(() -> { //new thread worker
-            //Initilse array list
-            ArrayList<String> arrStatus = new ArrayList<String>();
-            try {
-                arrStatus = ApiQuerry.querry(); //querry
-            } catch (IOException ex) {
-                AtLogger.logger.warning(AtLogger.formatException(ex));
-            }
-            final ArrayList<String> arrStatus_ = arrStatus; //final arraylist
-            Platform.runLater(() -> {
-                //
-                sd1.setStyle("-fx-background-color : " + arrStatus_.get(0) + ";");
-                sd2.setStyle("-fx-background-color : " + arrStatus_.get(2) + ";");
-                sd3.setStyle("-fx-background-color : " + arrStatus_.get(3) + ";");
-                sd4.setStyle("-fx-background-color : " + arrStatus_.get(4) + ";");
-                sd5.setStyle("-fx-background-color : " + arrStatus_.get(5) + ";");
-                sd6.setStyle("-fx-background-color : " + arrStatus_.get(6) + ";");
-                sd7.setStyle("-fx-background-color : " + arrStatus_.get(7) + ";");
-                pbApi.setProgress(0);
-            });
-        });
-        st.start();
-    }
-
-    private void tickApi() {
-        Thread ratf = new Thread(() -> {
-            if (Data.isOnStatusWindow) {
-                Platform.runLater(() -> {
-                    refreshApiStatus();
-                });
-                Data data = Data.getInstance();
-                try {
-                    int timeSleep = (int) data.getQuerryMojangApiRefreshRate() * 1000;
-                    for (int i = 0; i < timeSleep / 500; i++) {
-                        if (!Data.isOnStatusWindow) {
-                            return;
-                        }
-                        Thread.sleep(500);
-                    }
-                } catch (InterruptedException | IOException ex) {
-                    AtLogger.logger.warning(AtLogger.formatException(ex));
-                }
-                tickApi();
-            }
-        });
-        ratf.setName("ApiTick");
-        ThreadManager.startThread(ratf, ThreadType.ASYNCJOB);
-    }
-
-    @FXML
     private void mcStatusRefresh() {
         Thread mcsr = new Thread(() -> {
             Data d = Data.getInstance(); //get data class instance
@@ -174,7 +102,7 @@ public class StatusWindowController implements Initializable {
                     if (data.getFavicon() != null) {
                         sFavicon.setImage(QuerryUtils.convertToImage(data.getFavicon()));
                     } else {
-                        sFavicon.setImage(new Image(StatusWindowController.class.getResourceAsStream("/app/admintools/img/unknown_server.png")));
+                        sFavicon.setImage(new Image(AdminTools.class.getResourceAsStream("/img/unknown-server.png")));
                     }
                 });
 

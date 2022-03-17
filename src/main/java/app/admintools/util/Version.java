@@ -5,13 +5,13 @@ import java.util.Arrays;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class Version {
-    private final String VERSION_NUMBER = "7.0.0";
+    private final String VERSION_NUMBER = "7.1.0";
     /**
      * Snapshot version, only used if isDevelopmentVersion is true
      *
      * Version number goes like 23d12m2020y001v .  So its [Day Of Release]d[Month Of Release]m[Year Of Release]y[Snapshot Number]v
      */
-    private final String SNAPSHOT_VER = "8d3m2021y001v";
+    private final String SNAPSHOT_VER = "17d3m2022y000v";
     private final boolean isDevelopmentVersion = false;
     private static Version instance = null;
 
