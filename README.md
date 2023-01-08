@@ -7,6 +7,9 @@
 
 # Admin Tools
 
+***LEGACY SUPPORT***
+***For new and better maintained app visit https://admintools.app***
+
 The gui rcon administration program for minecraft servers, supporting varius features such as scripting,
 custom themes and many more.
 
